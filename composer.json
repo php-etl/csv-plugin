@@ -1,8 +1,13 @@
 {
-    "name": "php-etl/csv-flow",
-    "description": "Adapters for SPL CSV",
+    "name": "php-etl/csv-plugin",
+    "description": "Plugins for CSV Extractor and Loader",
     "type": "library",
     "license": "MIT",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    },
     "autoload": {
         "psr-4": {
             "Kiboko\\Component\\ETL\\Flow\\CSV\\": "src/"
@@ -21,7 +26,8 @@
         "ext-json": "*",
         "php-etl/configurator-contracts": "dev-master",
         "nikic/php-parser": "^4.9@dev",
-        "symfony/config": "^4.0 || ^5.0"
+        "symfony/config": "^4.0 || ^5.0",
+        "php-etl/pipeline-contracts": "dev-master"
     },
     "require-dev": {
         "php-http/mock-client": "^1.4@dev",
@@ -29,7 +35,6 @@
         "symfony/console": "5.x-dev",
         "php-etl/bucket-contracts": "^0.1.0@dev",
         "akeneo/api-php-client-ee": "^4.0",
-        "php-etl/pipeline-contracts": "^0.1.0@dev",
         "php-etl/pipeline": "^0.2.0@dev",
         "phpunit/phpunit": "^9.0",
         "laminas/laminas-diactoros": "2.6.x-dev",
