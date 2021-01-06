@@ -3,11 +3,8 @@ CSV Flows
 
 Goal
 ---
-[WIP]
-This package aims at integration the Akeneo PHP clients into the
-[Pipeline](https://github.com/php-etl/pipeline) stack. This integration is
-compatible with both [Akeneo Enterprise Edition client](https://github.com/akeneo/api-php-client-ee)
-and the [Akeneo Community Edition client](https://github.com/akeneo/api-php-client)
+This package aims at integrating the CSV reader and writer into the
+[Pipeline](https://github.com/php-etl/pipeline) stack.
 
 Principles
 ---
@@ -22,49 +19,33 @@ Configuration format
 ### Building an extractor
 
 ```yaml
-akeneo:
-  enterprise: false
+csv:
   extractor:
-    type: productModel
-    method: all
-    search:
-      - { field: enabled, operator: '=', value: true }
-      - { field: completeness, operator: '>', value: 70, scope: ecommerce }
-      - { field: completeness, operator: '<', value: 85, scope: ecommerce }
-      - { field: categories, operator: IN, value: winter_collection }
-      - { field: family, operator: IN, value: [camcorders, digital_cameras] }
+    file_path: 'path/to/file.csv'
+    delimiter: ','
+    enclosure: '"'
+    escape: '\\'
   logger:
     type: 'stderr'
-  client:
-    api_url: 'https://demo.akeneo.com'
-    client_id: '2_5a3jtcvwi8w0cwk88w04ogkcks00o4wowwgc8gg4w0cow4wsc8'
-    secret: '4ww9l30ij2m8wsw8w04sgw4wgkwc8gss0sgc8cc0o0goo4wkso'
-    username: 'demo_9573'
-    password: 516f3e3e5
 ```
 
 ### Building a loader
 
 ```yaml
-akeneo:
-  enterprise: true
-  loader:
-    type: productModel
-    method: upsert
-  logger:
-    type: 'stderr'
-  client:
-    api_url: 'https://demo.akeneo.com'
-    client_id: '2_5a3jtcvwi8w0cwk88w04ogkcks00o4wowwgc8gg4w0cow4wsc8'
-    secret: '4ww9l30ij2m8wsw8w04sgw4wgkwc8gss0sgc8cc0o0goo4wkso'
-    username: 'demo_9573'
-    password: 516f3e3e5
+csv:
+    loader:
+        file_path: 'path/to/file.csv'
+        delimiter: ','
+        enclosure: '"'
+        escape: '\\'
+    logger:
+        type: 'stderr'
 ```
 
 Usage
 ---
 
-This library will build for you either an extractor or a loader, compatible with the Akeneo API.
+This library will build for you either an extractor or a loader that reads or write a CSV.
 
 You can use the following PHP script to test and print the result of your configuration.
 
@@ -73,7 +54,7 @@ You can use the following PHP script to test and print the result of your config
 
 require __DIR__ . '/../vendor/autoload.php';
 
-use Kiboko\Component\ETL\Flow\Akeneo;
+use Kiboko\Component\ETL\Flow\CSV;
 use PhpParser\Node;
 use PhpParser\PrettyPrinter;
 use Symfony\Component\Console;
@@ -93,7 +74,7 @@ class DefaultCommand extends Console\Command\Command
 
     protected function execute(Console\Input\InputInterface $input, Console\Output\OutputInterface $output)
     {
-        $factory = new Akeneo\Service();
+        $factory = new CSV\Service();
 
         $style = new Console\Style\SymfonyStyle(
             $input,

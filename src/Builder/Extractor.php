@@ -18,6 +18,6 @@ final class Extractor implements Builder
 
     public function getNode(): Node
     {
-        return new Node\Expr\New_(class: new Node\Name\FullyQualified(''));
+        return new Node\Expr\New_(class: new Node\Name\FullyQualified('Kiboko\\Component\\Flow\\Csv\\Safe\\Loader'));
     }
 }
