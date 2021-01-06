@@ -20,13 +20,13 @@ Configuration format
 
 ```yaml
 csv:
-  extractor:
-    file_path: 'path/to/file.csv'
-    delimiter: ','
-    enclosure: '"'
-    escape: '\\'
-  logger:
-    type: 'stderr'
+    extractor:
+        file_path: 'path/to/file.csv'
+        delimiter: ','
+        enclosure: '"'
+        escape: '\\'
+    logger:
+        type: 'stderr'
 ```
 
 ### Building a loader
