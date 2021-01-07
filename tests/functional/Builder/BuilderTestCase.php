@@ -2,12 +2,11 @@
 
 namespace functional\Kiboko\Component\ETL\Flow\CSV\Builder;
 
-use PhpParser\Node;
-use PhpParser\PrettyPrinter;
+use functional\Kiboko\Component\ETL\Flow\CSV\BuilderProducesAnInstanceOf;
 use PhpParser\Builder as DefaultBuilder;
+use PHPUnit\Framework\Constraint\LogicalNot;
 use PHPUnit\Framework\TestCase;
 use Vfs\FileSystem;
-use Vfs\Node\File;
 
 abstract class BuilderTestCase extends TestCase
 {
@@ -15,7 +14,6 @@ abstract class BuilderTestCase extends TestCase
 
     protected function setUp(): void
     {
-        var_dump('SET UP SET UP SET UP');
         $this->fs = FileSystem::factory('vfs://');
         $this->fs->mount();
     }
@@ -26,43 +24,23 @@ abstract class BuilderTestCase extends TestCase
         $this->fs = null;
     }
 
-    protected function assertNodeIsInstanceOf(string $expected, DefaultBuilder $builder, string $message = '')
+    protected function assertBuilderProducesAnInstanceOf(string $expected, DefaultBuilder $builder, string $message = '')
     {
-        $printer = new PrettyPrinter\Standard();
-
-        try {
-            $filename = sha1(random_bytes(128)) .'.php';
-
-            $this->fs->get('/')->add($filename, new File($printer->prettyPrintFile([
-                new Node\Stmt\Return_($builder->getNode()),
-            ])));
-
-            $actual = include 'vfs://'.$filename;
-        } catch (\ParseError $exception) {
-            echo $printer->prettyPrintFile([$builder->getNode()]);
-            $this->fail($exception->getMessage());
-        }
-
-        $this->assertInstanceOf($expected, $actual, $message);
+        static::assertThat(
+            $builder,
+            new BuilderProducesAnInstanceOf($expected),
+            $message
+        );
     }
 
-    protected function assertNodeIsNotInstanceOf(string $expected, DefaultBuilder $builder, string $message = '')
+    protected function assertBuilderNotProducesAnInstanceOf(string $expected, DefaultBuilder $builder, string $message = '')
     {
-        $printer = new PrettyPrinter\Standard();
-
-        try {
-            $filename = sha1(random_bytes(128)) .'.php';
-
-            $this->fs->get('/')->add($filename, new File($printer->prettyPrintFile([
-                new Node\Stmt\Return_($builder->getNode()),
-            ])));
-
-            $actual = include 'vfs://'.$filename;
-        } catch (\ParseError $exception) {
-            echo $printer->prettyPrintFile([$builder->getNode()]);
-            $this->fail($exception->getMessage());
-        }
-
-        $this->assertNotInstanceOf($expected, $actual, $message);
+        static::assertThat(
+            $builder,
+            new LogicalNot(
+                new BuilderProducesAnInstanceOf($expected),
+            ),
+            $message
+        );
     }
 }

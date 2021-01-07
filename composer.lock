@@ -218,12 +218,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-etl/csv-flow.git",
-                "reference": "cb7142be13feff65e3c1696aedb271729e43d9d0"
+                "reference": "ea222b9b95c17db702b58ec61c06a040cd17c2b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-etl/csv-flow/zipball/cb7142be13feff65e3c1696aedb271729e43d9d0",
-                "reference": "cb7142be13feff65e3c1696aedb271729e43d9d0",
+                "url": "https://api.github.com/repos/php-etl/csv-flow/zipball/ea222b9b95c17db702b58ec61c06a040cd17c2b2",
+                "reference": "ea222b9b95c17db702b58ec61c06a040cd17c2b2",
                 "shasum": ""
             },
             "require": {
@@ -253,12 +253,13 @@
             },
             "autoload": {
                 "psr-4": {
-                    "Kiboko\\Component\\Flow\\Csv\\": ""
+                    "Kiboko\\Component\\Flow\\Csv\\": "src/"
                 }
             },
             "autoload-dev": {
                 "psr-4": {
-                    "unit\\Kiboko\\Component\\Flow\\Csv\\": "unit/"
+                    "unit\\Kiboko\\Component\\Flow\\Csv\\": "tests/unit/",
+                    "functional\\Kiboko\\Component\\Flow\\Csv\\": "tests/functional/"
                 }
             },
             "license": [
@@ -279,7 +280,7 @@
                 "source": "https://github.com/php-etl/csv-flow/tree/master",
                 "issues": "https://github.com/php-etl/csv-flow/issues"
             },
-            "time": "2021-01-06T11:22:34+00:00"
+            "time": "2021-01-07T19:02:00+00:00"
         },
         {
             "name": "php-etl/pipeline-contracts",
