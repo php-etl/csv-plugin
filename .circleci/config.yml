@@ -1,0 +1,17 @@
+version: 2
+jobs:
+    build:
+        machine: true
+        steps:
+            - checkout
+            - run: cp .circleci/phpunit.xml phpunit.xml
+            - restore_cache:
+                keys:
+                    - composer-v2-{{ checksum "composer.lock" }}
+            - run: composer install -n --prefer-dist
+            - save_cache:
+                key: composer-v2-{{ checksum "composer.lock" }}
+                paths:
+                    - vendor
+            - run: bin/phpstan analyse src/ --level=8
+            - run: bin/phpunit tests/

@@ -52,7 +52,7 @@ final class Logger implements Configurator\FactoryInterface
     {
         $builder = new CSV\Builder\Logger();
         try {
-            if ($config['type'] === 'stderr') {
+            if (isset($config['type']) && $config['type'] === 'stderr') {
                 $builder->withLogger((new CSV\Builder\StderrLogger())->getNode());
             } else {
                 $builder->withLogger((new CSV\Builder\NullLogger())->getNode());

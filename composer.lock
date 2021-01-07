@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8c09bb00e96c62cb51ab19311ff02e7c",
+    "content-hash": "e5c33e3e65a31cfa9a54d9f624b1f5e4",
     "packages": [
         {
             "name": "nikic/php-parser",
@@ -57,6 +57,62 @@
                 "php"
             ],
             "time": "2020-12-20T10:01:03+00:00"
+        },
+        {
+            "name": "php-etl/bucket",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-etl/bucket.git",
+                "reference": "1d8733b2473f59cc6aaef2000fa85de2a2177af7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-etl/bucket/zipball/1d8733b2473f59cc6aaef2000fa85de2a2177af7",
+                "reference": "1d8733b2473f59cc6aaef2000fa85de2a2177af7",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0",
+                "php-etl/bucket-contracts": "^0.1.0@dev"
+            },
+            "require-dev": {
+                "friends-of-phpspec/phpspec-code-coverage": "6.x-dev",
+                "phpspec/phpspec": "^7.0",
+                "phpstan/phpstan": "^0.12"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Kiboko\\Component\\ETL\\Bucket\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kiboko SAS",
+                    "homepage": "http://kiboko.fr"
+                },
+                {
+                    "name": "Grégory Planchat",
+                    "email": "gregory@kiboko.fr"
+                }
+            ],
+            "description": "This library implements the Extract-Transform-Load pattern asynchronously in PHP with the help of iterators and generators",
+            "support": {
+                "issues": "https://github.com/php-etl/bucket/issues",
+                "source": "https://github.com/php-etl/bucket/tree/master"
+            },
+            "time": "2020-12-17T21:26:04+00:00"
         },
         {
             "name": "php-etl/bucket-contracts",
@@ -157,6 +213,75 @@
             "time": "2020-12-16T18:24:09+00:00"
         },
         {
+            "name": "php-etl/csv-flow",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-etl/csv-flow.git",
+                "reference": "cb7142be13feff65e3c1696aedb271729e43d9d0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-etl/csv-flow/zipball/cb7142be13feff65e3c1696aedb271729e43d9d0",
+                "reference": "cb7142be13feff65e3c1696aedb271729e43d9d0",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0",
+                "php-etl/bucket": "^0.1",
+                "php-etl/bucket-contracts": "^0.1",
+                "php-etl/pipeline-contracts": "^0.1",
+                "psr/log": "^1.1@dev"
+            },
+            "require-dev": {
+                "friends-of-phpspec/phpspec-code-coverage": "^6.0",
+                "infection/infection": "^0.20",
+                "johnkary/phpunit-speedtrap": "*",
+                "mybuilder/phpunit-accelerator": "*",
+                "php-etl/phpspec-extension": "^0.2@dev",
+                "phpspec/phpspec": "^7.0",
+                "phpstan/phpstan": "^0.12",
+                "phpunit/php-invoker": "*",
+                "phpunit/phpunit": "^9.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Kiboko\\Component\\Flow\\Csv\\": ""
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "unit\\Kiboko\\Component\\Flow\\Csv\\": "unit/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kiboko SAS",
+                    "homepage": "http://kiboko.fr"
+                },
+                {
+                    "name": "Grégory Planchat",
+                    "email": "gregory@kiboko.fr"
+                }
+            ],
+            "description": "CSV implementation for the ETL pipeline",
+            "support": {
+                "source": "https://github.com/php-etl/csv-flow/tree/master",
+                "issues": "https://github.com/php-etl/csv-flow/issues"
+            },
+            "time": "2021-01-06T11:22:34+00:00"
+        },
+        {
             "name": "php-etl/pipeline-contracts",
             "version": "dev-master",
             "source": {
@@ -209,6 +334,56 @@
                 "source": "https://github.com/php-etl/pipeline-contracts/tree/master"
             },
             "time": "2020-12-10T22:29:12+00:00"
+        },
+        {
+            "name": "psr/log",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/log.git",
+                "reference": "dd738d0b4491f32725492cf345f6b501f5922fec"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/dd738d0b4491f32725492cf345f6b501f5922fec",
+                "reference": "dd738d0b4491f32725492cf345f6b501f5922fec",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Log\\": "Psr/Log/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "https://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for logging libraries",
+            "homepage": "https://github.com/php-fig/log",
+            "keywords": [
+                "log",
+                "psr",
+                "psr-3"
+            ],
+            "support": {
+                "source": "https://github.com/php-fig/log/tree/master"
+            },
+            "time": "2020-09-18T06:44:51+00:00"
         },
         {
             "name": "symfony/config",
@@ -1966,6 +2141,67 @@
             "time": "2020-12-19T10:15:11+00:00"
         },
         {
+            "name": "phpstan/phpstan",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpstan/phpstan.git",
+                "reference": "91a917e7edb32c1c6376d2e5383fdd1c394f0b2d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/91a917e7edb32c1c6376d2e5383fdd1c394f0b2d",
+                "reference": "91a917e7edb32c1c6376d2e5383fdd1c394f0b2d",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1|^8.0"
+            },
+            "conflict": {
+                "phpstan/phpstan-shim": "*"
+            },
+            "default-branch": true,
+            "bin": [
+                "phpstan",
+                "phpstan.phar"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.12-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "PHPStan - PHP Static Analysis Tool",
+            "support": {
+                "issues": "https://github.com/phpstan/phpstan/issues",
+                "source": "https://github.com/phpstan/phpstan/tree/master"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/ondrejmirtes",
+                    "type": "github"
+                },
+                {
+                    "url": "https://www.patreon.com/phpstan",
+                    "type": "patreon"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/phpstan/phpstan",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2021-01-06T15:13:43+00:00"
+        },
+        {
             "name": "phpunit/php-code-coverage",
             "version": "9.2.x-dev",
             "source": {
@@ -2593,56 +2829,6 @@
                 "response"
             ],
             "time": "2019-08-29T13:16:46+00:00"
-        },
-        {
-            "name": "psr/log",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-fig/log.git",
-                "reference": "dd738d0b4491f32725492cf345f6b501f5922fec"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/dd738d0b4491f32725492cf345f6b501f5922fec",
-                "reference": "dd738d0b4491f32725492cf345f6b501f5922fec",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Psr\\Log\\": "Psr/Log/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "PHP-FIG",
-                    "homepage": "https://www.php-fig.org/"
-                }
-            ],
-            "description": "Common interface for logging libraries",
-            "homepage": "https://github.com/php-fig/log",
-            "keywords": [
-                "log",
-                "psr",
-                "psr-3"
-            ],
-            "support": {
-                "source": "https://github.com/php-fig/log/tree/master"
-            },
-            "time": "2020-09-18T06:44:51+00:00"
         },
         {
             "name": "sebastian/cli-parser",
@@ -4434,13 +4620,15 @@
         "php-etl/configurator-contracts": 20,
         "nikic/php-parser": 20,
         "php-etl/pipeline-contracts": 20,
+        "php-etl/csv-flow": 20,
         "php-http/mock-client": 20,
         "symfony/yaml": 20,
         "symfony/console": 20,
         "php-etl/bucket-contracts": 20,
         "php-etl/pipeline": 20,
         "laminas/laminas-diactoros": 20,
-        "adlawson/vfs": 20
+        "adlawson/vfs": 20,
+        "phpstan/phpstan": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

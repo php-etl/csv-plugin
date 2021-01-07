@@ -15,6 +15,7 @@ abstract class BuilderTestCase extends TestCase
 
     protected function setUp(): void
     {
+        var_dump('SET UP SET UP SET UP');
         $this->fs = FileSystem::factory('vfs://');
         $this->fs->mount();
     }

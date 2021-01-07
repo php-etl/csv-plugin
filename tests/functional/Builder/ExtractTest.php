@@ -3,13 +3,13 @@
 namespace functional\Kiboko\Component\ETL\Flow\CSV\Builder;
 
 use Kiboko\Component\ETL\Flow\CSV\Builder;
+use Kiboko\Component\Flow\Csv\Safe\Extractor;
 
-class ExtractTest extends BuilderTestCase
+final class ExtractTest extends BuilderTestCase
 {
-    public function testWithFilePath()
+    public function testWithFilePath(): void
     {
         $extract = new Builder\Extractor();
-
-        $this->assertNodeIsInstanceOf('', $extract);
+        $this->assertNodeIsInstanceOf(Extractor::class, $extract);
     }
 }

@@ -4,6 +4,8 @@ namespace Kiboko\Component\ETL\Flow\CSV\Builder;
 
 use PhpParser\Builder;
 use PhpParser\Node;
+use Kiboko\Component\ETL\Flow\SPL\CSV\Safe\Loader as SafeLoader;
+use Kiboko\Component\Flow\Csv\Safe\Extractor as SafeExtractor;
 
 final class Extractor implements Builder
 {
@@ -18,6 +20,8 @@ final class Extractor implements Builder
 
     public function getNode(): Node
     {
-        return new Node\Expr\New_(class: new Node\Name\FullyQualified('Kiboko\\Component\\Flow\\Csv\\Safe\\Loader'));
+        return new Node\Expr\New_(
+            class: new Node\Name\FullyQualified(SafeExtractor::class)
+        );
     }
 }

@@ -5,12 +5,18 @@
     "license": "MIT",
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "^0.1.x-dev"
         }
     },
     "autoload": {
         "psr-4": {
             "Kiboko\\Component\\ETL\\Flow\\CSV\\": "src/"
+        }
+    },
+    "repositories": {
+        "php-etl/csv-flow": {
+            "type": "vcs",
+            "url": "https://github.com/php-etl/csv-flow.git"
         }
     },
     "autoload-dev": {
@@ -27,7 +33,8 @@
         "php-etl/configurator-contracts": "dev-master",
         "nikic/php-parser": "^4.9@dev",
         "symfony/config": "^4.0 || ^5.0",
-        "php-etl/pipeline-contracts": "dev-master"
+        "php-etl/pipeline-contracts": "dev-master",
+        "php-etl/csv-flow": "dev-master"
     },
     "require-dev": {
         "php-http/mock-client": "^1.4@dev",
@@ -38,7 +45,8 @@
         "php-etl/pipeline": "^0.2.0@dev",
         "phpunit/phpunit": "^9.0",
         "laminas/laminas-diactoros": "2.6.x-dev",
-        "adlawson/vfs": "dev-develop"
+        "adlawson/vfs": "dev-develop",
+        "phpstan/phpstan": "0.12.x-dev"
     },
     "authors": [
         {

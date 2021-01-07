@@ -62,7 +62,7 @@ final class Service implements FactoryInterface
                 $extractor->withLogger($logger->getNode());
 
                 return $extractor;
-            } else if (isset($congig['loader'])) {
+            } else if (isset($config['loader'])) {
                 $loaderFactory = new Factory\Loader();
 
                 $loader = $loaderFactory->compile($config['loader']);

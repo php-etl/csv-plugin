@@ -2,13 +2,14 @@
 
 namespace Kiboko\Component\ETL\Flow\CSV\Configuration;
 
-use Symfony\Component\Config;
+use Symfony\Component\Config\Definition\Builder\TreeBuilder;
+use Symfony\Component\Config\Definition\ConfigurationInterface;
 
-final class Logger implements Config\Definition\ConfigurationInterface
+final class Logger implements ConfigurationInterface
 {
     public function getConfigTreeBuilder()
     {
-        $builder = new Config\Definition\Builder\TreeBuilder('logger');
+        $builder = new TreeBuilder('logger');
 
         $builder->getRootNode()
             ->children()

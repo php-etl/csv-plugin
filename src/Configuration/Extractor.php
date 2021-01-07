@@ -2,13 +2,15 @@
 
 namespace Kiboko\Component\ETL\Flow\CSV\Configuration;
 
-use Symfony\Component\Config;
+use Symfony\Component\Config\Definition\Builder\TreeBuilder;
+use Symfony\Component\Config\Definition\ConfigurationInterface;
 
-final class Extractor implements Config\Definition\ConfigurationInterface
+final class Extractor implements ConfigurationInterface
 {
     public function getConfigTreeBuilder()
     {
-        $builder = new Config\Definition\Builder\TreeBuilder('extractor');
+        $builder = new TreeBuilder('extractor');
+
         $builder->getRootNode()
             ->children()
                 ->scalarNode('file_path')->isRequired()->end()
