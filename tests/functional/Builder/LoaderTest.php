@@ -5,11 +5,11 @@ namespace functional\Kiboko\Component\ETL\Flow\CSV\Builder;
 use Kiboko\Component\ETL\Flow\CSV\Builder;
 use PhpParser\Node;
 
-final class ExtractorTest extends BuilderTestCase
+final class LoaderTest extends BuilderTestCase
 {
     public function testWithFilePath(): void
     {
-        $extract = new Builder\Extractor(
+        $extract = new Builder\Loader(
             new Node\Scalar\String_('path.csv'),
             new Node\Scalar\String_(';'),
             new Node\Scalar\String_('"'),
@@ -17,7 +17,7 @@ final class ExtractorTest extends BuilderTestCase
         );
 
         $this->assertBuilderProducesAnInstanceOf(
-            'Kiboko\\Component\\Flow\\Csv\\Safe\\Extractor',
+            'Kiboko\\Component\\ETL\\Flow\\SPL\\CSV\\Safe\\Loader',
             $extract
         );
     }
