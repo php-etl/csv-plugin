@@ -7,17 +7,11 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 final class Configuration implements ConfigurationInterface
 {
-    private ConfigurationInterface $loggerConfiguration;
-
-    public function __construct(?ConfigurationInterface $loggerConfiguration = null)
-    {
-        $this->loggerConfiguration = $loggerConfiguration ?? new Configuration\Logger();
-    }
-
     public function getConfigTreeBuilder()
     {
         $extractor = new Configuration\Extractor();
         $loader = new Configuration\Loader();
+        $logger = new Configuration\Logger();
 
         $builder = new TreeBuilder('csv');
         $builder->getRootNode()
@@ -30,7 +24,7 @@ final class Configuration implements ConfigurationInterface
             ->children()
                 ->append(node: $extractor->getConfigTreeBuilder()->getRootNode())
                 ->append(node: $loader->getConfigTreeBuilder()->getRootNode())
-                ->append(node: $this->loggerConfiguration->getConfigTreeBuilder()->getRootNode())
+                ->append(node: $logger->getConfigTreeBuilder()->getRootNode())
             ->end()
         ;
 

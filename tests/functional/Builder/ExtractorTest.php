@@ -9,8 +9,10 @@ final class ExtractorTest extends BuilderTestCase
 {
     public function testWithFilePath(): void
     {
+        fopen('vfs://source.csv', 'w');
+
         $extract = new Builder\Extractor(
-            new Node\Scalar\String_('path.csv'),
+            new Node\Scalar\String_('vfs://source.csv'),
             new Node\Scalar\String_(';'),
             new Node\Scalar\String_('"'),
             new Node\Scalar\String_('\\'),

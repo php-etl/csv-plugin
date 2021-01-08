@@ -46,7 +46,8 @@
         "phpunit/phpunit": "^9.0",
         "laminas/laminas-diactoros": "2.6.x-dev",
         "adlawson/vfs": "dev-develop",
-        "phpstan/phpstan": "0.12.x-dev"
+        "phpstan/phpstan": "0.12.x-dev",
+        "infection/infection": "dev-master"
     },
     "authors": [
         {

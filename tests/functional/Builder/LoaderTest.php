@@ -10,7 +10,7 @@ final class LoaderTest extends BuilderTestCase
     public function testWithFilePath(): void
     {
         $extract = new Builder\Loader(
-            new Node\Scalar\String_('path.csv'),
+            new Node\Scalar\String_('vfs://destination.csv'),
             new Node\Scalar\String_(';'),
             new Node\Scalar\String_('"'),
             new Node\Scalar\String_('\\'),

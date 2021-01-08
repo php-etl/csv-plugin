@@ -33,7 +33,8 @@ final class Loader implements Builder
                 new Node\Expr\New_(
                     class: new Node\Name\FullyQualified('SplFileObject'),
                     args: [
-                        new Node\Arg($this->filePath)
+                        new Node\Arg($this->filePath),
+                        new Node\Arg(new Node\Scalar\String_('w')),
                     ]
                 ),
                 new Node\Arg($this->delimiter),

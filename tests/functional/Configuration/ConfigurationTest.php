@@ -89,6 +89,31 @@ class ConfigurationTest extends TestCase
                 ]
             ]
         ];
+
+        yield [
+            'expected' => [
+                'logger' => [
+                    'type' => 'null'
+                ],
+                'extractor' => [
+                    'file_path' => 'path/to/file',
+                    'delimiter' => ',',
+                    'enclosure' => '"',
+                    'escape' => '\\'
+                ]
+            ],
+            'actual' => [
+                'logger' => [
+                    'type' => 'null'
+                ],
+                'extractor' => [
+                    'file_path' => 'path/to/file',
+                    'delimiter' => ',',
+                    'enclosure' => '"',
+                    'escape' => '\\'
+                ]
+            ]
+        ];
     }
 
     /**
@@ -121,6 +146,23 @@ class ConfigurationTest extends TestCase
                 [
                     'extractor' => [
                         'enclosure' => '"',
+                    ]
+                ]
+            ]
+        );
+    }
+
+    public function testMissingOptionsInLoader()
+    {
+        $this->expectException(Config\Definition\Exception\InvalidConfigurationException::class);
+        $this->expectExceptionMessage('The child config "file_path" under "csv.loader" must be configured.');
+
+        $config = new Configuration();
+        $this->processor->processConfiguration(
+            $config,
+            [
+                [
+                    'loader' => [
                     ]
                 ]
             ]
