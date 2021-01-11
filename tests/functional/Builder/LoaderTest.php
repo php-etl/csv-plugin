@@ -17,7 +17,7 @@ final class LoaderTest extends BuilderTestCase
         );
 
         $this->assertBuilderProducesAnInstanceOf(
-            'Kiboko\\Component\\ETL\\Flow\\SPL\\CSV\\Safe\\Loader',
+            'Kiboko\\Component\\Flow\\Csv\\Safe\\Loader',
             $extract
         );
     }

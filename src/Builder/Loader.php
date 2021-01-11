@@ -28,7 +28,7 @@ final class Loader implements Builder
     public function getNode(): Node
     {
         return new Node\Expr\New_(
-            class: new Node\Name\FullyQualified('Kiboko\\Component\\ETL\\Flow\\SPL\\CSV\\Safe\\Loader'),
+            class: new Node\Name\FullyQualified('Kiboko\\Component\\Flow\\Csv\\Safe\\Loader'),
             args: [
                 new Node\Expr\New_(
                     class: new Node\Name\FullyQualified('SplFileObject'),
