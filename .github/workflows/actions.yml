@@ -1,0 +1,32 @@
+name: Quality
+
+on: push
+
+jobs:
+    quality:
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                php-version: [ "8.0", "8.1" ]
+                phpstan-level: [ 3, 5, 7, 8 ]
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+
+            - name: Setup PHP with pecl extension
+              uses: shivammathur/setup-php@v2
+              with:
+                 php-version: ${{ matrix.php-version }}
+                 tools: composer:v2, phpstan
+
+            - name: Install dependencies
+              run: composer install --prefer-dist --no-progress
+
+            - name: php-cs-fixer default
+              uses: zalexki/php-cs-fixer-action@master
+              with:
+                 other-cmds: '--dry-run --diff'
+
+            - name: PHPStan
+              run: vendor/bin/phpstan analyze --level=${{ matrix.phpstan-level }} src
