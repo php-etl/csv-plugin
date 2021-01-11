@@ -36,8 +36,7 @@ jobs:
               run: bin/phpstan analyze --level=${{ matrix.phpstan-level }} src
 
             - name: Infection
-              run: |
-                wget https://github.com/infection/infection/releases/download/0.20.0/infection.phar
+              run: wget https://github.com/infection/infection/releases/download/0.20.0/infection.phar
                 wget https://github.com/infection/infection/releases/download/0.20.0/infection.phar.asc
                 chmod +x infection.phar
                 ./infection.phar
