@@ -23,10 +23,13 @@ jobs:
             - name: Install dependencies
               run: composer install --prefer-dist --no-progress
 
+            - name: PhpUnit
+              run: bin/phpunit
+
             - name: php-cs-fixer default
               uses: zalexki/php-cs-fixer-action@master
               with:
                  other-cmds: '--dry-run --diff'
 
             - name: PHPStan
-              run: vendor/bin/phpstan analyze --level=${{ matrix.phpstan-level }} src
+              run: bin/phpstan analyze --level=${{ matrix.phpstan-level }} src
