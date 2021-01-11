@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Kiboko\Component\ETL\Flow\CSV\Factory;
+namespace Kiboko\Plugin\CSV\Factory;
 
-use Kiboko\Component\ETL\Flow\CSV;
+use Kiboko\Plugin\CSV;
 use Kiboko\Contract\ETL\Configurator;
 use PhpParser\Node;
 use Symfony\Component\Config\Definition\ConfigurationInterface;

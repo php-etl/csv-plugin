@@ -5,23 +5,17 @@
     "license": "MIT",
     "extra": {
         "branch-alias": {
-            "dev-master": "^0.1.x-dev"
+            "dev-master": "0.1.x-dev"
         }
     },
     "autoload": {
         "psr-4": {
-            "Kiboko\\Component\\ETL\\Flow\\CSV\\": "src/"
-        }
-    },
-    "repositories": {
-        "php-etl/csv-flow": {
-            "type": "vcs",
-            "url": "https://github.com/php-etl/csv-flow.git"
+            "Kiboko\\Plugin\\CSV\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "functional\\Kiboko\\Component\\ETL\\Flow\\CSV\\": "tests/functional/"
+            "functional\\Kiboko\\Plugin\\CSV\\": "tests/functional/"
         }
     },
     "config": {

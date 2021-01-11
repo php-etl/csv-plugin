@@ -1,11 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Kiboko\Component\ETL\Flow\CSV;
+namespace Kiboko\Plugin\CSV;
 
-use Kiboko\Component\ETL\Flow\CSV\Configuration;
-use Kiboko\Component\ETL\Flow\CSV\Factory;
+use Kiboko\Plugin\CSV\Factory;
 use Kiboko\Contract\ETL\Configurator\InvalidConfigurationException;
-use Kiboko\Contract\ETL\Configurator\ConfigurationExceptionInterface;
 use Kiboko\Contract\ETL\Configurator\FactoryInterface;
 use PhpParser\Builder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;

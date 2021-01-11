@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace functional\Kiboko\Component\ETL\Flow\CSV\Builder;
+namespace functional\Kiboko\Plugin\CSV\Builder;
 
-use functional\Kiboko\Component\ETL\Flow\CSV\BuilderProducesAnInstanceOf;
+use functional\Kiboko\Plugin\CSV\BuilderProducesAnInstanceOf;
 use PhpParser\Builder as DefaultBuilder;
 use PHPUnit\Framework\Constraint\LogicalNot;
 use PHPUnit\Framework\TestCase;

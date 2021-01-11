@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace functional\Kiboko\Component\ETL\Flow\CSV\Builder;
+namespace functional\Kiboko\Plugin\CSV\Builder;
 
-use Kiboko\Component\ETL\Flow\CSV\Builder;
+use Kiboko\Plugin\CSV\Builder;
 use PhpParser\Node;
 
 final class LoaderTest extends BuilderTestCase

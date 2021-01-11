@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Kiboko\Component\ETL\Flow\CSV\Builder;
+namespace Kiboko\Plugin\CSV\Builder;
 
 use PhpParser\Builder;
 use PhpParser\Node;

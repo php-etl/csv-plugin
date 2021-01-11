@@ -54,7 +54,7 @@ You can use the following PHP script to test and print the result of your config
 
 require __DIR__ . '/../vendor/autoload.php';
 
-use Kiboko\Component\ETL\Flow\CSV;
+use Kiboko\Plugin\CSV;
 use PhpParser\Node;
 use PhpParser\PrettyPrinter;
 use Symfony\Component\Console;
