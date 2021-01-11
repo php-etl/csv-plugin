@@ -218,12 +218,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-etl/csv-flow.git",
-                "reference": "3be02ba5487fcbf95a161c52915a445f391cff94"
+                "reference": "0db0db85346334cb33cb1f91677c5494f03e2579"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-etl/csv-flow/zipball/3be02ba5487fcbf95a161c52915a445f391cff94",
-                "reference": "3be02ba5487fcbf95a161c52915a445f391cff94",
+                "url": "https://api.github.com/repos/php-etl/csv-flow/zipball/0db0db85346334cb33cb1f91677c5494f03e2579",
+                "reference": "0db0db85346334cb33cb1f91677c5494f03e2579",
                 "shasum": ""
             },
             "require": {
@@ -275,7 +275,7 @@
                 "issues": "https://github.com/php-etl/csv-flow/issues",
                 "source": "https://github.com/php-etl/csv-flow/tree/master"
             },
-            "time": "2021-01-11T11:02:35+00:00"
+            "time": "2021-01-11T14:25:22+00:00"
         },
         {
             "name": "php-etl/pipeline-contracts",
@@ -283,12 +283,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-etl/pipeline-contracts.git",
-                "reference": "18be461a56191ba3896e86889246ceeac262f221"
+                "reference": "1158ab48bbcbafb1140a1b533f0dab6c8e37623a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-etl/pipeline-contracts/zipball/18be461a56191ba3896e86889246ceeac262f221",
-                "reference": "18be461a56191ba3896e86889246ceeac262f221",
+                "url": "https://api.github.com/repos/php-etl/pipeline-contracts/zipball/1158ab48bbcbafb1140a1b533f0dab6c8e37623a",
+                "reference": "1158ab48bbcbafb1140a1b533f0dab6c8e37623a",
                 "shasum": ""
             },
             "require": {
@@ -307,7 +307,7 @@
             },
             "autoload": {
                 "psr-4": {
-                    "Kiboko\\Contract\\ETL\\Pipeline\\": "src/"
+                    "Kiboko\\Contract\\Pipeline\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -329,7 +329,7 @@
                 "issues": "https://github.com/php-etl/pipeline-contracts/issues",
                 "source": "https://github.com/php-etl/pipeline-contracts/tree/master"
             },
-            "time": "2020-12-10T22:29:12+00:00"
+            "time": "2021-01-11T14:04:51+00:00"
         },
         {
             "name": "psr/log",
@@ -1388,6 +1388,7 @@
                 "phpspec/phpspec": "^5.1",
                 "phpunit/phpunit": "^7.0"
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
