@@ -14,8 +14,7 @@ final class Extractor implements Builder
         private Node\Expr $delimiter,
         private Node\Expr $enclosure,
         private Node\Expr $escape,
-    )
-    {
+    ) {
     }
 
     public function withLogger(Node\Expr $logger): self
