@@ -7,7 +7,7 @@ jobs:
         runs-on: ubuntu-latest
         strategy:
             matrix:
-                php-version: [ "8.0", "8.1" ]
+                php-version: [ "8.0" ]
                 phpstan-level: [ 3, 5, 7, 8 ]
 
         steps:
