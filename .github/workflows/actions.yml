@@ -5,6 +5,9 @@ on: push
 jobs:
     build:
         runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                phpstan-level: [ 3, 5, 7, 8 ]
         steps:
             - name: Checkout code
               uses: actions/checkout@v2
@@ -16,36 +19,33 @@ jobs:
                  tools: composer:v2, phpstan
 
             - name: Install dependencies
-              run: composer install --prefer-dist --no-progress
+              uses: php-actions/composer@v5
 
-    phpunit:
-        runs-on: ubuntu-latest
-        needs: [ build ]
-        steps:
+#    phpunit:
+#        runs-on: ubuntu-latest
+#        needs: [ build ]
+#        steps:
             - name: PhpUnit
               run: bin/phpunit
 
-    cs-fixer:
-        runs-on: ubuntu-latest
-        needs: [ build ]
-        steps:
+#    cs-fixer:
+#        runs-on: ubuntu-latest
+#        needs: [ build ]
+#        steps:
             - name: Cs-Fixer
               run: PHP_CS_FIXER_IGNORE_ENV=true bin/php-cs-fixer fix --dry-run src
 
-    phpstan:
-        runs-on: ubuntu-latest
-        strategy:
-            matrix:
-                phpstan-level: [ 3, 5, 7, 8 ]
-        needs: [ build ]
-        steps:
+#    phpstan:
+#        runs-on: ubuntu-latest
+#        needs: [ build ]
+#        steps:
             -   name: PHPStan
                 run: bin/phpstan analyze --level=${{ matrix.phpstan-level }} src
 
-    infection:
-        runs-on: ubuntu-latest
-        needs: [ phpunit, cs-fixer, phpstan ]
-        steps:
+#    infection:
+#        runs-on: ubuntu-latest
+#        needs: [ phpunit, cs-fixer, phpstan ]
+#        steps:
             - name: Infection
               run: |
                 wget -q https://github.com/infection/infection/releases/download/0.20.0/infection.phar
