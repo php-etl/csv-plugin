@@ -8,12 +8,19 @@ jobs:
         steps:
             -   uses: actions/checkout@v2
 
+            -   name: Setup PHP with pecl extension
+                    uses: shivammathur/setup-php@v2
+                    with:
+                        php-version: '8.0'
+                        tools: composer:v2, pecl
+
             -   name: Cache Composer dependencies
                 uses: actions/cache@v2
                 with:
                     path: '**/vendor'
                     key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-                    restore-key: ${{ runner.os }}-composer-
+                    restore-keys: |
+                        ${{ runner.os }}-composer-
 
             -   uses: php-actions/composer@v5
                 with:
@@ -31,6 +38,7 @@ jobs:
                     wget -q https://github.com/infection/infection/releases/download/0.20.0/infection.phar
                     wget -q https://github.com/infection/infection/releases/download/0.20.0/infection.phar.asc
                     chmod +x infection.phar
+                    pecl install pcov
                     ./infection.phar
 
             -   name: PHP Unit tests
