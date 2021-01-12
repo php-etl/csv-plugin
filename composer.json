@@ -35,10 +35,10 @@
         "symfony/yaml": "5.x-dev",
         "symfony/console": "5.x-dev",
         "php-etl/bucket-contracts": "^0.1.0@dev",
-        "akeneo/api-php-client-ee": "^4.0",
         "php-etl/pipeline": "^0.2.0@dev",
         "laminas/laminas-diactoros": "2.6.x-dev",
-        "adlawson/vfs": "dev-develop"
+        "adlawson/vfs": "dev-develop",
+        "phpunit/phpunit": "10.0.x-dev"
     },
     "authors": [
         {
