@@ -3,17 +3,25 @@ name: Quality
 on: push
 
 jobs:
-#    composer:
-#        runs-on: ubuntu-latest
-#        steps:
-#            -   uses: actions/checkout@v2
-#            -   uses: php-actions/composer@v5
-#                with:
-#                    php_version: 8.0
+    composer:
+        runs-on: ubuntu-latest
+        steps:
+            -   uses: actions/checkout@v2
+            -   name: Cache Composer dependencies
+                uses: actions/cache@v2
+                with:
+                    path: /tmp/composer-cache
+                    key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
+            -   uses: php-actions/composer@v5
+                with:
+                    php_version: 8.0
 
     phpstan:
-#        needs: composer
+        needs: composer
         runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                phpstan-level: [ 3, 5, 7, 8 ]
         steps:
             -   uses: actions/checkout@v2
             -   uses: php-actions/composer@v5
@@ -24,9 +32,10 @@ jobs:
                 uses: php-actions/phpstan@v2
                 with:
                     path: src/
+                    args: --level=${{ matrix.phpstan-level }}
 
     phpunit:
-#        needs: composer
+        needs: composer
         runs-on: ubuntu-latest
         steps:
             -   uses: actions/checkout@v2
@@ -40,7 +49,6 @@ jobs:
                     php_version: 8.0
 
     cs-fixer:
-#        needs: composer
         runs-on: ubuntu-latest
         steps:
             -   uses: actions/checkout@v2
@@ -57,18 +65,13 @@ jobs:
                     PHP_CS_FIXER_IGNORE_ENV=true ./php-cs-fixer fix src --dry-run
 
     infection:
-#        needs: composer
+        needs: composer
         runs-on: ubuntu-latest
         steps:
             -   uses: actions/checkout@v2
             -   uses: php-actions/composer@v5
                 with:
                     php_version: 8.0
-
-#            -   name: Setup PHP
-#                uses: shivammathur/setup-php@v2
-#                with:
-#                    php-version: '8.0'
 
             -   name: Infection
                 run: |
