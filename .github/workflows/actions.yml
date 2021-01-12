@@ -21,8 +21,9 @@ jobs:
             -   name: Install dependencies
                 uses: php-actions/composer@v5
                 with:
-                    no-progress: ~
-                    prefer-dist: ~
+                    php_version: 8.0
+                    args: --prefer-dist
+                    quiet: ~
             -   name: PhpUnit
                 run: bin/phpunit
 
@@ -44,8 +45,9 @@ jobs:
             -   name: Install dependencies
                 uses: php-actions/composer@v5
                 with:
-                    no-progress: ~
-                    prefer-dist: ~
+                    php_version: 8.0
+                    args: --prefer-dist
+                    quiet: ~
             -   name: Cs-Fixer
                 run: |
                     wget -q https://cs.symfony.com/download/php-cs-fixer-v2.phar -O php-cs-fixer
@@ -73,8 +75,9 @@ jobs:
             -   name: Install dependencies
                 uses: php-actions/composer@v5
                 with:
-                    no-progress: ~
-                    prefer-dist: ~
+                    php_version: 8.0
+                    args: --prefer-dist
+                    quiet: ~
             -   name: PHPStan
                 run: bin/phpstan analyze --level=${{ matrix.phpstan-level }} src
 
