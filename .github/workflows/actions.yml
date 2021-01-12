@@ -3,26 +3,22 @@ name: Quality
 on: push
 
 jobs:
-    composer:
+#    composer:
+#        runs-on: ubuntu-latest
+#        steps:
+#            -   uses: actions/checkout@v2
+#            -   uses: php-actions/composer@v5
+#                with:
+#                    php_version: 8.0
+
+    phpstan:
+#        needs: composer
         runs-on: ubuntu-latest
         steps:
             -   uses: actions/checkout@v2
-
             -   uses: php-actions/composer@v5
                 with:
                     php_version: 8.0
-
-            -   name: Cache Composer
-                uses: actions/cache@v2
-                with:
-                    path: /tmp/composer-cache
-                    key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
-
-    phpstan:
-        needs: composer
-        runs-on: ubuntu-latest
-        steps:
-            -   uses: actions/checkout@v2
 
             -   name: PHPStan
                 uses: php-actions/phpstan@v2
@@ -30,10 +26,13 @@ jobs:
                     path: src/
 
     phpunit:
-        needs: composer
+#        needs: composer
         runs-on: ubuntu-latest
         steps:
             -   uses: actions/checkout@v2
+            -   uses: php-actions/composer@v5
+                with:
+                    php_version: 8.0
 
             -   name: PHP Unit tests
                 uses: php-actions/phpunit@v2
@@ -41,7 +40,7 @@ jobs:
                     php_version: 8.0
 
     cs-fixer:
-        needs: composer
+#        needs: composer
         runs-on: ubuntu-latest
         steps:
             -   uses: actions/checkout@v2
@@ -58,15 +57,18 @@ jobs:
                     PHP_CS_FIXER_IGNORE_ENV=true ./php-cs-fixer fix src --dry-run
 
     infection:
-        needs: [ phpstan, phpunit, cs-fixer ]
+#        needs: composer
         runs-on: ubuntu-latest
         steps:
             -   uses: actions/checkout@v2
-
-            -   name: Setup PHP
-                uses: shivammathur/setup-php@v2
+            -   uses: php-actions/composer@v5
                 with:
-                    php-version: '8.0'
+                    php_version: 8.0
+
+#            -   name: Setup PHP
+#                uses: shivammathur/setup-php@v2
+#                with:
+#                    php-version: '8.0'
 
             -   name: Infection
                 run: |
