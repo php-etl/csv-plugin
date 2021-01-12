@@ -56,6 +56,7 @@ csv:
     logger:
         type: stderr
 ```
+
 ## Read a CSV file, write the result to an other CSV file
 We read the file `my-input.csv`. It uses commas (`,`) to separate columns.
 
@@ -63,6 +64,7 @@ We then write it to `my-output.csv`, with semicolons (`;`) as the delimiter. We 
 
 Any error will be stored in [stderr](https://en.wikipedia.org/wiki/Standard_streams#Standard_error_(stderr)).
 
+settings.yml:
 ```yaml
 csv:
     extractor:
@@ -77,16 +79,14 @@ csv:
         type: stderr
 ```
 
+my-input.csv:
 ```
-# my-input.csv
-
 "John","Doe","Miami"
 "Jean","Dupont","Paris"
 ```
 
+my-output.csv:
 ```
-# my-output.csv
-
 "John";"Doe";"Miami"
 "Jean";"Dupont";"Paris"
 ```

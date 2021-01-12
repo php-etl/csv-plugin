@@ -7,13 +7,13 @@ The tools in this library will produce executable PHP sources, using an intermed
 [nikic/php-parser](https://github.com/nikic/PHP-Parser). This intermediate format helps you combine 
 the code produced by this library with other packages from [Middleware](https://github.com/php-etl).
 
-## Installation
+# Installation
 ```
 composer require php-etl/csv-plugin
 ```
 
 # Usage
-Example of a config file. Reads `input.csv`, writes `output.csv`, logs error.
+Example of a config file. Reads `input.csv`, writes `output.csv`, logs error in system's [stderr](https://en.wikipedia.org/wiki/Standard_streams#Standard_error_(stderr)).
 ```yaml
 csv:
     extractor:
