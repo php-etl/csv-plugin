@@ -28,8 +28,7 @@
         "nikic/php-parser": "^4.9@dev",
         "symfony/config": "^4.0 || ^5.0",
         "php-etl/pipeline-contracts": "dev-master",
-        "php-etl/csv-flow": "dev-master",
-        "friendsofphp/php-cs-fixer": "2.17.x-dev"
+        "php-etl/csv-flow": "dev-master"
     },
     "require-dev": {
         "php-http/mock-client": "^1.4@dev",
@@ -38,10 +37,8 @@
         "php-etl/bucket-contracts": "^0.1.0@dev",
         "akeneo/api-php-client-ee": "^4.0",
         "php-etl/pipeline": "^0.2.0@dev",
-        "phpunit/phpunit": "^9.0",
         "laminas/laminas-diactoros": "2.6.x-dev",
-        "adlawson/vfs": "dev-develop",
-        "phpstan/phpstan": "0.12.x-dev"
+        "adlawson/vfs": "dev-develop"
     },
     "authors": [
         {
