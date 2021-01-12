@@ -38,9 +38,9 @@ jobs:
                     tools: composer:v2
             -   name: Cache Composer
                 uses: actions/cache@v2
-                    with:
-                        path: /tmp/composer-cache
-                        key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
+                with:
+                    path: /tmp/composer-cache
+                    key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
             -   name: Install dependencies
                 uses: php-actions/composer@v5
                 with:
@@ -67,9 +67,9 @@ jobs:
                     tools: composer:v2
             -   name: Cache Composer
                 uses: actions/cache@v2
-                    with:
-                        path: /tmp/composer-cache
-                        key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
+                with:
+                    path: /tmp/composer-cache
+                    key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
             -   name: Install dependencies
                 uses: php-actions/composer@v5
                 with:
@@ -90,14 +90,14 @@ jobs:
                     tools: composer:v2
             -   name: Cache Composer
                 uses: actions/cache@v2
-                    with:
-                        path: /tmp/composer-cache
-                        key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
+                with:
+                    path: /tmp/composer-cache
+                    key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
             -   name: Install dependencies
                 uses: php-actions/composer@v5
                 with:
-                    no-progress: ~
-                    prefer-dist: ~
+                    no-progress: true
+                    prefer-dist: true
             -   name: Infection
                 run: |
                     wget -q https://github.com/infection/infection/releases/download/0.20.0/infection.phar
