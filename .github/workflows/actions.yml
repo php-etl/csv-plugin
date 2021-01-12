@@ -5,12 +5,6 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             -   uses: actions/checkout@v2
-            -   uses: shivammathur/setup-php@v2
-                with:
-                    php-version: '8.0'
-                    tools: composer:v2
-                    coverage: pcov
-
             -   name: Cs-Fixer
                 run: |
                     wget -q https://cs.symfony.com/download/php-cs-fixer-v2.phar -O php-cs-fixer
