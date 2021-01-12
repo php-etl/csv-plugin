@@ -8,7 +8,7 @@ jobs:
         steps:
             -   uses: actions/checkout@v2
 
-            -   name: Setup PHP with pecl extension
+            -   name: Setup PHP with pcov extension
                 uses: shivammathur/setup-php@v2
                 with:
                     php-version: '8.0'
@@ -42,9 +42,7 @@ jobs:
                     ./infection.phar
 
             -   name: PHP Unit tests
-                uses: php-actions/phpunit@v2
-                with:
-                    php_version: 8.0
+                run: bin/phpunit tests
 
             -   name: PHPStan
                 uses: php-actions/phpstan@v2
