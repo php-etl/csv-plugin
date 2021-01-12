@@ -15,9 +15,9 @@ jobs:
                     tools: composer:v2
             -   name: Cache Composer
                 uses: actions/cache@v2
-                    with:
-                        path: /tmp/composer-cache
-                        key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
+                with:
+                    path: /tmp/composer-cache
+                    key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
             -   name: Install dependencies
                 uses: php-actions/composer@v5
                 with:
