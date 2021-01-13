@@ -27,4 +27,18 @@ final class LoggerTest extends BuilderTestCase
             $log
         );
     }
+
+    public function testAddingStderrLogger(): void
+    {
+        $log = new Builder\Logger();
+
+        $log->withLogger(
+            (new Builder\StderrLogger())->getNode()
+        );
+
+        $this->assertBuilderProducesAnInstanceOf(
+            'Psr\\Log\\AbstractLogger',
+            $log
+        );
+    }
 }
