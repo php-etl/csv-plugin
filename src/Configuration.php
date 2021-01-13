@@ -14,7 +14,7 @@ final class Configuration implements ConfigurationInterface
         $this->loggerConfiguration = $loggerConfiguration ?: new Configuration\Logger();
     }
 
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
         $extractor = new Configuration\Extractor();
         $loader = new Configuration\Loader();
