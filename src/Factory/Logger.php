@@ -39,13 +39,11 @@ final class Logger implements Configurator\FactoryInterface
 
     public function validate(array $config): bool
     {
-        try {
-            $this->normalize($config);
-
+        if ($this->normalize($config)) {
             return true;
-        } catch (Symfony\InvalidTypeException|Symfony\InvalidConfigurationException $exception) {
-            return false;
         }
+
+        return false;
     }
 
     public function compile(array $config): CSV\Builder\Logger

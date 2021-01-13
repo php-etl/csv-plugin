@@ -67,12 +67,7 @@ final class ServiceTest extends TestCase
     public function testWithConfigurationAndProcessor(array $expected, string $expectedClass, array $actual): void
     {
         $service = new CSV\Service();
-        $config = $service->normalize($actual);
-        $builder = $service->compile($config);
-
-        $this->assertTrue(
-            $service->validate($actual)
-        );
+        $normalizedConfig = $service->normalize($actual);
 
         $this->assertEquals(
             new CSV\Configuration(),
@@ -81,16 +76,19 @@ final class ServiceTest extends TestCase
 
         $this->assertEquals(
             $expected,
-            $config
+            $normalizedConfig
         );
+
+        $this->assertTrue($service->validate($actual));
+        $this->assertFalse($service->validate(['logger' => []]));
 
         $this->assertInstanceOf(
             $expectedClass,
-            $builder
+            $service->compile($normalizedConfig)
         );
     }
 
-    public function testWrongConfiguration(): void
+    public function testWithBothExtractAndLoad(): void
     {
         $this->expectException(InvalidConfigurationException::class);
         $this->expectExceptionMessage('Your configuration should either contain the "extractor" or the "loader" key, not both.');
@@ -108,15 +106,9 @@ final class ServiceTest extends TestCase
 
         $service = new CSV\Service();
         $service->normalize($wrongConfig);
-
-        $this->assertFalse($service->validate($wrongConfig));
-        $this->assertEquals(
-            false,
-            $service->validate($wrongConfig)
-        );
     }
 
-    public function testWrongWithBothExtractAndLoad(): void
+    public function testWrongConfiguration(): void
     {
         $this->expectException(InvalidConfigurationException::class);
         $this->expectExceptionMessage('Could not determine if the factory should build an extractor or a loader.');
