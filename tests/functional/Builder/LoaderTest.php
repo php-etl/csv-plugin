@@ -9,7 +9,7 @@ final class LoaderTest extends BuilderTestCase
 {
     public function testWithFilePath(): void
     {
-        $extract = new Builder\Loader(
+        $load = new Builder\Loader(
             new Node\Scalar\String_('vfs://destination.csv'),
             new Node\Scalar\String_(';'),
             new Node\Scalar\String_('"'),
@@ -18,7 +18,26 @@ final class LoaderTest extends BuilderTestCase
 
         $this->assertBuilderProducesAnInstanceOf(
             'Kiboko\\Component\\Flow\\Csv\\Safe\\Loader',
-            $extract
+            $load
+        );
+    }
+
+    public function testWithFilePathAndLogger(): void
+    {
+        $load = new Builder\Loader(
+            new Node\Scalar\String_('vfs://destination.csv'),
+            new Node\Scalar\String_(';'),
+            new Node\Scalar\String_('"'),
+            new Node\Scalar\String_('\\'),
+        );
+
+        $load->withLogger(
+            (new Builder\Logger())->getNode()
+        );
+
+        $this->assertBuilderProducesAnInstanceOf(
+            'Kiboko\\Component\\Flow\\Csv\\Safe\\Loader',
+            $load
         );
     }
 }
