@@ -1,3 +1,5 @@
+![Quality](https://github.com/php-etl/csv-plugin/workflows/Quality/badge.svg)
+
 # CSV Plugin
 This package aims at integrating the CSV reader and writer into the
 [Pipeline](https://github.com/php-etl/pipeline) stack.
