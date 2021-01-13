@@ -110,5 +110,20 @@ final class ServiceTest extends TestCase
         $service->normalize($wrongConfig);
 
         $this->assertFalse($service->validate($wrongConfig));
+        $this->assertEquals(
+            false,
+            $service->validate($wrongConfig)
+        );
+    }
+
+    public function testWrongWithBothExtractAndLoad(): void
+    {
+        $this->expectException(InvalidConfigurationException::class);
+        $this->expectExceptionMessage('Could not determine if the factory should build an extractor or a loader.');
+
+        $service = new CSV\Service();
+        $service->compile([
+            'csv' => []
+        ]);
     }
 }
