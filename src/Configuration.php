@@ -11,7 +11,7 @@ final class Configuration implements ConfigurationInterface
 
     public function __construct(?ConfigurationInterface $loggerConfiguration = null)
     {
-        $this->loggerConfiguration = $loggerConfiguration ?? new Configuration\Logger();
+        $this->loggerConfiguration = $loggerConfiguration ?: new Configuration\Logger();
     }
 
     public function getConfigTreeBuilder()

@@ -38,12 +38,14 @@ final class Service implements FactoryInterface
     public function validate(array $config): bool
     {
         try {
-            $this->processor->processConfiguration($this->configuration, $config);
-
-            return true;
+            if ($this->processor->processConfiguration($this->configuration, $config)) {
+                return true;
+            }
         } catch (Symfony\InvalidTypeException|Symfony\InvalidConfigurationException $exception) {
             return false;
         }
+
+        return false;
     }
 
     public function compile(array $config): Builder
