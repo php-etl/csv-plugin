@@ -3,6 +3,7 @@
 namespace functional\Kiboko\Plugin\CSV\Builder;
 
 use functional\Kiboko\Plugin\CSV\BuilderProducesAnInstanceOf;
+use functional\Kiboko\Plugin\CSV\ExtractorIteratesAs;
 use PhpParser\Builder as DefaultBuilder;
 use PHPUnit\Framework\Constraint\LogicalNot;
 use PHPUnit\Framework\TestCase;
@@ -40,6 +41,15 @@ abstract class BuilderTestCase extends TestCase
             new LogicalNot(
                 new BuilderProducesAnInstanceOf($expected),
             ),
+            $message
+        );
+    }
+
+    protected function assertExtractorIteratesAs(array $expected, DefaultBuilder $builder, string $message = '')
+    {
+        static::assertThat(
+            $builder,
+            new ExtractorIteratesAs($expected),
             $message
         );
     }

@@ -48,9 +48,10 @@ final class LoaderTest extends TestCase
         );
     }
 
-    public function testWrongConfiguration(): void
+    public function testFailToNormalize(): void
     {
         $this->expectException(InvalidConfigurationException::class);
+        $this->expectExceptionCode(0);
         $this->expectExceptionMessage('The child config "file_path" under "loader" must be configured.');
 
         $wrongConfig = [

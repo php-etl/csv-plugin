@@ -46,9 +46,10 @@ final class ExtractorTest extends TestCase
         $this->assertTrue($factory->validate($actual));
     }
 
-    public function testWrongConfiguration(): void
+    public function testFailToNormalize(): void
     {
         $this->expectException(InvalidConfigurationException::class);
+        $this->expectExceptionCode(0);
         $this->expectExceptionMessage('The child config "file_path" under "extractor" must be configured.');
 
         $wrongConfig = [

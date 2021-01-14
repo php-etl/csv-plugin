@@ -26,10 +26,8 @@ final class ExtractorTest extends BuilderTestCase
 
     public function testWithFilePathAndLogger(): void
     {
-        fopen('vfs://source.csv', 'w');
-
         $extract = new Builder\Extractor(
-            new Node\Scalar\String_('vfs://source.csv'),
+            new Node\Scalar\String_('tests/functional/files/source.csv'),
             new Node\Scalar\String_(';'),
             new Node\Scalar\String_('"'),
             new Node\Scalar\String_('\\'),
@@ -41,6 +39,20 @@ final class ExtractorTest extends BuilderTestCase
 
         $this->assertBuilderProducesAnInstanceOf(
             'Kiboko\\Component\\Flow\\Csv\\Safe\\Extractor',
+            $extract
+        );
+
+        $this->assertExtractorIteratesAs(
+            [
+                [
+                    'prenom' => 'pierre',
+                    'nom' => 'dupont'
+                ],
+                [
+                    'prenom' => 'john',
+                    'nom' => 'doe'
+                ]
+            ],
             $extract
         );
     }

@@ -91,6 +91,7 @@ final class ServiceTest extends TestCase
     public function testWithBothExtractAndLoad(): void
     {
         $this->expectException(InvalidConfigurationException::class);
+        $this->expectExceptionCode(0);
         $this->expectExceptionMessage('Your configuration should either contain the "extractor" or the "loader" key, not both.');
 
         $wrongConfig = [
@@ -111,6 +112,7 @@ final class ServiceTest extends TestCase
     public function testWrongConfiguration(): void
     {
         $this->expectException(InvalidConfigurationException::class);
+        $this->expectExceptionCode(0);
         $this->expectExceptionMessage('Could not determine if the factory should build an extractor or a loader.');
 
         $service = new CSV\Service();

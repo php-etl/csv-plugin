@@ -30,11 +30,7 @@ final class Logger implements Configurator\FactoryInterface
      */
     public function normalize(array $config): array
     {
-        try {
-            return $this->processor->processConfiguration($this->configuration, $config);
-        } catch (Symfony\InvalidTypeException|Symfony\InvalidConfigurationException $exception) {
-            throw new Configurator\InvalidConfigurationException($exception->getMessage(), 0, $exception);
-        }
+        return $this->processor->processConfiguration($this->configuration, $config);
     }
 
     public function validate(array $config): bool
@@ -49,19 +45,14 @@ final class Logger implements Configurator\FactoryInterface
     public function compile(array $config): CSV\Builder\Logger
     {
         $builder = new CSV\Builder\Logger();
-        try {
-            if (isset($config['type']) && $config['type'] === 'stderr') {
-                $builder->withLogger((new CSV\Builder\StderrLogger())->getNode());
-            } else {
-                $builder->withLogger((new CSV\Builder\NullLogger())->getNode());
-            }
 
-            return $builder;
-        } catch (Symfony\InvalidTypeException|Symfony\InvalidConfigurationException $exception) {
-            throw new Configurator\InvalidConfigurationException(
-                message: $exception->getMessage(),
-                previous: $exception
-            );
+        if (isset($config['type']) && $config['type'] === 'stderr') {
+            $builder->withLogger((new CSV\Builder\StderrLogger())->getNode());
+        } else {
+            $builder->withLogger((new CSV\Builder\NullLogger())->getNode());
         }
+
+        return $builder;
+
     }
 }
