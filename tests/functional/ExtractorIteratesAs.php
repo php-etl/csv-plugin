@@ -21,7 +21,7 @@ final class ExtractorIteratesAs extends Constraint
     {
         return sprintf(
             'file iterates %s',
-            implode(', ', $this->lines)
+            json_encode($this->lines)
         );
     }
 

@@ -9,10 +9,8 @@ final class ExtractorTest extends BuilderTestCase
 {
     public function testWithFilePath(): void
     {
-        fopen('vfs://source.csv', 'w');
-
         $extract = new Builder\Extractor(
-            new Node\Scalar\String_('vfs://source.csv'),
+            new Node\Scalar\String_('tests/functional/files/source-to-extract.csv'),
             new Node\Scalar\String_(';'),
             new Node\Scalar\String_('"'),
             new Node\Scalar\String_('\\'),
@@ -22,12 +20,20 @@ final class ExtractorTest extends BuilderTestCase
             'Kiboko\\Component\\Flow\\Csv\\Safe\\Extractor',
             $extract
         );
+
+        $this->assertExtractorIteratesAs(
+            [
+                ['name' => 'pierre', 'last name' => 'dupont'],
+                ['name' => 'john', 'last name' => 'doe']
+            ],
+            $extract
+        );
     }
 
     public function testWithFilePathAndLogger(): void
     {
         $extract = new Builder\Extractor(
-            new Node\Scalar\String_('tests/functional/files/source.csv'),
+            new Node\Scalar\String_('tests/functional/files/source-to-extract.csv'),
             new Node\Scalar\String_(';'),
             new Node\Scalar\String_('"'),
             new Node\Scalar\String_('\\'),
@@ -44,14 +50,8 @@ final class ExtractorTest extends BuilderTestCase
 
         $this->assertExtractorIteratesAs(
             [
-                [
-                    'prenom' => 'pierre',
-                    'nom' => 'dupont'
-                ],
-                [
-                    'prenom' => 'john',
-                    'nom' => 'doe'
-                ]
+                ['name' => 'pierre', 'last name' => 'dupont'],
+                ['name' => 'john', 'last name' => 'doe']
             ],
             $extract
         );

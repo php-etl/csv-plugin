@@ -7,7 +7,7 @@ use PhpParser\Node;
 
 final class Loader implements Builder
 {
-    private ?Node\Expr $logger;
+    private ?Node\Expr $logger = null;
 
     public function __construct(
         private Node\Expr $filePath,
@@ -17,7 +17,7 @@ final class Loader implements Builder
     ) {
     }
 
-    public function withLogger(Node\Expr $logger): self
+    public function withLogger(?Node\Expr $logger): self
     {
         $this->logger = $logger;
 
@@ -26,7 +26,7 @@ final class Loader implements Builder
 
     public function getNode(): Node
     {
-        return new Node\Expr\New_(
+        $instance = new Node\Expr\New_(
             class: new Node\Name\FullyQualified('Kiboko\\Component\\Flow\\Csv\\Safe\\Loader'),
             args: [
                 new Node\Expr\New_(
@@ -41,5 +41,17 @@ final class Loader implements Builder
                 new Node\Arg($this->escape),
             ]
         );
+
+        if ($this->logger !== null) {
+            return new Node\Expr\MethodCall(
+                var: $instance,
+                name: 'setLogger',
+                args: [
+                    new Node\Arg($this->logger),
+                ]
+            );
+        }
+
+        return $instance;
     }
 }

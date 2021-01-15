@@ -20,6 +20,16 @@ final class LoaderTest extends BuilderTestCase
             'Kiboko\\Component\\Flow\\Csv\\Safe\\Loader',
             $load
         );
+
+        $this->assertLoaderProducesFile(
+            'tests/functional/files/expected-to-load.csv',
+            'vfs://destination.csv',
+            $load,
+            [
+                ['prenom' => 'pierre', 'nom de famille' => 'dupont'],
+                ['prenom' => 'john', 'nom de famille' => 'doe']
+            ]
+        );
     }
 
     public function testWithFilePathAndLogger(): void
@@ -38,6 +48,16 @@ final class LoaderTest extends BuilderTestCase
         $this->assertBuilderProducesAnInstanceOf(
             'Kiboko\\Component\\Flow\\Csv\\Safe\\Loader',
             $load
+        );
+
+        $this->assertLoaderProducesFile(
+            'tests/functional/files/expected-to-load.csv',
+            'vfs://destination.csv',
+            $load,
+            [
+                ['prenom' => 'pierre', 'nom de famille' => 'dupont'],
+                ['prenom' => 'john', 'nom de famille' => 'doe']
+            ]
         );
     }
 }

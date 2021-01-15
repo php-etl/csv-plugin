@@ -4,6 +4,7 @@ namespace functional\Kiboko\Plugin\CSV\Builder;
 
 use functional\Kiboko\Plugin\CSV\BuilderProducesAnInstanceOf;
 use functional\Kiboko\Plugin\CSV\ExtractorIteratesAs;
+use functional\Kiboko\Plugin\CSV\LoaderProducesFile;
 use PhpParser\Builder as DefaultBuilder;
 use PHPUnit\Framework\Constraint\LogicalNot;
 use PHPUnit\Framework\TestCase;
@@ -50,6 +51,15 @@ abstract class BuilderTestCase extends TestCase
         static::assertThat(
             $builder,
             new ExtractorIteratesAs($expected),
+            $message
+        );
+    }
+
+    protected function assertLoaderProducesFile(string $expected, string $actual, DefaultBuilder $builder, array $input, string $message = '')
+    {
+        static::assertThat(
+            $builder,
+            new LoaderProducesFile($expected, $actual, $input),
             $message
         );
     }
