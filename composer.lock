@@ -223,12 +223,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-etl/csv-flow.git",
-                "reference": "a994694cac7a0f98fcbf8295d2ef0ad12809a079"
+                "reference": "8209cd0d7cf53e4187ceae235f6ed2c4e47f6948"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-etl/csv-flow/zipball/a994694cac7a0f98fcbf8295d2ef0ad12809a079",
-                "reference": "a994694cac7a0f98fcbf8295d2ef0ad12809a079",
+                "url": "https://api.github.com/repos/php-etl/csv-flow/zipball/8209cd0d7cf53e4187ceae235f6ed2c4e47f6948",
+                "reference": "8209cd0d7cf53e4187ceae235f6ed2c4e47f6948",
                 "shasum": ""
             },
             "require": {
@@ -280,7 +280,7 @@
                 "issues": "https://github.com/php-etl/csv-flow/issues",
                 "source": "https://github.com/php-etl/csv-flow/tree/master"
             },
-            "time": "2021-01-14T14:31:33+00:00"
+            "time": "2021-01-15T14:20:42+00:00"
         },
         {
             "name": "php-etl/pipeline-contracts",

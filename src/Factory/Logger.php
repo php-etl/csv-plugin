@@ -53,6 +53,5 @@ final class Logger implements Configurator\FactoryInterface
         }
 
         return $builder;
-
     }
 }
