@@ -1,9 +1,7 @@
 ---
 ## With a symfony command
 
-This library will build for you either an extractor or a loader that reads or write a CSV.
-
-You can use the following PHP script to test and print the result of your configuration.
+This is an example of code to load a configuration file, build the corresponding Extractor or Builder and show them in the console.
 
 ```php
 <?php

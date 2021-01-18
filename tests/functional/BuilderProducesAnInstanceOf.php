@@ -42,7 +42,7 @@ final class BuilderProducesAnInstanceOf extends Constraint
         $printer = new PrettyPrinter\Standard();
 
         try {
-            $filename = hash('sha512', random_bytes(512)) .'.php';
+            $filename = 'vfs://' . hash('sha512', random_bytes(512)) .'.php';
 
             file_put_contents($filename, $printer->prettyPrintFile([
                 new Node\Stmt\Return_($other->getNode()),

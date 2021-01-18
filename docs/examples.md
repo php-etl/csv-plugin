@@ -12,7 +12,8 @@ csv:
         
         escape:     # Optionnal. Character used to escape special characters (quotes, slashes).
                     # Default value: \\
-        
+```
+```
     loader:
         file_path:  # Path to the destination file
 
@@ -55,38 +56,4 @@ Other value available: `null`
 csv:
     logger:
         type: stderr
-```
-
-## Read a CSV file, write the result to an other CSV file
-We read the file `my-input.csv`. It uses commas (`,`) to separate columns.
-
-We then write it to `my-output.csv`, with semicolons (`;`) as the delimiter. We do not provide the other options.
-
-Any error will be stored in [stderr](https://en.wikipedia.org/wiki/Standard_streams#Standard_error_(stderr)).
-
-settings.yml:
-```yaml
-csv:
-    extractor:
-        file_path: my-input.csv
-        delimiter: ','
-        enclosure: '"'
-        escape: '\\'
-    loader:
-        file_path: my-output.csv
-        delimiter: ';'
-    logger:
-        type: stderr
-```
-
-my-input.csv:
-```
-"John","Doe","Miami"
-"Jean","Dupont","Paris"
-```
-
-my-output.csv:
-```
-"John";"Doe";"Miami"
-"Jean";"Dupont";"Paris"
 ```
