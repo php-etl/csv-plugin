@@ -23,7 +23,7 @@ final class LoggerTest extends BuilderTestCase
         $log = new Builder\Logger();
 
         $this->assertBuilderProducesAnInstanceOf(
-            'Psr\\Log\\AbstractLogger',
+            'Psr\\Log\\NullLogger',
             $log
         );
     }

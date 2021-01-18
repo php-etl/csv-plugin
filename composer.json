@@ -31,12 +31,9 @@
         "php-etl/csv-flow": "dev-master"
     },
     "require-dev": {
-        "php-http/mock-client": "^1.4@dev",
         "symfony/yaml": "5.x-dev",
-        "symfony/console": "5.x-dev",
         "php-etl/bucket-contracts": "^0.1.0@dev",
         "php-etl/pipeline": "^0.2.0@dev",
-        "laminas/laminas-diactoros": "2.6.x-dev",
         "adlawson/vfs": "dev-develop",
         "phpunit/phpunit": "^9.0"
     },

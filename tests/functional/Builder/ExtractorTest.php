@@ -43,6 +43,11 @@ final class ExtractorTest extends BuilderTestCase
             (new Builder\Logger())->getNode()
         );
 
+        $this->assertBuilderHasLogger(
+            '\\Psr\\Log\\NullLogger',
+            $extract
+        );
+
         $this->assertBuilderProducesAnInstanceOf(
             'Kiboko\\Component\\Flow\\Csv\\Safe\\Extractor',
             $extract

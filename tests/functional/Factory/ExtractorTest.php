@@ -59,4 +59,10 @@ final class ExtractorTest extends TestCase
         $factory = new CSV\Factory\Extractor();
         $factory->normalize($wrongConfig);
     }
+
+    public function testFailToValidate(): void
+    {
+        $factory = new CSV\Factory\Extractor();
+        $this->assertFalse($factory->validate([]));
+    }
 }

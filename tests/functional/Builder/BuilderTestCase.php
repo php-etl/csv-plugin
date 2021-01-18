@@ -2,9 +2,7 @@
 
 namespace functional\Kiboko\Plugin\CSV\Builder;
 
-use functional\Kiboko\Plugin\CSV\BuilderProducesAnInstanceOf;
-use functional\Kiboko\Plugin\CSV\ExtractorIteratesAs;
-use functional\Kiboko\Plugin\CSV\LoaderProducesFile;
+use functional\Kiboko\Plugin\CSV;
 use PhpParser\Builder as DefaultBuilder;
 use PHPUnit\Framework\Constraint\LogicalNot;
 use PHPUnit\Framework\TestCase;
@@ -30,7 +28,7 @@ abstract class BuilderTestCase extends TestCase
     {
         static::assertThat(
             $builder,
-            new BuilderProducesAnInstanceOf($expected),
+            new CSV\BuilderProducesAnInstanceOf($expected),
             $message
         );
     }
@@ -40,8 +38,17 @@ abstract class BuilderTestCase extends TestCase
         static::assertThat(
             $builder,
             new LogicalNot(
-                new BuilderProducesAnInstanceOf($expected),
+                new CSV\BuilderProducesAnInstanceOf($expected),
             ),
+            $message
+        );
+    }
+
+    protected function assertBuilderHasLogger(string $expected, DefaultBuilder $builder, string $message = '')
+    {
+        static::assertThat(
+            $builder,
+            new CSV\BuilderHasLogger($expected),
             $message
         );
     }
@@ -50,7 +57,7 @@ abstract class BuilderTestCase extends TestCase
     {
         static::assertThat(
             $builder,
-            new ExtractorIteratesAs($expected),
+            new CSV\ExtractorIteratesAs($expected),
             $message
         );
     }
@@ -59,7 +66,7 @@ abstract class BuilderTestCase extends TestCase
     {
         static::assertThat(
             $builder,
-            new LoaderProducesFile($expected, $actual, $input),
+            new CSV\LoaderProducesFile($expected, $actual, $input),
             $message
         );
     }

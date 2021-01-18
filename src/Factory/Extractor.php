@@ -39,8 +39,11 @@ final class Extractor implements Configurator\FactoryInterface
 
     public function validate(array $config): bool
     {
-        if ($this->normalize($config)) {
-            return true;
+        try {
+            if ($this->normalize($config)) {
+                return true;
+            }
+        } catch (\Exception $exception) {
         }
 
         return false;

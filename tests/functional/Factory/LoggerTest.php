@@ -62,4 +62,10 @@ final class LoggerTest extends TestCase
             $factory->compile($normalizedConfig)
         );
     }
+
+    public function testFailToValidate(): void
+    {
+        $factory = new CSV\Factory\Logger();
+        $this->assertFalse($factory->validate([]));
+    }
 }

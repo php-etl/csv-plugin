@@ -45,6 +45,11 @@ final class LoaderTest extends BuilderTestCase
             (new Builder\Logger())->getNode()
         );
 
+        $this->assertBuilderHasLogger(
+            '\\Psr\\Log\\NullLogger',
+            $load
+        );
+
         $this->assertBuilderProducesAnInstanceOf(
             'Kiboko\\Component\\Flow\\Csv\\Safe\\Loader',
             $load

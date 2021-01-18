@@ -55,10 +55,17 @@ final class LoaderTest extends TestCase
         $this->expectExceptionMessage('The child config "file_path" under "loader" must be configured.');
 
         $wrongConfig = [
-            'extractor' => []
+            'loader' => []
         ];
 
         $factory = new CSV\Factory\Loader();
         $factory->normalize($wrongConfig);
+    }
+
+
+    public function testFailToValidate(): void
+    {
+        $factory = new CSV\Factory\Loader();
+        $this->assertFalse($factory->validate([]));
     }
 }
