@@ -2,7 +2,7 @@
 
 namespace functional\Kiboko\Plugin\CSV\Service;
 
-use Kiboko\Contract\ETL\Configurator\InvalidConfigurationException;
+use Kiboko\Contract\Configurator\InvalidConfigurationException;
 use Kiboko\Plugin\CSV;
 use PHPUnit\Framework\TestCase;
 

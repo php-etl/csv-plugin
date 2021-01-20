@@ -12,16 +12,11 @@ use function sprintf;
 
 final class LoaderProducesFile extends Constraint
 {
-    private string $expectedFile;
-    private string $actualFile;
-    private array $source;
-
-    public function __construct(string $expectedFile, string $actualFile, array $source)
-    {
-        $this->expectedFile = $expectedFile;
-        $this->actualFile = $actualFile;
-        $this->source = $source;
-    }
+    public function __construct(
+        private string $expectedFile,
+        private string $actualFile,
+        private array $source
+    ) {}
 
     public function toString(): string
     {

@@ -3,8 +3,8 @@
 namespace Kiboko\Plugin\CSV;
 
 use Kiboko\Plugin\CSV\Factory;
-use Kiboko\Contract\ETL\Configurator\InvalidConfigurationException;
-use Kiboko\Contract\ETL\Configurator\FactoryInterface;
+use Kiboko\Contract\Configurator\InvalidConfigurationException;
+use Kiboko\Contract\Configurator\FactoryInterface;
 use PhpParser\Builder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Exception as Symfony;

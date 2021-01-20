@@ -3,7 +3,7 @@
 namespace Kiboko\Plugin\CSV\Factory;
 
 use Kiboko\Plugin\CSV;
-use Kiboko\Contract\ETL\Configurator;
+use Kiboko\Contract\Configurator;
 use PhpParser\Node;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Exception as Symfony;
