@@ -22,7 +22,7 @@ final class ServiceTest extends TestCase
                     'type' => 'stderr'
                 ]
             ],
-            'expected_class' => 'Kiboko\\Plugin\\CSV\\Builder\\Extractor',
+            'expected_class' => 'Kiboko\\Plugin\\CSV\\Factory\\Repository\\Extractor',
             'actual' => [
                 'csv' => [
                     'extractor' => [
@@ -47,7 +47,7 @@ final class ServiceTest extends TestCase
                     'type' => 'stderr'
                 ]
             ],
-            'expected_class' => 'Kiboko\\Plugin\\CSV\\Builder\\Loader',
+            'expected_class' => 'Kiboko\\Plugin\\CSV\\Factory\\Repository\\Loader',
             'actual' => [
                 'csv' => [
                     'loader' => [

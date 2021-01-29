@@ -2,6 +2,7 @@
 
 namespace Kiboko\Plugin\CSV;
 
+use Kiboko\Plugin\Log\Configuration as LoggerConfiguration;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -11,7 +12,7 @@ final class Configuration implements ConfigurationInterface
 
     public function __construct(?ConfigurationInterface $loggerConfiguration = null)
     {
-        $this->loggerConfiguration = $loggerConfiguration ?: new Configuration\Logger();
+        $this->loggerConfiguration = $loggerConfiguration ?: new LoggerConfiguration();
     }
 
     public function getConfigTreeBuilder(): TreeBuilder

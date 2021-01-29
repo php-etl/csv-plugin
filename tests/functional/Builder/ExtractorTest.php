@@ -2,14 +2,15 @@
 
 namespace functional\Kiboko\Plugin\CSV\Builder;
 
-use Kiboko\Plugin\CSV\Builder;
+use Kiboko\Plugin\CSV\Builder\Extractor;
+use Kiboko\Plugin\Log\Builder\Logger;
 use PhpParser\Node;
 
 final class ExtractorTest extends BuilderTestCase
 {
     public function testWithFilePath(): void
     {
-        $extract = new Builder\Extractor(
+        $extract = new Extractor(
             new Node\Scalar\String_('tests/functional/files/source-to-extract.csv'),
             new Node\Scalar\String_(';'),
             new Node\Scalar\String_('"'),
@@ -32,7 +33,7 @@ final class ExtractorTest extends BuilderTestCase
 
     public function testWithFilePathAndLogger(): void
     {
-        $extract = new Builder\Extractor(
+        $extract = new Extractor(
             new Node\Scalar\String_('tests/functional/files/source-to-extract.csv'),
             new Node\Scalar\String_(';'),
             new Node\Scalar\String_('"'),
@@ -40,7 +41,7 @@ final class ExtractorTest extends BuilderTestCase
         );
 
         $extract->withLogger(
-            (new Builder\Logger())->getNode()
+            (new Logger())->getNode()
         );
 
         $this->assertBuilderHasLogger(

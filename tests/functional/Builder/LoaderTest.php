@@ -2,14 +2,15 @@
 
 namespace functional\Kiboko\Plugin\CSV\Builder;
 
-use Kiboko\Plugin\CSV\Builder;
+use Kiboko\Plugin\CSV\Builder\Loader;
+use Kiboko\Plugin\Log\Builder\Logger;
 use PhpParser\Node;
 
 final class LoaderTest extends BuilderTestCase
 {
     public function testWithFilePath(): void
     {
-        $load = new Builder\Loader(
+        $load = new Loader(
             new Node\Scalar\String_('vfs://destination.csv'),
             new Node\Scalar\String_(';'),
             new Node\Scalar\String_('"'),
@@ -34,7 +35,7 @@ final class LoaderTest extends BuilderTestCase
 
     public function testWithFilePathAndLogger(): void
     {
-        $load = new Builder\Loader(
+        $load = new Loader(
             new Node\Scalar\String_('vfs://destination.csv'),
             new Node\Scalar\String_(';'),
             new Node\Scalar\String_('"'),
@@ -42,7 +43,7 @@ final class LoaderTest extends BuilderTestCase
         );
 
         $load->withLogger(
-            (new Builder\Logger())->getNode()
+            (new Logger())->getNode()
         );
 
         $this->assertBuilderHasLogger(

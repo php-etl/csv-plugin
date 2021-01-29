@@ -43,7 +43,7 @@ final class Loader implements Configurator\FactoryInterface
             if ($this->normalize($config)) {
                 return true;
             }
-        } catch (\Exception $exception) {
+        } catch (\Exception) {
         }
 
         return false;

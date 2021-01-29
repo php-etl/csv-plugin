@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0a972fb05cd4813ae8ad5d9e3f974b31",
+    "content-hash": "bf7963d04632f7bbfdfb44f241be3089",
     "packages": [
         {
             "name": "nikic/php-parser",
@@ -228,12 +228,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-etl/csv-flow.git",
-                "reference": "11a715d6312aad8d5dda8537ca05e00dc8159f1f"
+                "reference": "5069b4e005e36b7efed5e96d36be15b3738a4167"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-etl/csv-flow/zipball/11a715d6312aad8d5dda8537ca05e00dc8159f1f",
-                "reference": "11a715d6312aad8d5dda8537ca05e00dc8159f1f",
+                "url": "https://api.github.com/repos/php-etl/csv-flow/zipball/5069b4e005e36b7efed5e96d36be15b3738a4167",
+                "reference": "5069b4e005e36b7efed5e96d36be15b3738a4167",
                 "shasum": ""
             },
             "require": {
@@ -282,7 +282,63 @@
                 "issues": "https://github.com/php-etl/csv-flow/issues",
                 "source": "https://github.com/php-etl/csv-flow/tree/master"
             },
-            "time": "2021-01-19T16:18:30+00:00"
+            "time": "2021-01-29T10:15:32+00:00"
+        },
+        {
+            "name": "php-etl/log-plugin",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-etl/log-plugin.git",
+                "reference": "93c4e59ff08e45f319f0048e5417727689c2b888"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-etl/log-plugin/zipball/93c4e59ff08e45f319f0048e5417727689c2b888",
+                "reference": "93c4e59ff08e45f319f0048e5417727689c2b888",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "nikic/php-parser": "^4.9@dev",
+                "php": "^8.0",
+                "php-etl/configurator-contracts": "0.1.x-dev",
+                "symfony/config": "^4.0 || ^5.0"
+            },
+            "require-dev": {
+                "adlawson/vfs": "dev-develop",
+                "phpunit/phpunit": "^9.0",
+                "symfony/console": "5.x-dev",
+                "symfony/yaml": "5.x-dev"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Kiboko\\Plugin\\Log\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Grégory Planchat",
+                    "email": "gregory@kiboko.fr"
+                }
+            ],
+            "description": "Plugins for adding Logging support",
+            "support": {
+                "issues": "https://github.com/php-etl/log-plugin/issues",
+                "source": "https://github.com/php-etl/log-plugin/tree/master"
+            },
+            "time": "2021-01-29T11:09:38+00:00"
         },
         {
             "name": "php-etl/pipeline-contracts",
@@ -2952,6 +3008,7 @@
         "nikic/php-parser": 20,
         "php-etl/pipeline-contracts": 20,
         "php-etl/csv-flow": 20,
+        "php-etl/log-plugin": 20,
         "symfony/yaml": 20,
         "php-etl/bucket-contracts": 20,
         "php-etl/pipeline": 20,
