@@ -49,13 +49,22 @@ final class Loader implements Configurator\FactoryInterface
         return false;
     }
 
-    public function compile(array $config): CSV\Builder\Loader
+    public function compile(array $config): Repository\Loader
     {
-        return new CSV\Builder\Loader(
+        $builder = new CSV\Builder\Loader(
             new Node\Scalar\String_($config['file_path']),
             new Node\Scalar\String_($config['delimiter']),
             new Node\Scalar\String_($config['enclosure']),
             new Node\Scalar\String_($config['escape']),
         );
+
+        try {
+            return new Repository\Loader($builder);
+        } catch (Symfony\InvalidTypeException|Symfony\InvalidConfigurationException $exception) {
+            throw new Configurator\InvalidConfigurationException(
+                message: $exception->getMessage(),
+                previous: $exception
+            );
+        }
     }
 }

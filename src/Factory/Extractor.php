@@ -49,13 +49,22 @@ final class Extractor implements Configurator\FactoryInterface
         return false;
     }
 
-    public function compile(array $config): CSV\Builder\Extractor
+    public function compile(array $config): Repository\Extractor
     {
-        return new CSV\Builder\Extractor(
+        $builder = new CSV\Builder\Extractor(
             new Node\Scalar\String_($config['file_path']),
             new Node\Scalar\String_($config['delimiter']),
             new Node\Scalar\String_($config['enclosure']),
             new Node\Scalar\String_($config['escape']),
         );
+
+        try {
+            return new Repository\Extractor($builder);
+        } catch (Symfony\InvalidTypeException|Symfony\InvalidConfigurationException $exception) {
+            throw new Configurator\InvalidConfigurationException(
+                message: $exception->getMessage(),
+                previous: $exception
+            );
+        }
     }
 }

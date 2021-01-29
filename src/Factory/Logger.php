@@ -45,16 +45,23 @@ final class Logger implements Configurator\FactoryInterface
         return false;
     }
 
-    public function compile(array $config): CSV\Builder\Logger
+    public function compile(array $config): Repository\Logger
     {
         $builder = new CSV\Builder\Logger();
 
-        if (isset($config['type']) && $config['type'] === 'stderr') {
+        if (array_key_exists('type', $config) && $config['type'] === 'stderr') {
             $builder->withLogger((new CSV\Builder\StderrLogger())->getNode());
         } else {
             $builder->withLogger((new CSV\Builder\NullLogger())->getNode());
         }
 
-        return $builder;
+        try {
+            return new Repository\Logger($builder);
+        } catch (Symfony\InvalidTypeException|Symfony\InvalidConfigurationException $exception) {
+            throw new Configurator\InvalidConfigurationException(
+                message: $exception->getMessage(),
+                previous: $exception
+            );
+        }
     }
 }

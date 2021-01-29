@@ -2,7 +2,6 @@
 
 namespace functional\Factory;
 
-use Kiboko\Contract\Configurator\InvalidConfigurationException;
 use Kiboko\Plugin\CSV;
 use PHPUnit\Framework\TestCase;
 
@@ -14,7 +13,7 @@ final class LoggerTest extends TestCase
             'expected' => [
                 'type' => 'stderr'
             ],
-            'expected_class' => 'Kiboko\\Plugin\\CSV\\Builder\\Logger',
+            'expected_class' => 'Kiboko\\Plugin\\CSV\\Factory\\Repository\\Logger',
             'actual' => [
                 'logger' => [
                     'type' => 'stderr'
@@ -26,7 +25,7 @@ final class LoggerTest extends TestCase
             'expected' => [
                 'type' => 'null'
             ],
-            'expected_class' => 'Kiboko\\Plugin\\CSV\\Builder\\Logger',
+            'expected_class' => 'Kiboko\\Plugin\\CSV\\Factory\\Repository\\Logger',
             'actual' => [
                 'logger' => [
                     'type' => 'null'
