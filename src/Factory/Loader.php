@@ -40,31 +40,23 @@ final class Loader implements Configurator\FactoryInterface
     public function validate(array $config): bool
     {
         try {
-            if ($this->normalize($config)) {
-                return true;
-            }
-        } catch (\Exception) {
-        }
+            $this->processor->processConfiguration($this->configuration, $config);
 
-        return false;
+            return true;
+        } catch (Symfony\InvalidTypeException|Symfony\InvalidConfigurationException) {
+            return false;
+        }
     }
 
     public function compile(array $config): Repository\Loader
     {
-        $builder = new CSV\Builder\Loader(
-            new Node\Scalar\String_($config['file_path']),
-            new Node\Scalar\String_($config['delimiter']),
-            new Node\Scalar\String_($config['enclosure']),
-            new Node\Scalar\String_($config['escape']),
+        return new Repository\Loader(
+            new CSV\Builder\Loader(
+                new Node\Scalar\String_($config['file_path']),
+                new Node\Scalar\String_($config['delimiter']),
+                new Node\Scalar\String_($config['enclosure']),
+                new Node\Scalar\String_($config['escape']),
+            ),
         );
-
-        try {
-            return new Repository\Loader($builder);
-        } catch (Symfony\InvalidTypeException|Symfony\InvalidConfigurationException $exception) {
-            throw new Configurator\InvalidConfigurationException(
-                message: $exception->getMessage(),
-                previous: $exception
-            );
-        }
     }
 }

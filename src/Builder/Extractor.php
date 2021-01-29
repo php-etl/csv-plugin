@@ -7,17 +7,46 @@ use PhpParser\Node;
 
 final class Extractor implements Builder
 {
-    private ?Node\Expr $logger = null;
+    private ?Node\Expr $logger;
 
     public function __construct(
-        private Node\Expr $filePath,
-        private Node\Expr $delimiter,
-        private Node\Expr $enclosure,
-        private Node\Expr $escape,
+        private ?Node\Expr $filePath,
+        private ?Node\Expr $delimiter = null,
+        private ?Node\Expr $enclosure = null,
+        private ?Node\Expr $escape = null,
     ) {
+        $this->logger = null;
     }
 
-    public function withLogger(?Node\Expr $logger): self
+    public function withFilePath(Node\Expr $filePath): self
+    {
+        $this->filePath = $filePath;
+
+        return $this;
+    }
+
+    public function withDelimiter(Node\Expr $delimiter): self
+    {
+        $this->delimiter = $delimiter;
+
+        return $this;
+    }
+
+    public function withEnclosure(Node\Expr $enclosure): self
+    {
+        $this->enclosure = $enclosure;
+
+        return $this;
+    }
+
+    public function withEscape(Node\Expr $escape): self
+    {
+        $this->escape = $escape;
+
+        return $this;
+    }
+
+    public function withLogger(Node\Expr $logger): self
     {
         $this->logger = $logger;
 
@@ -26,20 +55,52 @@ final class Extractor implements Builder
 
     public function getNode(): Node
     {
-        $instance = new Node\Expr\New_(
-            class: new Node\Name\FullyQualified('Kiboko\\Component\\Flow\\Csv\\Safe\\Extractor'),
-            args: [
-                new Node\Expr\New_(
+        $arguments = [
+            new Node\Arg(
+                value: new Node\Expr\New_(
                     class: new Node\Name\FullyQualified('SplFileObject'),
                     args: [
                         new Node\Arg($this->filePath),
                         new Node\Arg(new Node\Scalar\String_('r')),
-                    ]
+                    ],
                 ),
-                new Node\Arg($this->delimiter),
-                new Node\Arg($this->enclosure),
-                new Node\Arg($this->escape),
-            ]
+                name: new Node\Identifier('file'),
+            ),
+        ];
+
+        if ($this->delimiter !== null) {
+            array_push(
+                $arguments,
+                new Node\Arg(
+                    value: $this->delimiter,
+                    name: new Node\Identifier('delimiter'),
+                ),
+            );
+        }
+
+        if ($this->enclosure !== null) {
+            array_push(
+                $arguments,
+                new Node\Arg(
+                    value: $this->delimiter,
+                    name: new Node\Identifier('enclosure'),
+                ),
+            );
+        }
+
+        if ($this->escape !== null) {
+            array_push(
+                $arguments,
+                new Node\Arg(
+                    value: $this->delimiter,
+                    name: new Node\Identifier('escape'),
+                ),
+            );
+        }
+
+        $instance = new Node\Expr\New_(
+            class: new Node\Name\FullyQualified('Kiboko\\Component\\Flow\\Csv\\Safe\\Extractor'),
+            args: $arguments,
         );
 
         if ($this->logger !== null) {

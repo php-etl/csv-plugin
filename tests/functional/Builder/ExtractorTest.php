@@ -2,19 +2,19 @@
 
 namespace functional\Kiboko\Plugin\CSV\Builder;
 
-use Kiboko\Plugin\CSV\Builder\Extractor;
-use Kiboko\Plugin\Log\Builder\Logger;
+use Kiboko\Plugin\CSV\Builder;
+use Kiboko\Plugin\Log;
 use PhpParser\Node;
 
 final class ExtractorTest extends BuilderTestCase
 {
     public function testWithFilePath(): void
     {
-        $extract = new Extractor(
-            new Node\Scalar\String_('tests/functional/files/source-to-extract.csv'),
-            new Node\Scalar\String_(';'),
-            new Node\Scalar\String_('"'),
-            new Node\Scalar\String_('\\'),
+        $extract = new Builder\Extractor(
+            filePath: new Node\Scalar\String_('tests/functional/files/source-to-extract.csv'),
+            delimiter: new Node\Scalar\String_(';'),
+//            enclosure: new Node\Scalar\String_('"'),
+//            escape: new Node\Scalar\String_('\\'),
         );
 
         $this->assertBuilderProducesAnInstanceOf(
@@ -33,15 +33,15 @@ final class ExtractorTest extends BuilderTestCase
 
     public function testWithFilePathAndLogger(): void
     {
-        $extract = new Extractor(
+        $extract = new Builder\Extractor(
             new Node\Scalar\String_('tests/functional/files/source-to-extract.csv'),
-            new Node\Scalar\String_(';'),
-            new Node\Scalar\String_('"'),
-            new Node\Scalar\String_('\\'),
+            delimiter: new Node\Scalar\String_(';'),
+//            enclosure: new Node\Scalar\String_('"'),
+//            escape: new Node\Scalar\String_('\\'),
         );
 
         $extract->withLogger(
-            (new Logger())->getNode()
+            (new Log\Builder\Logger())->getNode()
         );
 
         $this->assertBuilderHasLogger(

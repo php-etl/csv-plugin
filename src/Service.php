@@ -2,11 +2,12 @@
 
 namespace Kiboko\Plugin\CSV;
 
-use Kiboko\Contract\Configurator\FactoryInterface;
-use Kiboko\Contract\Configurator\InvalidConfigurationException;
 use Kiboko\Contract\Configurator\RepositoryInterface;
-use Kiboko\Plugin\CSV\Factory;
-use Kiboko\Plugin\Log\Service as LoggerFactory;
+use Kiboko\Plugin\CSV;
+use Kiboko\Plugin\Log;
+use Kiboko\Contract\Configurator\InvalidConfigurationException;
+use Kiboko\Contract\Configurator\FactoryInterface;
+use PhpParser\Builder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Exception as Symfony;
 use Symfony\Component\Config\Definition\Processor;
@@ -47,7 +48,7 @@ final class Service implements FactoryInterface
 
     public function compile(array $config): RepositoryInterface
     {
-        $loggerFactory = new LoggerFactory();
+        $loggerFactory = new Log\Service();
 
         try {
             if (array_key_exists('extractor', $config)) {

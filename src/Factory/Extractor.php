@@ -3,6 +3,7 @@
 namespace Kiboko\Plugin\CSV\Factory;
 
 use Kiboko\Plugin\CSV;
+use Kiboko\Plugin\Log;
 use Kiboko\Contract\Configurator;
 use PhpParser\Node;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -40,31 +41,23 @@ final class Extractor implements Configurator\FactoryInterface
     public function validate(array $config): bool
     {
         try {
-            if ($this->normalize($config)) {
-                return true;
-            }
-        } catch (\Exception) {
-        }
+            $this->processor->processConfiguration($this->configuration, $config);
 
-        return false;
+            return true;
+        } catch (Symfony\InvalidTypeException|Symfony\InvalidConfigurationException) {
+            return false;
+        }
     }
 
     public function compile(array $config): Repository\Extractor
     {
-        $builder = new CSV\Builder\Extractor(
-            new Node\Scalar\String_($config['file_path']),
-            new Node\Scalar\String_($config['delimiter']),
-            new Node\Scalar\String_($config['enclosure']),
-            new Node\Scalar\String_($config['escape']),
+        return new Repository\Extractor(
+            new CSV\Builder\Extractor(
+                new Node\Scalar\String_($config['file_path']),
+                new Node\Scalar\String_($config['delimiter']),
+                new Node\Scalar\String_($config['enclosure']),
+                new Node\Scalar\String_($config['escape']),
+            ),
         );
-
-        try {
-            return new Repository\Extractor($builder);
-        } catch (Symfony\InvalidTypeException|Symfony\InvalidConfigurationException $exception) {
-            throw new Configurator\InvalidConfigurationException(
-                message: $exception->getMessage(),
-                previous: $exception
-            );
-        }
     }
 }

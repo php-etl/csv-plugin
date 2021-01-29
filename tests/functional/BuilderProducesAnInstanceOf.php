@@ -50,7 +50,7 @@ final class BuilderProducesAnInstanceOf extends Constraint
 
             $instance = include $filename;
         } catch (\Error $exception) {
-            $this->fail($other, $exception->getMessage());
+            $this->fail($printer->prettyPrintExpr($other->getNode()), $exception->getMessage());
         }
 
         return $instance instanceof $this->className;
