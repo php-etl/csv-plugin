@@ -82,7 +82,7 @@ final class Loader implements Builder
             array_push(
                 $arguments,
                 new Node\Arg(
-                    value: $this->delimiter,
+                    value: $this->enclosure,
                     name: new Node\Identifier('enclosure'),
                 ),
             );
@@ -92,7 +92,7 @@ final class Loader implements Builder
             array_push(
                 $arguments,
                 new Node\Arg(
-                    value: $this->delimiter,
+                    value: $this->escape,
                     name: new Node\Identifier('escape'),
                 ),
             );
