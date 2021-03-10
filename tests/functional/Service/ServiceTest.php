@@ -14,9 +14,6 @@ final class ServiceTest extends TestCase
             'expected' => [
                 'extractor' => [
                     'file_path' => 'input.csv',
-                    'delimiter' => ',',
-                    'enclosure' => '"',
-                    'escape' => '\\',
                 ],
                 'logger' => [
                     'type' => 'stderr'
@@ -39,9 +36,6 @@ final class ServiceTest extends TestCase
             'expected' => [
                 'loader' => [
                     'file_path' => 'output.csv',
-                    'delimiter' => ',',
-                    'enclosure' => '"',
-                    'escape' => '\\',
                 ],
                 'logger' => [
                     'type' => 'stderr'

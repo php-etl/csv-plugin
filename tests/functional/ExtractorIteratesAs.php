@@ -47,7 +47,7 @@ final class ExtractorIteratesAs extends Constraint
 
             $extractor = include $filename;
         } catch (\Error $exception) {
-            $this->fail($printer->prettyPrintExpr($other->getNode()), $exception->getMessage());
+            $this->fail($other, $exception->getMessage());
         }
 
         $result = [];

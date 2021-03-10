@@ -8,61 +8,185 @@ use PhpParser\Node;
 
 final class LoaderTest extends BuilderTestCase
 {
-    public function testWithFilePath(): void
+    public function testWithoutOptions(): void
     {
-        $load = new Builder\Loader(
-            filePath: new Node\Scalar\String_('vfs://destination.csv'),
-            delimiter: new Node\Scalar\String_(';'),
-//            enclosure: new Node\Scalar\String_('"'),
-//            escape: new Node\Scalar\String_('\\'),
+        file_put_contents('vfs://expected.csv', <<<CSV
+            firstname,lastname
+            pierre,dupont
+            john,doe
+            
+            CSV);
+
+        $loader = new Builder\Loader(
+            filePath: new Node\Scalar\String_('vfs://output.csv'),
         );
 
         $this->assertBuilderProducesAnInstanceOf(
             'Kiboko\\Component\\Flow\\Csv\\Safe\\Loader',
-            $load
+            $loader
         );
 
         $this->assertLoaderProducesFile(
-            'tests/functional/files/expected-to-load.csv',
-            'vfs://destination.csv',
-            $load,
+            'vfs://expected.csv',
+            'vfs://output.csv',
+            $loader,
             [
-                ['prenom' => 'pierre', 'nom de famille' => 'dupont'],
-                ['prenom' => 'john', 'nom de famille' => 'doe']
+                ['firstname' => 'pierre', 'lastname' => 'dupont'],
+                ['firstname' => 'john', 'lastname' => 'doe']
             ]
         );
     }
 
-    public function testWithFilePathAndLogger(): void
+    public function testFingersCrossed(): void
     {
-        $load = new Builder\Loader(
-            filePath: new Node\Scalar\String_('vfs://destination.csv'),
+        file_put_contents('vfs://expected.csv', <<<CSV
+            firstname,lastname
+            pierre,dupont
+            john,doe
+            
+            CSV);
+
+        $loader = new Builder\Loader(
+            filePath: new Node\Scalar\String_('vfs://output.csv'),
+            safeMode: false,
+        );
+
+        $this->assertBuilderProducesAnInstanceOf(
+            'Kiboko\\Component\\Flow\\Csv\\FingersCrossed\\Loader',
+            $loader
+        );
+
+        $this->assertLoaderProducesFile(
+            'vfs://expected.csv',
+            'vfs://output.csv',
+            $loader,
+            [
+                ['firstname' => 'pierre', 'lastname' => 'dupont'],
+                ['firstname' => 'john', 'lastname' => 'doe']
+            ]
+        );
+    }
+
+    public function testWithDelimiter(): void
+    {
+        file_put_contents('vfs://expected.csv', <<<CSV
+            firstname;lastname
+            pierre;dupont
+            john;doe
+            
+            CSV);
+
+        $loader = new Builder\Loader(
+            filePath: new Node\Scalar\String_('vfs://output.csv'),
             delimiter: new Node\Scalar\String_(';'),
-//            enclosure: new Node\Scalar\String_('"'),
-//            escape: new Node\Scalar\String_('\\'),
-        );
-
-        $load->withLogger(
-            (new Log\Builder\Logger())->getNode()
-        );
-
-        $this->assertBuilderHasLogger(
-            '\\Psr\\Log\\NullLogger',
-            $load
         );
 
         $this->assertBuilderProducesAnInstanceOf(
             'Kiboko\\Component\\Flow\\Csv\\Safe\\Loader',
-            $load
+            $loader
         );
 
         $this->assertLoaderProducesFile(
-            'tests/functional/files/expected-to-load.csv',
-            'vfs://destination.csv',
-            $load,
+            'vfs://expected.csv',
+            'vfs://output.csv',
+            $loader,
             [
-                ['prenom' => 'pierre', 'nom de famille' => 'dupont'],
-                ['prenom' => 'john', 'nom de famille' => 'doe']
+                ['firstname' => 'pierre', 'lastname' => 'dupont'],
+                ['firstname' => 'john', 'lastname' => 'doe']
+            ]
+        );
+    }
+
+    public function testWithEnclosure(): void
+    {
+        file_put_contents('vfs://expected.csv', <<<CSV
+            firstname,lastname
+            "pierre louis",dupont
+            john,doe
+            
+            CSV);
+
+        $loader = new Builder\Loader(
+            filePath: new Node\Scalar\String_('vfs://output.csv'),
+            enclosure: new Node\Scalar\String_('"'),
+        );
+
+        $this->assertBuilderProducesAnInstanceOf(
+            'Kiboko\\Component\\Flow\\Csv\\Safe\\Loader',
+            $loader
+        );
+
+        $this->assertLoaderProducesFile(
+            'vfs://expected.csv',
+            'vfs://output.csv',
+            $loader,
+            [
+                ['firstname' => 'pierre louis', 'lastname' => 'dupont'],
+                ['firstname' => 'john', 'lastname' => 'doe']
+            ]
+        );
+    }
+
+    public function testWithEscape(): void
+    {
+        file_put_contents('vfs://expected.csv', <<<CSV
+            firstname,lastname
+            "pierre ""louis""",dupont
+            john,doe
+            
+            CSV);
+
+        $loader = new Builder\Loader(
+            filePath: new Node\Scalar\String_('vfs://output.csv'),
+            enclosure: new Node\Scalar\String_('"'),
+            escape: new Node\Scalar\String_('\\'),
+        );
+
+        $this->assertBuilderProducesAnInstanceOf(
+            'Kiboko\\Component\\Flow\\Csv\\Safe\\Loader',
+            $loader
+        );
+
+        $this->assertLoaderProducesFile(
+            'vfs://expected.csv',
+            'vfs://output.csv',
+            $loader,
+            [
+                ['firstname' => 'pierre "louis"', 'lastname' => 'dupont'],
+                ['firstname' => 'john', 'lastname' => 'doe']
+            ]
+        );
+    }
+
+    public function testWithLogger(): void
+    {
+        file_put_contents('vfs://expected.csv', <<<CSV
+            firstname,lastname
+            pierre,dupont
+            john,doe
+            
+            CSV);
+
+        $loader = new Builder\Loader(
+            filePath: new Node\Scalar\String_('vfs://output.csv'),
+        );
+
+        $loader->withLogger(
+            (new Log\Builder\Logger())->getNode()
+        );
+
+        $this->assertBuilderProducesAnInstanceOf(
+            'Kiboko\\Component\\Flow\\Csv\\Safe\\Loader',
+            $loader
+        );
+
+        $this->assertLoaderProducesFile(
+            'vfs://expected.csv',
+            'vfs://output.csv',
+            $loader,
+            [
+                ['firstname' => 'pierre', 'lastname' => 'dupont'],
+                ['firstname' => 'john', 'lastname' => 'doe']
             ]
         );
     }

@@ -8,58 +8,131 @@ use PhpParser\Node;
 
 final class ExtractorTest extends BuilderTestCase
 {
-    public function testWithFilePath(): void
+    public function testWithoutOptions(): void
     {
-        $extract = new Builder\Extractor(
-            filePath: new Node\Scalar\String_('tests/functional/files/source-to-extract.csv'),
-            delimiter: new Node\Scalar\String_(';'),
-//            enclosure: new Node\Scalar\String_('"'),
-//            escape: new Node\Scalar\String_('\\'),
+        $extractor = new Builder\Extractor(
+            filePath: new Node\Scalar\String_(__DIR__ . '/../files/source-to-extract-comma-delimited.csv'),
         );
 
         $this->assertBuilderProducesAnInstanceOf(
             'Kiboko\\Component\\Flow\\Csv\\Safe\\Extractor',
-            $extract
+            $extractor
         );
 
         $this->assertExtractorIteratesAs(
             [
-                ['name' => 'pierre', 'last name' => 'dupont'],
-                ['name' => 'john', 'last name' => 'doe']
+                ['firstname' => 'pierre', 'lastname' => 'dupont'],
+                ['firstname' => 'john', 'lastname' => 'doe']
             ],
-            $extract
+            $extractor
         );
     }
 
-    public function testWithFilePathAndLogger(): void
+    public function testFingersCrossed(): void
     {
-        $extract = new Builder\Extractor(
-            new Node\Scalar\String_('tests/functional/files/source-to-extract.csv'),
-            delimiter: new Node\Scalar\String_(';'),
-//            enclosure: new Node\Scalar\String_('"'),
-//            escape: new Node\Scalar\String_('\\'),
-        );
-
-        $extract->withLogger(
-            (new Log\Builder\Logger())->getNode()
-        );
-
-        $this->assertBuilderHasLogger(
-            '\\Psr\\Log\\NullLogger',
-            $extract
+        $extractor = new Builder\Extractor(
+            filePath: new Node\Scalar\String_(__DIR__ . '/../files/source-to-extract-comma-delimited.csv'),
+            safeMode: false,
         );
 
         $this->assertBuilderProducesAnInstanceOf(
-            'Kiboko\\Component\\Flow\\Csv\\Safe\\Extractor',
-            $extract
+            'Kiboko\\Component\\Flow\\Csv\\FingersCrossed\\Extractor',
+            $extractor
         );
 
         $this->assertExtractorIteratesAs(
             [
-                ['name' => 'pierre', 'last name' => 'dupont'],
-                ['name' => 'john', 'last name' => 'doe']
+                ['firstname' => 'pierre', 'lastname' => 'dupont'],
+                ['firstname' => 'john', 'lastname' => 'doe']
             ],
-            $extract
+            $extractor
+        );
+    }
+
+    public function testWithDelimiter(): void
+    {
+        $extractor = new Builder\Extractor(
+            filePath: new Node\Scalar\String_(__DIR__ . '/../files/source-to-extract-semicolon-delimited.csv'),
+            delimiter: new Node\Scalar\String_(';'),
+        );
+
+        $this->assertBuilderProducesAnInstanceOf(
+            'Kiboko\\Component\\Flow\\Csv\\Safe\\Extractor',
+            $extractor
+        );
+
+        $this->assertExtractorIteratesAs(
+            [
+                ['firstname' => 'pierre', 'lastname' => 'dupont'],
+                ['firstname' => 'john', 'lastname' => 'doe']
+            ],
+            $extractor
+        );
+    }
+
+    public function testWithEnclosure(): void
+    {
+        $extractor = new Builder\Extractor(
+            filePath: new Node\Scalar\String_(__DIR__ . '/../files/source-to-extract-comma-delimited-with-enclosure.csv'),
+            enclosure: new Node\Scalar\String_('"'),
+        );
+
+        $this->assertBuilderProducesAnInstanceOf(
+            'Kiboko\\Component\\Flow\\Csv\\Safe\\Extractor',
+            $extractor
+        );
+
+        $this->assertExtractorIteratesAs(
+            [
+                ['firstname' => 'pierre', 'lastname' => 'dupont'],
+                ['firstname' => 'john', 'lastname' => 'doe']
+            ],
+            $extractor
+        );
+    }
+
+    public function testWithEscape(): void
+    {
+        $extractor = new Builder\Extractor(
+            filePath: new Node\Scalar\String_(__DIR__ . '/../files/source-to-extract-comma-delimited-with-escape.csv'),
+            escape: new Node\Scalar\String_('\\'),
+        );
+
+        $this->assertBuilderProducesAnInstanceOf(
+            'Kiboko\\Component\\Flow\\Csv\\Safe\\Extractor',
+            $extractor
+        );
+
+        $this->assertExtractorIteratesAs(
+            [
+                ['firstname' => 'pierre \\"louis\\"', 'lastname' => 'dupont'],
+                ['firstname' => 'john', 'lastname' => 'doe']
+            ],
+            $extractor
+        );
+    }
+
+    public function testWithLogger(): void
+    {
+        $extractor = new Builder\Extractor(
+            filePath: new Node\Scalar\String_(__DIR__ . '/../files/source-to-extract-comma-delimited.csv'),
+        );
+
+        $extractor->withLogger(
+            (new Log\Builder\Logger())->getNode()
+        );
+
+        $this->assertBuilderProducesAnInstanceOf(
+            'Kiboko\\Component\\Flow\\Csv\\Safe\\Extractor',
+            $extractor
+        );
+
+        $this->assertExtractorIteratesAs(
+            [
+                ['firstname' => 'pierre', 'lastname' => 'dupont'],
+                ['firstname' => 'john', 'lastname' => 'doe']
+            ],
+            $extractor
         );
     }
 }

@@ -14,6 +14,8 @@ final class Loader implements Builder
         private ?Node\Expr $delimiter = null,
         private ?Node\Expr $enclosure = null,
         private ?Node\Expr $escape = null,
+        private ?Node\Expr $columns = null,
+        private bool $safeMode = true,
     ) {
         $this->logger = null;
     }
@@ -46,9 +48,30 @@ final class Loader implements Builder
         return $this;
     }
 
+    public function withColumns(Node\Expr $columns): self
+    {
+        $this->columns = $columns;
+
+        return $this;
+    }
+
     public function withLogger(Node\Expr $logger): self
     {
         $this->logger = $logger;
+
+        return $this;
+    }
+
+    public function withSafeMode(): self
+    {
+        $this->safeMode = true;
+
+        return $this;
+    }
+
+    public function withFingersCrossedMode(): self
+    {
+        $this->safeMode = false;
 
         return $this;
     }
@@ -98,21 +121,33 @@ final class Loader implements Builder
             );
         }
 
-        $instance = new Node\Expr\New_(
-            class: new Node\Name\FullyQualified('Kiboko\\Component\\Flow\\Csv\\Safe\\Loader'),
-            args: $arguments,
-        );
-
-        if ($this->logger !== null) {
-            return new Node\Expr\MethodCall(
-                var: $instance,
-                name: 'setLogger',
-                args: [
-                    new Node\Arg($this->logger),
-                ]
+        if ($this->columns !== null) {
+            array_push(
+                $arguments,
+                new Node\Arg(
+                    value: $this->columns,
+                    name: new Node\Identifier('columns'),
+                ),
             );
         }
 
-        return $instance;
+        if ($this->logger !== null) {
+            array_push(
+                $arguments,
+                new Node\Arg(
+                    value: $this->logger,
+                    name: new Node\Identifier('logger'),
+                ),
+            );
+        }
+
+        return new Node\Expr\New_(
+            class: new Node\Name\FullyQualified(
+                $this->safeMode
+                    ? 'Kiboko\\Component\\Flow\\Csv\\Safe\\Loader'
+                    : 'Kiboko\\Component\\Flow\\Csv\\FingersCrossed\\Loader'
+            ),
+            args: $arguments,
+        );
     }
 }

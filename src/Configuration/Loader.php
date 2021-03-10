@@ -14,9 +14,16 @@ final class Loader implements ConfigurationInterface
         $builder->getRootNode()
             ->children()
                 ->scalarNode('file_path')->isRequired()->end()
-                ->scalarNode('delimiter')->defaultValue(',')->end()
-                ->scalarNode('enclosure')->defaultValue('"')->end()
-                ->scalarNode('escape')->defaultValue('\\')->end()
+                ->scalarNode('delimiter')->end()
+                ->scalarNode('enclosure')->end()
+                ->scalarNode('escape')->end()
+                ->booleanNode('safe_mode')->end()
+                ->variableNode('columns')
+                    ->validate()
+                        ->ifTrue(fn ($value) => $value !== null || !is_array($value))
+                        ->thenInvalid('Value should be an array')
+                    ->end()
+                ->end()
             ->end();
 
         return $builder;

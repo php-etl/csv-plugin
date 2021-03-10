@@ -13,9 +13,6 @@ final class LoaderTest extends TestCase
         yield [
             'expected' => [
                 'file_path' => 'output.csv',
-                'delimiter' => ',',
-                'enclosure' => '"',
-                'escape' => '\\',
             ],
             'actual' => [
                 'loader' => [

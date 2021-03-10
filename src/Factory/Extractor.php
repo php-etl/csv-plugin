@@ -3,7 +3,6 @@
 namespace Kiboko\Plugin\CSV\Factory;
 
 use Kiboko\Plugin\CSV;
-use Kiboko\Plugin\Log;
 use Kiboko\Contract\Configurator;
 use PhpParser\Node;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -51,13 +50,53 @@ final class Extractor implements Configurator\FactoryInterface
 
     public function compile(array $config): Repository\Extractor
     {
-        return new Repository\Extractor(
-            new CSV\Builder\Extractor(
-                new Node\Scalar\String_($config['file_path']),
-                new Node\Scalar\String_($config['delimiter']),
-                new Node\Scalar\String_($config['enclosure']),
-                new Node\Scalar\String_($config['escape']),
-            ),
+        $extractor = new CSV\Builder\Extractor(
+            filePath: new Node\Scalar\String_($config['file_path']),
+            delimiter: array_key_exists('delimiter', $config) ? new Node\Scalar\String_($config['delimiter']) : null,
+            enclosure: array_key_exists('enclosure', $config) ? new Node\Scalar\String_($config['enclosure']) : null,
+            escape: array_key_exists('escape', $config) ? new Node\Scalar\String_($config['escape']) : null,
+            columns: array_key_exists('columns', $config) ? $this->toAst($config['columns']) : null,
         );
+
+        if (array_key_exists('safe_mode', $config)) {
+            if ($config['safe_mode'] === true) {
+                $extractor->withSafeMode();
+            } else {
+                $extractor->withFingersCrossedMode();
+            }
+        }
+
+        return new Repository\Extractor($extractor);
+    }
+
+    private function toAst($value): Node\Expr
+    {
+        if (is_string($value)) {
+            return new Node\Scalar\String_($value);
+        }
+        if (is_float($value)) {
+            return new Node\Scalar\DNumber($value);
+        }
+        if (is_int($value)) {
+            return new Node\Scalar\LNumber($value);
+        }
+        if (is_array($value)) {
+            $items = [];
+
+            foreach ($value as $key => $item) {
+                $items[] = new Node\Expr\ArrayItem(
+                    value: $this->toAst($item),
+                );
+            }
+
+            return new Node\Expr\Array_(attributes: [Node\Expr\Array_::KIND_SHORT]);
+        }
+
+        throw new \InvalidArgumentException(strtr(
+            'Unsupported type %actual%.',
+            [
+                '%actual%' => get_debug_type($value),
+            ]
+        ));
     }
 }

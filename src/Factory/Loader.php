@@ -50,13 +50,53 @@ final class Loader implements Configurator\FactoryInterface
 
     public function compile(array $config): Repository\Loader
     {
-        return new Repository\Loader(
-            new CSV\Builder\Loader(
-                new Node\Scalar\String_($config['file_path']),
-                new Node\Scalar\String_($config['delimiter']),
-                new Node\Scalar\String_($config['enclosure']),
-                new Node\Scalar\String_($config['escape']),
-            ),
+        $loader = new CSV\Builder\Loader(
+            filePath: new Node\Scalar\String_($config['file_path']),
+            delimiter: array_key_exists('delimiter', $config) ? new Node\Scalar\String_($config['delimiter']) : null,
+            enclosure: array_key_exists('enclosure', $config) ? new Node\Scalar\String_($config['enclosure']) : null,
+            escape: array_key_exists('escape', $config) ? new Node\Scalar\String_($config['escape']) : null,
+            columns: array_key_exists('columns', $config) ? $this->toAst($config['columns']) : null,
         );
+
+        if (array_key_exists('safe_mode', $config)) {
+            if ($config['safe_mode'] === true) {
+                $loader->withSafeMode();
+            } else {
+                $loader->withFingersCrossedMode();
+            }
+        }
+
+        return new Repository\Loader($loader);
+    }
+
+    private function toAst($value): Node\Expr
+    {
+        if (is_string($value)) {
+            return new Node\Scalar\String_($value);
+        }
+        if (is_float($value)) {
+            return new Node\Scalar\DNumber($value);
+        }
+        if (is_int($value)) {
+            return new Node\Scalar\LNumber($value);
+        }
+        if (is_array($value)) {
+            $items = [];
+
+            foreach ($value as $key => $item) {
+                $items[] = new Node\Expr\ArrayItem(
+                    value: $this->toAst($item),
+                );
+            }
+
+            return new Node\Expr\Array_(attributes: [Node\Expr\Array_::KIND_SHORT]);
+        }
+
+        throw new \InvalidArgumentException(strtr(
+            'Unsupported type %actual%.',
+            [
+                '%actual%' => get_debug_type($value),
+            ]
+        ));
     }
 }

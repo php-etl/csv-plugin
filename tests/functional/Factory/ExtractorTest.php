@@ -13,9 +13,6 @@ final class ExtractorTest extends TestCase
         yield [
             'expected' => [
                 'file_path' => 'input.csv',
-                'delimiter' => ',',
-                'enclosure' => '"',
-                'escape' => '\\',
             ],
             'actual' => [
                 'extractor' => [

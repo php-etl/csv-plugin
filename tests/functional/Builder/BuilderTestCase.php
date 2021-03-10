@@ -3,6 +3,8 @@
 namespace functional\Kiboko\Plugin\CSV\Builder;
 
 use functional\Kiboko\Plugin\CSV;
+use Kiboko\Component\PHPUnitExtension\BuilderAssertTrait;
+use Kiboko\Component\PHPUnitExtension\PipelineAssertTrait;
 use PhpParser\Builder as DefaultBuilder;
 use PHPUnit\Framework\Constraint\LogicalNot;
 use PHPUnit\Framework\TestCase;
@@ -10,6 +12,9 @@ use Vfs\FileSystem;
 
 abstract class BuilderTestCase extends TestCase
 {
+    use PipelineAssertTrait;
+    use BuilderAssertTrait;
+
     private ?FileSystem $fs = null;
 
     protected function setUp(): void
@@ -22,52 +27,5 @@ abstract class BuilderTestCase extends TestCase
     {
         $this->fs->unmount();
         $this->fs = null;
-    }
-
-    protected function assertBuilderProducesAnInstanceOf(string $expected, DefaultBuilder $builder, string $message = '')
-    {
-        static::assertThat(
-            $builder,
-            new CSV\BuilderProducesAnInstanceOf($expected),
-            $message
-        );
-    }
-
-    protected function assertBuilderNotProducesAnInstanceOf(string $expected, DefaultBuilder $builder, string $message = '')
-    {
-        static::assertThat(
-            $builder,
-            new LogicalNot(
-                new CSV\BuilderProducesAnInstanceOf($expected),
-            ),
-            $message
-        );
-    }
-
-    protected function assertBuilderHasLogger(string $expected, DefaultBuilder $builder, string $message = '')
-    {
-        static::assertThat(
-            $builder,
-            new CSV\BuilderHasLogger($expected),
-            $message
-        );
-    }
-
-    protected function assertExtractorIteratesAs(array $expected, DefaultBuilder $builder, string $message = '')
-    {
-        static::assertThat(
-            $builder,
-            new CSV\ExtractorIteratesAs($expected),
-            $message
-        );
-    }
-
-    protected function assertLoaderProducesFile(string $expected, string $actual, DefaultBuilder $builder, array $input, string $message = '')
-    {
-        static::assertThat(
-            $builder,
-            new CSV\LoaderProducesFile($expected, $actual, $input),
-            $message
-        );
     }
 }

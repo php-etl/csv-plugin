@@ -42,7 +42,6 @@ class ConfigurationTest extends TestCase
                     'file_path' => 'path/to/file',
                     'delimiter' => ',',
                     'enclosure' => '"',
-                    'escape' => '\\'
                 ]
             ],
             'actual' => [
@@ -59,7 +58,6 @@ class ConfigurationTest extends TestCase
                 'extractor' => [
                     'file_path' => 'path/to/file',
                     'delimiter' => ',',
-                    'enclosure' => '"',
                     'escape' => '\\'
                 ]
             ],
@@ -76,7 +74,6 @@ class ConfigurationTest extends TestCase
             'expected' => [
                 'extractor' => [
                     'file_path' => 'path/to/file',
-                    'delimiter' => ',',
                     'enclosure' => '"',
                     'escape' => '\\'
                 ]
