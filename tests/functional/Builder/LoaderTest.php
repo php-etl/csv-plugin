@@ -21,19 +21,18 @@ final class LoaderTest extends BuilderTestCase
             filePath: new Node\Scalar\String_('vfs://output.csv'),
         );
 
-        $this->assertBuilderProducesAnInstanceOf(
+        $this->assertBuilderProducesInstanceOf(
             'Kiboko\\Component\\Flow\\Csv\\Safe\\Loader',
             $loader
         );
 
-        $this->assertLoaderProducesFile(
-            'vfs://expected.csv',
+        $this->assertBuilderProducesLoaderWritingFile(
             'vfs://output.csv',
-            $loader,
             [
                 ['firstname' => 'pierre', 'lastname' => 'dupont'],
                 ['firstname' => 'john', 'lastname' => 'doe']
-            ]
+            ],
+            $loader,
         );
     }
 
@@ -51,19 +50,18 @@ final class LoaderTest extends BuilderTestCase
             safeMode: false,
         );
 
-        $this->assertBuilderProducesAnInstanceOf(
+        $this->assertBuilderProducesInstanceOf(
             'Kiboko\\Component\\Flow\\Csv\\FingersCrossed\\Loader',
             $loader
         );
 
-        $this->assertLoaderProducesFile(
-            'vfs://expected.csv',
+        $this->assertBuilderProducesLoaderWritingFile(
             'vfs://output.csv',
-            $loader,
             [
                 ['firstname' => 'pierre', 'lastname' => 'dupont'],
                 ['firstname' => 'john', 'lastname' => 'doe']
-            ]
+            ],
+            $loader,
         );
     }
 
@@ -81,19 +79,18 @@ final class LoaderTest extends BuilderTestCase
             delimiter: new Node\Scalar\String_(';'),
         );
 
-        $this->assertBuilderProducesAnInstanceOf(
+        $this->assertBuilderProducesInstanceOf(
             'Kiboko\\Component\\Flow\\Csv\\Safe\\Loader',
             $loader
         );
 
-        $this->assertLoaderProducesFile(
-            'vfs://expected.csv',
+        $this->assertBuilderProducesLoaderWritingFile(
             'vfs://output.csv',
-            $loader,
             [
                 ['firstname' => 'pierre', 'lastname' => 'dupont'],
                 ['firstname' => 'john', 'lastname' => 'doe']
-            ]
+            ],
+            $loader,
         );
     }
 
@@ -111,19 +108,18 @@ final class LoaderTest extends BuilderTestCase
             enclosure: new Node\Scalar\String_('"'),
         );
 
-        $this->assertBuilderProducesAnInstanceOf(
+        $this->assertBuilderProducesInstanceOf(
             'Kiboko\\Component\\Flow\\Csv\\Safe\\Loader',
             $loader
         );
 
-        $this->assertLoaderProducesFile(
-            'vfs://expected.csv',
+        $this->assertBuilderProducesLoaderWritingFile(
             'vfs://output.csv',
-            $loader,
             [
                 ['firstname' => 'pierre louis', 'lastname' => 'dupont'],
                 ['firstname' => 'john', 'lastname' => 'doe']
-            ]
+            ],
+            $loader,
         );
     }
 
@@ -142,19 +138,18 @@ final class LoaderTest extends BuilderTestCase
             escape: new Node\Scalar\String_('\\'),
         );
 
-        $this->assertBuilderProducesAnInstanceOf(
+        $this->assertBuilderProducesInstanceOf(
             'Kiboko\\Component\\Flow\\Csv\\Safe\\Loader',
             $loader
         );
 
-        $this->assertLoaderProducesFile(
-            'vfs://expected.csv',
+        $this->assertBuilderProducesLoaderWritingFile(
             'vfs://output.csv',
-            $loader,
             [
                 ['firstname' => 'pierre "louis"', 'lastname' => 'dupont'],
                 ['firstname' => 'john', 'lastname' => 'doe']
-            ]
+            ],
+            $loader,
         );
     }
 
@@ -175,19 +170,18 @@ final class LoaderTest extends BuilderTestCase
             (new Log\Builder\Logger())->getNode()
         );
 
-        $this->assertBuilderProducesAnInstanceOf(
+        $this->assertBuilderProducesInstanceOf(
             'Kiboko\\Component\\Flow\\Csv\\Safe\\Loader',
             $loader
         );
 
-        $this->assertLoaderProducesFile(
-            'vfs://expected.csv',
+        $this->assertBuilderProducesLoaderWritingFile(
             'vfs://output.csv',
-            $loader,
             [
                 ['firstname' => 'pierre', 'lastname' => 'dupont'],
                 ['firstname' => 'john', 'lastname' => 'doe']
-            ]
+            ],
+            $loader,
         );
     }
 }

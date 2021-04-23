@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace functional\Kiboko\Plugin\CSV\Service;
+namespace functional\Kiboko\Plugin\CSV;
 
 use Kiboko\Contract\Configurator\InvalidConfigurationException;
 use Kiboko\Plugin\CSV;
@@ -16,7 +16,7 @@ final class ServiceTest extends TestCase
                     'file_path' => 'input.csv',
                 ],
                 'logger' => [
-                    'type' => 'stderr'
+                    'destinations' => []
                 ]
             ],
             'expected_class' => 'Kiboko\\Plugin\\CSV\\Factory\\Repository\\Extractor',
@@ -26,7 +26,7 @@ final class ServiceTest extends TestCase
                         'file_path' => 'input.csv'
                     ],
                     'logger' => [
-                        'type' => 'stderr'
+                        'destinations' => []
                     ]
                 ]
             ]
@@ -38,7 +38,7 @@ final class ServiceTest extends TestCase
                     'file_path' => 'output.csv',
                 ],
                 'logger' => [
-                    'type' => 'stderr'
+                    'destinations' => []
                 ]
             ],
             'expected_class' => 'Kiboko\\Plugin\\CSV\\Factory\\Repository\\Loader',
@@ -48,7 +48,7 @@ final class ServiceTest extends TestCase
                         'file_path' => 'output.csv'
                     ],
                     'logger' => [
-                        'type' => 'stderr'
+                        'destinations' => []
                     ]
                 ]
             ]

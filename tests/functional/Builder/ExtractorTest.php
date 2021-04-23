@@ -14,12 +14,12 @@ final class ExtractorTest extends BuilderTestCase
             filePath: new Node\Scalar\String_(__DIR__ . '/../files/source-to-extract-comma-delimited.csv'),
         );
 
-        $this->assertBuilderProducesAnInstanceOf(
+        $this->assertBuilderProducesInstanceOf(
             'Kiboko\\Component\\Flow\\Csv\\Safe\\Extractor',
             $extractor
         );
 
-        $this->assertExtractorIteratesAs(
+        $this->assertBuilderProducesExtractorIteratesAs(
             [
                 ['firstname' => 'pierre', 'lastname' => 'dupont'],
                 ['firstname' => 'john', 'lastname' => 'doe']
@@ -35,12 +35,12 @@ final class ExtractorTest extends BuilderTestCase
             safeMode: false,
         );
 
-        $this->assertBuilderProducesAnInstanceOf(
+        $this->assertBuilderProducesInstanceOf(
             'Kiboko\\Component\\Flow\\Csv\\FingersCrossed\\Extractor',
             $extractor
         );
 
-        $this->assertExtractorIteratesAs(
+        $this->assertBuilderProducesExtractorIteratesAs(
             [
                 ['firstname' => 'pierre', 'lastname' => 'dupont'],
                 ['firstname' => 'john', 'lastname' => 'doe']
@@ -56,12 +56,12 @@ final class ExtractorTest extends BuilderTestCase
             delimiter: new Node\Scalar\String_(';'),
         );
 
-        $this->assertBuilderProducesAnInstanceOf(
+        $this->assertBuilderProducesInstanceOf(
             'Kiboko\\Component\\Flow\\Csv\\Safe\\Extractor',
             $extractor
         );
 
-        $this->assertExtractorIteratesAs(
+        $this->assertBuilderProducesExtractorIteratesAs(
             [
                 ['firstname' => 'pierre', 'lastname' => 'dupont'],
                 ['firstname' => 'john', 'lastname' => 'doe']
@@ -77,12 +77,12 @@ final class ExtractorTest extends BuilderTestCase
             enclosure: new Node\Scalar\String_('"'),
         );
 
-        $this->assertBuilderProducesAnInstanceOf(
+        $this->assertBuilderProducesInstanceOf(
             'Kiboko\\Component\\Flow\\Csv\\Safe\\Extractor',
             $extractor
         );
 
-        $this->assertExtractorIteratesAs(
+        $this->assertBuilderProducesExtractorIteratesAs(
             [
                 ['firstname' => 'pierre', 'lastname' => 'dupont'],
                 ['firstname' => 'john', 'lastname' => 'doe']
@@ -98,12 +98,12 @@ final class ExtractorTest extends BuilderTestCase
             escape: new Node\Scalar\String_('\\'),
         );
 
-        $this->assertBuilderProducesAnInstanceOf(
+        $this->assertBuilderProducesInstanceOf(
             'Kiboko\\Component\\Flow\\Csv\\Safe\\Extractor',
             $extractor
         );
 
-        $this->assertExtractorIteratesAs(
+        $this->assertBuilderProducesExtractorIteratesAs(
             [
                 ['firstname' => 'pierre \\"louis\\"', 'lastname' => 'dupont'],
                 ['firstname' => 'john', 'lastname' => 'doe']
@@ -122,12 +122,12 @@ final class ExtractorTest extends BuilderTestCase
             (new Log\Builder\Logger())->getNode()
         );
 
-        $this->assertBuilderProducesAnInstanceOf(
+        $this->assertBuilderProducesInstanceOf(
             'Kiboko\\Component\\Flow\\Csv\\Safe\\Extractor',
             $extractor
         );
 
-        $this->assertExtractorIteratesAs(
+        $this->assertBuilderProducesExtractorIteratesAs(
             [
                 ['firstname' => 'pierre', 'lastname' => 'dupont'],
                 ['firstname' => 'john', 'lastname' => 'doe']

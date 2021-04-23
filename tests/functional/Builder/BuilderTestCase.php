@@ -12,7 +12,6 @@ use Vfs\FileSystem;
 
 abstract class BuilderTestCase extends TestCase
 {
-    use PipelineAssertTrait;
     use BuilderAssertTrait;
 
     private ?FileSystem $fs = null;

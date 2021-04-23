@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace functional\Kiboko\Plugin\CSV\Configuration;
+namespace functional\Kiboko\Plugin\CSV;
 
 use Kiboko\Plugin\CSV\Configuration;
 use PHPUnit\Framework\TestCase;
@@ -90,7 +90,7 @@ class ConfigurationTest extends TestCase
         yield [
             'expected' => [
                 'logger' => [
-                    'type' => 'null'
+                    'destinations' => []
                 ],
                 'extractor' => [
                     'file_path' => 'path/to/file',
@@ -101,7 +101,7 @@ class ConfigurationTest extends TestCase
             ],
             'actual' => [
                 'logger' => [
-                    'type' => 'null'
+                    'destinations' => []
                 ],
                 'extractor' => [
                     'file_path' => 'path/to/file',
