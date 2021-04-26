@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a1ade03d4e8a3c850404c2abd6ed9a59",
+    "content-hash": "04cf9bc27d7d1c33b91cccd571c9854f",
     "packages": [
         {
             "name": "doctrine/instantiator",
@@ -701,23 +701,22 @@
         },
         {
             "name": "php-etl/pipeline-contracts",
-            "version": "dev-master",
+            "version": "v0.1.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-etl/pipeline-contracts.git",
-                "reference": "0d90272ad46add53de4933a31aee9f565c180e93"
+                "reference": "1d5ce72ecbea43e4d591223c3b015273af431a79"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-etl/pipeline-contracts/zipball/0d90272ad46add53de4933a31aee9f565c180e93",
-                "reference": "0d90272ad46add53de4933a31aee9f565c180e93",
+                "url": "https://api.github.com/repos/php-etl/pipeline-contracts/zipball/1d5ce72ecbea43e4d591223c3b015273af431a79",
+                "reference": "1d5ce72ecbea43e4d591223c3b015273af431a79",
                 "shasum": ""
             },
             "require": {
                 "php": "^8.0",
                 "php-etl/bucket-contracts": "^0.1"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -748,7 +747,7 @@
                 "issues": "https://github.com/php-etl/pipeline-contracts/issues",
                 "source": "https://github.com/php-etl/pipeline-contracts/tree/master"
             },
-            "time": "2021-02-01T13:55:21+00:00"
+            "time": "2021-04-23T21:15:31+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -3057,7 +3056,6 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "php-etl/configurator-contracts": 20,
-        "php-etl/pipeline-contracts": 20,
         "php-etl/csv-flow": 20,
         "php-etl/log-plugin": 20,
         "php-etl/phpunit-extension": 20,
