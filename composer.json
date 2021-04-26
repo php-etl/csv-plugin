@@ -27,17 +27,16 @@
         "php-etl/configurator-contracts": "dev-master",
         "nikic/php-parser": "^4.10",
         "symfony/config": "^4.0 || ^5.0",
-        "php-etl/pipeline-contracts": "^0.1.0",
-        "php-etl/csv-flow": "dev-master",
-        "php-etl/log-plugin": "0.1.x-dev",
-        "php-etl/phpunit-extension": "0.1.x-dev"
+        "php-etl/log-plugin": "0.1.x-dev"
     },
     "require-dev": {
         "symfony/yaml": "5.x-dev",
         "php-etl/bucket-contracts": "^0.1.0@dev",
         "php-etl/pipeline": "^0.2.0@dev",
         "adlawson/vfs": "dev-develop",
-        "phpunit/phpunit": "^9.0"
+        "phpunit/phpunit": "^9.0",
+        "php-etl/csv-flow": "0.1.x-dev",
+        "php-etl/phpunit-extension": "0.1.x-dev"
     },
     "authors": [
         {
