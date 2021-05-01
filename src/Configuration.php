@@ -8,13 +8,6 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 final class Configuration implements ConfigurationInterface
 {
-    private ConfigurationInterface $loggerConfiguration;
-
-    public function __construct(?ConfigurationInterface $loggerConfiguration = null)
-    {
-        $this->loggerConfiguration = $loggerConfiguration ?: new Log\Configuration();
-    }
-
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $extractor = new Configuration\Extractor();
@@ -31,9 +24,6 @@ final class Configuration implements ConfigurationInterface
             ->children()
                 ->append(node: $extractor->getConfigTreeBuilder()->getRootNode())
                 ->append(node: $loader->getConfigTreeBuilder()->getRootNode())
-                ->append(node: $this->loggerConfiguration->getConfigTreeBuilder()->getRootNode()
-                        ->setDeprecated('php-etl/csv-plugin', '0.1')
-                )
             ->end()
         ;
 
