@@ -3,10 +3,28 @@
     "description": "Plugins for CSV Extractor and Loader",
     "type": "library",
     "license": "MIT",
-    "extra": {
-        "branch-alias": {
-            "dev-master": "0.1.x-dev"
+    "authors": [
+        {
+            "name": "Grégory Planchat",
+            "email": "gregory@kiboko.fr"
         }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^8.0",
+        "ext-json": "*",
+        "nikic/php-parser": "^4.10",
+        "symfony/config": "^5.2",
+        "php-etl/configurator-contracts": "^0.2.0"
+    },
+    "require-dev": {
+        "adlawson/vfs": "dev-develop",
+        "phpunit/phpunit": "^9.0",
+        "php-etl/bucket-contracts": "^0.1.0",
+        "php-etl/pipeline": "^0.2.0",
+        "php-etl/csv-flow": "^0.1.0",
+        "php-etl/phpunit-extension": "*",
+        "php-etl/pipeline-contracts": "^0.1.0"
     },
     "autoload": {
         "psr-4": {
@@ -18,31 +36,12 @@
             "functional\\Kiboko\\Plugin\\CSV\\": "tests/functional/"
         }
     },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.2.x-dev"
+        }
+    },
     "config": {
         "bin-dir": "bin"
-    },
-    "require": {
-        "php": "^8.0",
-        "ext-json": "*",
-        "php-etl/configurator-contracts": "dev-master",
-        "nikic/php-parser": "^4.10",
-        "symfony/config": "^4.0 || ^5.0",
-        "php-etl/log-plugin": "0.1.x-dev"
-    },
-    "require-dev": {
-        "symfony/yaml": "5.x-dev",
-        "php-etl/bucket-contracts": "^0.1.0@dev",
-        "php-etl/pipeline": "^0.2.0@dev",
-        "adlawson/vfs": "dev-develop",
-        "phpunit/phpunit": "^9.0",
-        "php-etl/csv-flow": "0.1.x-dev",
-        "php-etl/phpunit-extension": "0.1.x-dev"
-    },
-    "authors": [
-        {
-            "name": "Grégory Planchat",
-            "email": "gregory@kiboko.fr"
-        }
-    ],
-    "minimum-stability": "dev"
+    }
 }

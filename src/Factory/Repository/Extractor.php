@@ -5,7 +5,7 @@ namespace Kiboko\Plugin\CSV\Factory\Repository;
 use Kiboko\Contract\Configurator;
 use Kiboko\Plugin\CSV;
 
-final class Extractor implements Configurator\RepositoryInterface
+final class Extractor implements Configurator\StepRepositoryInterface
 {
     use RepositoryTrait;
 

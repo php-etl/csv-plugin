@@ -2,12 +2,14 @@
 
 namespace Kiboko\Plugin\CSV\Builder;
 
-use PhpParser\Builder;
+use Kiboko\Contract\Configurator\StepBuilderInterface;
 use PhpParser\Node;
 
-final class Extractor implements Builder
+final class Extractor implements StepBuilderInterface
 {
     private ?Node\Expr $logger;
+    private ?Node\Expr $rejection;
+    private ?Node\Expr $state;
 
     public function __construct(
         private ?Node\Expr $filePath,
@@ -18,6 +20,8 @@ final class Extractor implements Builder
         private bool $safeMode = true,
     ) {
         $this->logger = null;
+        $this->rejection = null;
+        $this->state = null;
     }
 
     public function withFilePath(Node\Expr $filePath): self
@@ -58,6 +62,20 @@ final class Extractor implements Builder
     public function withLogger(Node\Expr $logger): self
     {
         $this->logger = $logger;
+
+        return $this;
+    }
+
+    public function withRejection(Node\Expr $rejection): self
+    {
+        $this->rejection = $rejection;
+
+        return $this;
+    }
+
+    public function withState(Node\Expr $state): self
+    {
+        $this->state = $state;
 
         return $this;
     }
