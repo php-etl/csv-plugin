@@ -111,28 +111,4 @@ final class ExtractorTest extends BuilderTestCase
             $extractor
         );
     }
-
-    public function testWithLogger(): void
-    {
-        $extractor = new Builder\Extractor(
-            filePath: new Node\Scalar\String_(__DIR__ . '/../files/source-to-extract-comma-delimited.csv'),
-        );
-
-        $extractor->withLogger(
-            (new Log\Builder\Logger())->getNode()
-        );
-
-        $this->assertBuilderProducesInstanceOf(
-            'Kiboko\\Component\\Flow\\Csv\\Safe\\Extractor',
-            $extractor
-        );
-
-        $this->assertBuilderProducesExtractorIteratesAs(
-            [
-                ['firstname' => 'pierre', 'lastname' => 'dupont'],
-                ['firstname' => 'john', 'lastname' => 'doe']
-            ],
-            $extractor
-        );
-    }
 }

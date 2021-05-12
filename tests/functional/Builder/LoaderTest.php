@@ -152,36 +152,4 @@ final class LoaderTest extends BuilderTestCase
             $loader,
         );
     }
-
-    public function testWithLogger(): void
-    {
-        file_put_contents('vfs://expected.csv', <<<CSV
-            firstname,lastname
-            pierre,dupont
-            john,doe
-            
-            CSV);
-
-        $loader = new Builder\Loader(
-            filePath: new Node\Scalar\String_('vfs://output.csv'),
-        );
-
-        $loader->withLogger(
-            (new Log\Builder\Logger())->getNode()
-        );
-
-        $this->assertBuilderProducesInstanceOf(
-            'Kiboko\\Component\\Flow\\Csv\\Safe\\Loader',
-            $loader
-        );
-
-        $this->assertBuilderProducesLoaderWritingFile(
-            'vfs://output.csv',
-            [
-                ['firstname' => 'pierre', 'lastname' => 'dupont'],
-                ['firstname' => 'john', 'lastname' => 'doe']
-            ],
-            $loader,
-        );
-    }
 }

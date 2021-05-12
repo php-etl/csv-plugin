@@ -14,9 +14,6 @@ final class ServiceTest extends TestCase
             'expected' => [
                 'extractor' => [
                     'file_path' => 'input.csv',
-                ],
-                'logger' => [
-                    'destinations' => []
                 ]
             ],
             'expected_class' => 'Kiboko\\Plugin\\CSV\\Factory\\Repository\\Extractor',
@@ -24,9 +21,6 @@ final class ServiceTest extends TestCase
                 'csv' => [
                     'extractor' => [
                         'file_path' => 'input.csv'
-                    ],
-                    'logger' => [
-                        'destinations' => []
                     ]
                 ]
             ]
@@ -36,9 +30,6 @@ final class ServiceTest extends TestCase
             'expected' => [
                 'loader' => [
                     'file_path' => 'output.csv',
-                ],
-                'logger' => [
-                    'destinations' => []
                 ]
             ],
             'expected_class' => 'Kiboko\\Plugin\\CSV\\Factory\\Repository\\Loader',
@@ -46,9 +37,6 @@ final class ServiceTest extends TestCase
                 'csv' => [
                     'loader' => [
                         'file_path' => 'output.csv'
-                    ],
-                    'logger' => [
-                        'destinations' => []
                     ]
                 ]
             ]

@@ -89,9 +89,6 @@ class ConfigurationTest extends TestCase
 
         yield [
             'expected' => [
-                'logger' => [
-                    'destinations' => []
-                ],
                 'extractor' => [
                     'file_path' => 'path/to/file',
                     'delimiter' => ',',
@@ -100,9 +97,6 @@ class ConfigurationTest extends TestCase
                 ]
             ],
             'actual' => [
-                'logger' => [
-                    'destinations' => []
-                ],
                 'extractor' => [
                     'file_path' => 'path/to/file',
                     'delimiter' => ',',
