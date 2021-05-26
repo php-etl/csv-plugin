@@ -2,19 +2,24 @@
 
 namespace Kiboko\Plugin\CSV\Factory;
 
+use Kiboko\Contract\Configurator\InvalidConfigurationException;
 use Kiboko\Plugin\CSV;
 use Kiboko\Contract\Configurator;
 use PhpParser\Node;
+use PhpParser\ParserFactory;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Exception as Symfony;
 use Symfony\Component\Config\Definition\Processor;
+use Symfony\Component\ExpressionLanguage\Expression;
+use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 final class Extractor implements Configurator\FactoryInterface
 {
     private Processor $processor;
     private ConfigurationInterface $configuration;
 
-    public function __construct()
+    //private ?ExpressionLanguage $interpreter = null
+    public function __construct(private ExpressionLanguage $interpreter)
     {
         $this->processor = new Processor();
         $this->configuration = new CSV\Configuration\Extractor();
@@ -48,14 +53,29 @@ final class Extractor implements Configurator\FactoryInterface
         }
     }
 
+    private function compileValue(string|Expression $value): Node\Expr
+    {
+        if (is_string($value)) {
+            return new Node\Scalar\String_(value: $value);
+        }
+        if ($value instanceof Expression) {
+            $parser = (new ParserFactory())->create(ParserFactory::PREFER_PHP7, null);
+            return $parser->parse('<?php ' . $this->interpreter->compile($value, ['input']) . ';')[0]->expr;
+        }
+
+        throw new InvalidConfigurationException(
+            message: 'Could not determine the correct way to compile the provided filter.',
+        );
+    }
+
     public function compile(array $config): Repository\Extractor
     {
         $extractor = new CSV\Builder\Extractor(
-            filePath: new Node\Scalar\String_($config['file_path']),
-            delimiter: array_key_exists('delimiter', $config) ? new Node\Scalar\String_($config['delimiter']) : null,
-            enclosure: array_key_exists('enclosure', $config) ? new Node\Scalar\String_($config['enclosure']) : null,
-            escape: array_key_exists('escape', $config) ? new Node\Scalar\String_($config['escape']) : null,
-            columns: array_key_exists('columns', $config) ? $this->toAst($config['columns']) : null,
+            filePath: $this->compileValue($config['file_path']),
+            delimiter: array_key_exists('delimiter', $config) ? $this->compileValue($config['delimiter']) : null,
+            enclosure: array_key_exists('enclosure', $config) ? $this->compileValue($config['enclosure']) : null,
+            escape: array_key_exists('escape', $config) ? $this->compileValue($config['escape']) : null,
+            columns: array_key_exists('columns', $config) ? $this->toAst($config['columns']) : null
         );
 
         if (array_key_exists('safe_mode', $config)) {
