@@ -4,11 +4,11 @@ namespace Kiboko\Plugin\CSV\Factory;
 
 use Kiboko\Plugin\CSV;
 use Kiboko\Contract\Configurator;
-use PhpParser\Node;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Exception as Symfony;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
+use function Kiboko\Component\SatelliteToolbox\Configuration\compileValue;
 use function Kiboko\Component\SatelliteToolbox\Configuration\compileValueWhenExpression;
 
 final class Extractor implements Configurator\FactoryInterface
@@ -57,7 +57,7 @@ final class Extractor implements Configurator\FactoryInterface
             delimiter: array_key_exists('delimiter', $config) ? compileValueWhenExpression($this->interpreter, $config['delimiter']) : null,
             enclosure: array_key_exists('enclosure', $config) ? compileValueWhenExpression($this->interpreter, $config['enclosure']) : null,
             escape: array_key_exists('escape', $config) ? compileValueWhenExpression($this->interpreter, $config['escape']) : null,
-            columns: array_key_exists('columns', $config) ? $this->toAst($config['columns']) : null
+            columns: array_key_exists('columns', $config) ? compileValue($this->interpreter, $config['columns']) : null
         );
 
         if (array_key_exists('safe_mode', $config)) {
@@ -69,36 +69,5 @@ final class Extractor implements Configurator\FactoryInterface
         }
 
         return new Repository\Extractor($extractor);
-    }
-
-    private function toAst($value): Node\Expr
-    {
-        if (is_string($value)) {
-            return new Node\Scalar\String_($value);
-        }
-        if (is_float($value)) {
-            return new Node\Scalar\DNumber($value);
-        }
-        if (is_int($value)) {
-            return new Node\Scalar\LNumber($value);
-        }
-        if (is_array($value)) {
-            $items = [];
-
-            foreach ($value as $key => $item) {
-                $items[] = new Node\Expr\ArrayItem(
-                    value: $this->toAst($item),
-                );
-            }
-
-            return new Node\Expr\Array_(attributes: [Node\Expr\Array_::KIND_SHORT]);
-        }
-
-        throw new \InvalidArgumentException(strtr(
-            'Unsupported type %actual%.',
-            [
-                '%actual%' => get_debug_type($value),
-            ]
-        ));
     }
 }

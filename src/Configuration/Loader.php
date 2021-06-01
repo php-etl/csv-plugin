@@ -43,8 +43,12 @@ final class Loader implements ConfigurationInterface
                 ->booleanNode('safe_mode')->end()
                 ->variableNode('columns')
                     ->validate()
-                        ->ifTrue(fn ($value) => $value !== null || !is_array($value))
+                        ->ifTrue(fn ($value) => $value !== null && !is_array($value))
                         ->thenInvalid('Value should be an array')
+                    ->end()
+                    ->validate()
+                        ->ifTrue(fn ($value) => $value === null)
+                        ->thenInvalid('Value cannot be null')
                     ->end()
                 ->end()
             ->end();
