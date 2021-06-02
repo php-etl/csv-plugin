@@ -17,17 +17,16 @@
         "symfony/config": "^5.2",
         "php-etl/configurator-contracts": "^0.3.0",
         "php-etl/packaging-contracts": "^0.1.0",
+        "php-etl/bucket-contracts": "^0.1.0",
+        "php-etl/pipeline-contracts": "^0.1.0",
         "symfony/expression-language": "^5.2",
         "php-etl/satellite-toolbox": "^0.1.0"
     },
     "require-dev": {
         "adlawson/vfs": "dev-develop",
         "phpunit/phpunit": "^9.0",
-        "php-etl/bucket-contracts": "^0.1.0",
-        "php-etl/pipeline": "^0.2.0",
         "php-etl/csv-flow": "^0.1.0",
-        "php-etl/phpunit-extension": "*",
-        "php-etl/pipeline-contracts": "^0.1.0"
+        "php-etl/phpunit-extension": "*"
     },
     "autoload": {
         "psr-4": {
