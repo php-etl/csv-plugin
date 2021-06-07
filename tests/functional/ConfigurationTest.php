@@ -19,6 +19,7 @@ class ConfigurationTest extends TestCase
     {
         yield [
             'expected' => [
+                'expression_language' => [],
                 'extractor' => [
                     'file_path' => 'path/to/file',
                     'delimiter' => ';',
@@ -27,6 +28,7 @@ class ConfigurationTest extends TestCase
                 ]
             ],
             'actual' => [
+                'expression_language' => [],
                 'extractor' => [
                     'file_path' => 'path/to/file',
                     'delimiter' => ';',
@@ -38,6 +40,7 @@ class ConfigurationTest extends TestCase
 
         yield [
             'expected' => [
+                'expression_language' => [],
                 'extractor' => [
                     'file_path' => 'path/to/file',
                     'delimiter' => ',',
@@ -45,6 +48,7 @@ class ConfigurationTest extends TestCase
                 ]
             ],
             'actual' => [
+                'expression_language' => [],
                 'extractor' => [
                     'file_path' => 'path/to/file',
                     'delimiter' => ',',
@@ -55,6 +59,7 @@ class ConfigurationTest extends TestCase
 
         yield [
             'expected' => [
+                'expression_language' => [],
                 'extractor' => [
                     'file_path' => 'path/to/file',
                     'delimiter' => ',',
@@ -62,6 +67,7 @@ class ConfigurationTest extends TestCase
                 ]
             ],
             'actual' => [
+                'expression_language' => [],
                 'extractor' => [
                     'file_path' => 'path/to/file',
                     'delimiter' => ',',
@@ -72,6 +78,7 @@ class ConfigurationTest extends TestCase
 
         yield [
             'expected' => [
+                'expression_language' => [],
                 'extractor' => [
                     'file_path' => 'path/to/file',
                     'enclosure' => '"',
@@ -79,6 +86,7 @@ class ConfigurationTest extends TestCase
                 ]
             ],
             'actual' => [
+                'expression_language' => [],
                 'extractor' => [
                     'file_path' => 'path/to/file',
                     'enclosure' => '"',
@@ -89,6 +97,7 @@ class ConfigurationTest extends TestCase
 
         yield [
             'expected' => [
+                'expression_language' => [],
                 'extractor' => [
                     'file_path' => 'path/to/file',
                     'delimiter' => ',',
@@ -97,6 +106,7 @@ class ConfigurationTest extends TestCase
                 ]
             ],
             'actual' => [
+                'expression_language' => [],
                 'extractor' => [
                     'file_path' => 'path/to/file',
                     'delimiter' => ',',

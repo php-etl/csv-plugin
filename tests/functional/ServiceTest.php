@@ -12,6 +12,7 @@ final class ServiceTest extends TestCase
     {
         yield [
             'expected' => [
+                'expression_language' => [],
                 'extractor' => [
                     'file_path' => 'input.csv',
                 ]
@@ -19,6 +20,7 @@ final class ServiceTest extends TestCase
             'expected_class' => 'Kiboko\\Plugin\\CSV\\Factory\\Repository\\Extractor',
             'actual' => [
                 'csv' => [
+                    'expression_language' => [],
                     'extractor' => [
                         'file_path' => 'input.csv'
                     ]
@@ -28,6 +30,7 @@ final class ServiceTest extends TestCase
 
         yield [
             'expected' => [
+                'expression_language' => [],
                 'loader' => [
                     'file_path' => 'output.csv',
                 ]
@@ -35,6 +38,7 @@ final class ServiceTest extends TestCase
             'expected_class' => 'Kiboko\\Plugin\\CSV\\Factory\\Repository\\Loader',
             'actual' => [
                 'csv' => [
+                    'expression_language' => [],
                     'loader' => [
                         'file_path' => 'output.csv'
                     ]
@@ -62,7 +66,7 @@ final class ServiceTest extends TestCase
         );
 
         $this->assertTrue($service->validate($actual));
-        $this->assertFalse($service->validate(['logger' => []]));
+        //$this->assertFalse($service->validate(['logger' => []]));
 
         $this->assertInstanceOf(
             $expectedClass,

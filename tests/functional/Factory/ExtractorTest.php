@@ -5,6 +5,7 @@ namespace functional\Factory;
 use Kiboko\Contract\Configurator\InvalidConfigurationException;
 use Kiboko\Plugin\CSV;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 final class ExtractorTest extends TestCase
 {
@@ -27,7 +28,7 @@ final class ExtractorTest extends TestCase
      */
     public function testWithConfiguration(array $expected, array $actual): void
     {
-        $factory = new CSV\Factory\Extractor();
+        $factory = new CSV\Factory\Extractor(new ExpressionLanguage());
         $normalizedConfig = $factory->normalize($actual);
 
         $this->assertEquals(
@@ -53,13 +54,13 @@ final class ExtractorTest extends TestCase
             'extractor' => []
         ];
 
-        $factory = new CSV\Factory\Extractor();
+        $factory = new CSV\Factory\Extractor(new ExpressionLanguage());
         $factory->normalize($wrongConfig);
     }
 
     public function testFailToValidate(): void
     {
-        $factory = new CSV\Factory\Extractor();
+        $factory = new CSV\Factory\Extractor(new ExpressionLanguage());
         $this->assertFalse($factory->validate([]));
     }
 }
