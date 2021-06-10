@@ -9,13 +9,13 @@ final class Loader implements Configurator\StepRepositoryInterface
 {
     use RepositoryTrait;
 
-    public function __construct(private CSV\Builder\Loader $builder)
+    public function __construct(private CSV\Builder\Loader|CSV\Builder\MultipleFileLoader $builder)
     {
         $this->files = [];
         $this->packages = [];
     }
 
-    public function getBuilder(): CSV\Builder\Loader
+    public function getBuilder(): CSV\Builder\Loader|CSV\Builder\MultipleFileLoader
     {
         return $this->builder;
     }

@@ -52,13 +52,24 @@ final class Loader implements Configurator\FactoryInterface
 
     public function compile(array $config): Repository\Loader
     {
-        $loader = new CSV\Builder\Loader(
-            filePath: compileValueWhenExpression($this->interpreter, $config['file_path']),
-            delimiter: array_key_exists('delimiter', $config) ? compileValueWhenExpression($this->interpreter, $config['delimiter']) : null,
-            enclosure: array_key_exists('enclosure', $config) ? compileValueWhenExpression($this->interpreter, $config['enclosure']) : null,
-            escape: array_key_exists('escape', $config) ? compileValueWhenExpression($this->interpreter, $config['escape']) : null,
-            columns: array_key_exists('columns', $config) ? compileValue($this->interpreter, $config['columns']) : null,
-        );
+        if (array_key_exists('line_number', $config)) {
+            $loader = new CSV\Builder\MultipleFileLoader(
+                filePath: compileValueWhenExpression($this->interpreter, $config['file_path']),
+                lineNumber: compileValueWhenExpression($this->interpreter, $config['line_number']),
+                delimiter: array_key_exists('delimiter', $config) ? compileValueWhenExpression($this->interpreter, $config['delimiter']) : null,
+                enclosure: array_key_exists('enclosure', $config) ? compileValueWhenExpression($this->interpreter, $config['enclosure']) : null,
+                escape: array_key_exists('escape', $config) ? compileValueWhenExpression($this->interpreter, $config['escape']) : null,
+                columns: array_key_exists('columns', $config) ? compileValue($this->interpreter, $config['columns']) : null
+            );
+        } else {
+            $loader = new CSV\Builder\Loader(
+                filePath: compileValueWhenExpression($this->interpreter, $config['file_path']),
+                delimiter: array_key_exists('delimiter', $config) ? compileValueWhenExpression($this->interpreter, $config['delimiter']) : null,
+                enclosure: array_key_exists('enclosure', $config) ? compileValueWhenExpression($this->interpreter, $config['enclosure']) : null,
+                escape: array_key_exists('escape', $config) ? compileValueWhenExpression($this->interpreter, $config['escape']) : null,
+                columns: array_key_exists('columns', $config) ? compileValue($this->interpreter, $config['columns']) : null,
+            );
+        }
 
         if (array_key_exists('safe_mode', $config)) {
             if ($config['safe_mode'] === true) {
