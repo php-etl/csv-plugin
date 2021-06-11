@@ -118,6 +118,9 @@ final class MultipleFileLoader implements StepBuilderInterface
                     args: [
                         new Node\Arg(
                             value: $this->filePath
+                        ),
+                        new Node\Arg(
+                            value: new Node\Scalar\String_('w')
                         )
                     ]
                 )
@@ -232,7 +235,7 @@ final class MultipleFileLoader implements StepBuilderInterface
                                         ),
                                         stmts: [
                                             new Node\Stmt\If_(
-                                                cond: new Node\Expr\BinaryOp\Greater(
+                                                cond: new Node\Expr\BinaryOp\GreaterOrEqual(
                                                     new Node\Expr\PostInc(
                                                         var: new Node\Expr\Variable('readLines')
                                                     ),
@@ -249,16 +252,21 @@ final class MultipleFileLoader implements StepBuilderInterface
                                                                     args: [
                                                                         new Node\Arg(
                                                                             value: new Node\Expr\PreInc(
-                                                                                var: new Node\Expr\Variable('index')
-                                                                            )
-                                                                        )
-                                                                    ]
-                                                                )
-                                                            )
-                                                        )
-                                                    ]
-
-                                                ]
+                                                                                var: new Node\Expr\Variable('index'),
+                                                                            ),
+                                                                        ),
+                                                                    ],
+                                                                ),
+                                                            ),
+                                                        ),
+                                                        new Node\Stmt\Expression(
+                                                            new Node\Expr\Assign(
+                                                                new Node\Expr\Variable('readLines'),
+                                                                new Node\Scalar\LNumber(0),
+                                                            ),
+                                                        ),
+                                                    ],
+                                                ],
                                             ),
                                             new Node\Stmt\Expression(
                                                 new Node\Expr\Assign(
