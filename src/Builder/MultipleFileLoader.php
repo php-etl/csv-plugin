@@ -13,7 +13,7 @@ final class MultipleFileLoader implements StepBuilderInterface
 
     public function __construct(
         private ?Node\Expr $filePath,
-        private ?Node\Expr $lineNumber,
+        private ?Node\Expr $maxLines,
         private ?Node\Expr $delimiter = null,
         private ?Node\Expr $enclosure = null,
         private ?Node\Expr $escape = null,
@@ -39,9 +39,9 @@ final class MultipleFileLoader implements StepBuilderInterface
         return $this;
     }
 
-    public function withLineNumber(Node\Expr $lineNumber): self
+    public function withMaxLines(Node\Expr $maxLines): self
     {
-        $this->lineNumber = $lineNumber;
+        $this->maxLines = $maxLines;
 
         return $this;
     }
@@ -113,11 +113,11 @@ final class MultipleFileLoader implements StepBuilderInterface
     {
         $arguments = [
             new Node\Arg(
-                value: new Node\Expr\FuncCall(
-                    name: $this->filePath,
+                value: new Node\Expr\New_(
+                    class: new Node\Name\FullyQualified('SplFileObject'),
                     args: [
                         new Node\Arg(
-                            value: new Node\Expr\Variable('index')
+                            value: $this->filePath
                         )
                     ]
                 )
@@ -236,7 +236,7 @@ final class MultipleFileLoader implements StepBuilderInterface
                                                     new Node\Expr\PostInc(
                                                         var: new Node\Expr\Variable('readLines')
                                                     ),
-                                                    $this->lineNumber
+                                                    $this->maxLines
                                                 ),
                                                 subNodes: [
                                                     'stmts' => [
@@ -272,7 +272,6 @@ final class MultipleFileLoader implements StepBuilderInterface
                                                             )
                                                         ]
                                                     )
-
                                                 )
                                             )
                                         ]
@@ -302,7 +301,7 @@ final class MultipleFileLoader implements StepBuilderInterface
                                             var: new Node\Expr\Variable('loader'),
                                             expr: new Node\Expr\New_(
                                                 class: new Node\Name\FullyQualified(
-                                                $this->safeMode
+                                                    $this->safeMode
                                                     ? 'Kiboko\\Component\\Flow\\Csv\\Safe\\Loader'
                                                     : 'Kiboko\\Component\\Flow\\Csv\\FingersCrossed\\Loader',
                                                 ),
