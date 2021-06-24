@@ -33,15 +33,13 @@ final class MultipleFilesLoaderTest extends BuilderTestCase
             firstname,lastname
             Pierre,Dupont
             John,Doe
-            Frank,O'hara
             
             CSV);
 
         file_put_contents('vfs://expected-2.csv', <<<CSV
             firstname,lastname
+            Frank,O'hara
             Hiroko,Froncillo
-            Marlon,Botz
-            Billy,Hess
             
             CSV);
 
@@ -67,15 +65,7 @@ final class MultipleFilesLoaderTest extends BuilderTestCase
                 [
                     'firstname' => 'Hiroko',
                     'lastname' => 'Froncillo',
-                ],
-                [
-                    'firstname' => 'Marlon',
-                    'lastname' => 'Botz',
-                ],
-                [
-                    'firstname' => 'Billy',
-                    'lastname' => 'Hess',
-                ],
+                ]
             ],
             [
                 [
@@ -93,15 +83,7 @@ final class MultipleFilesLoaderTest extends BuilderTestCase
                 [
                     'firstname' => 'Hiroko',
                     'lastname' => 'Froncillo',
-                ],
-                [
-                    'firstname' => 'Marlon',
-                    'lastname' => 'Botz',
-                ],
-                [
-                    'firstname' => 'Billy',
-                    'lastname' => 'Hess',
-                ],
+                ]
             ],
             $loader,
         );

@@ -217,7 +217,7 @@ final class MultipleFileLoader implements StepBuilderInterface
                                     new Node\Stmt\Expression(
                                         expr: new Node\Expr\Assign(
                                             var: new Node\Expr\Variable('readLines'),
-                                            expr: new Node\Scalar\LNumber(0)
+                                            expr: new Node\Scalar\LNumber(1)
                                         )
                                     ),
                                     new Node\Stmt\Expression(
@@ -236,10 +236,8 @@ final class MultipleFileLoader implements StepBuilderInterface
                                         stmts: [
                                             new Node\Stmt\If_(
                                                 cond: new Node\Expr\BinaryOp\GreaterOrEqual(
-                                                    new Node\Expr\PostInc(
-                                                        var: new Node\Expr\Variable('readLines')
-                                                    ),
-                                                    $this->maxLines
+                                                    left: new Node\Expr\Variable('readLines'),
+                                                    right: $this->maxLines
                                                 ),
                                                 subNodes: [
                                                     'stmts' => [
@@ -262,7 +260,7 @@ final class MultipleFileLoader implements StepBuilderInterface
                                                         new Node\Stmt\Expression(
                                                             new Node\Expr\Assign(
                                                                 new Node\Expr\Variable('readLines'),
-                                                                new Node\Scalar\LNumber(0),
+                                                                new Node\Scalar\LNumber(1),
                                                             ),
                                                         ),
                                                     ],
@@ -277,20 +275,25 @@ final class MultipleFileLoader implements StepBuilderInterface
                                                         args: [
                                                             new Node\Arg(
                                                                 value: new Node\Expr\Variable('line')
-                                                            )
-                                                        ]
-                                                    )
-                                                )
-                                            )
+                                                            ),
+                                                        ],
+                                                    ),
+                                                ),
+                                            ),
+                                            new Node\Stmt\Expression(
+                                                expr: new Node\Expr\PostInc(
+                                                    var: new Node\Expr\Variable('readLines')
+                                                ),
+                                            ),
                                         ]
                                     ),
                                     new Node\Stmt\Expression(
                                         new Node\Expr\Yield_(
                                             value: new Node\Expr\Variable('bucket')
-                                        )
-                                    )
-                                ]
-                            ]
+                                        ),
+                                    ),
+                                ],
+                            ],
                         ),
                         new Node\Stmt\ClassMethod(
                             name: new Node\Identifier(name: 'coroutineFactory'),
@@ -314,8 +317,8 @@ final class MultipleFileLoader implements StepBuilderInterface
                                                     : 'Kiboko\\Component\\Flow\\Csv\\FingersCrossed\\Loader',
                                                 ),
                                                 args: $arguments
-                                            )
-                                        )
+                                            ),
+                                        ),
                                     ),
                                     new Node\Stmt\Expression(
                                         new Node\Expr\Assign(
@@ -323,24 +326,24 @@ final class MultipleFileLoader implements StepBuilderInterface
                                             expr: new Node\Expr\MethodCall(
                                                 var: new Node\Expr\Variable('loader'),
                                                 name: new Node\Identifier('load')
-                                            )
-                                        )
+                                            ),
+                                        ),
                                     ),
                                     new Node\Stmt\Expression(
                                         new Node\Expr\MethodCall(
                                             var: new Node\Expr\Variable('coroutine'),
                                             name: new Node\Identifier('rewind')
-                                        )
+                                        ),
                                     ),
                                     new Node\Stmt\Return_(
                                         expr: new Node\Expr\Variable('coroutine'),
-                                    )
-                                ]
-                            ]
-                        )
-                    ]
-                ]
-            )
+                                    ),
+                                ],
+                            ],
+                        ),
+                    ],
+                ],
+            ),
         );
     }
 }
