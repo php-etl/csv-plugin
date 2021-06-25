@@ -33,17 +33,19 @@ final class MultipleFilesLoaderTest extends BuilderTestCase
             firstname,lastname
             Pierre,Dupont
             John,Doe
+            Frank,O'hara
             
             CSV);
 
         file_put_contents('vfs://expected-2.csv', <<<CSV
             firstname,lastname
-            Frank,O'hara
             Hiroko,Froncillo
+            Marlon,Botz
+            Billy,Hess
             
             CSV);
 
-        $loader = new Builder\MultipleFileLoader(
+        $loader = new Builder\MultipleFilesLoader(
             filePath: compileExpression(new \functional\Kiboko\Plugin\CSV\ExpressionLanguage\ExpressionLanguage(), new Expression('format("vfs://SKU_%06d.csv", index)'), 'index'),
             maxLines: new Node\Scalar\LNumber(3)
         );
@@ -65,7 +67,19 @@ final class MultipleFilesLoaderTest extends BuilderTestCase
                 [
                     'firstname' => 'Hiroko',
                     'lastname' => 'Froncillo',
-                ]
+                ],
+                [
+                    'firstname' => 'Marlon',
+                    'lastname' => 'Botz',
+                ],
+                [
+                    'firstname' => 'Billy',
+                    'lastname' => 'Hess',
+                ],
+                [
+                    'firstname' => 'Henry',
+                    'lastname' => 'Sellers',
+                ],
             ],
             [
                 [
@@ -83,7 +97,19 @@ final class MultipleFilesLoaderTest extends BuilderTestCase
                 [
                     'firstname' => 'Hiroko',
                     'lastname' => 'Froncillo',
-                ]
+                ],
+                [
+                    'firstname' => 'Marlon',
+                    'lastname' => 'Botz',
+                ],
+                [
+                    'firstname' => 'Billy',
+                    'lastname' => 'Hess',
+                ],
+                [
+                    'firstname' => 'Henry',
+                    'lastname' => 'Sellers',
+                ],
             ],
             $loader,
         );

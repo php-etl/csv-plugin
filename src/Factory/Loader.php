@@ -53,7 +53,7 @@ final class Loader implements Configurator\FactoryInterface
     public function compile(array $config): Repository\Loader
     {
         if (array_key_exists('max_lines', $config)) {
-            $loader = new CSV\Builder\MultipleFileLoader(
+            $loader = new CSV\Builder\MultipleFilesLoader(
                 filePath: compileValueWhenExpression($this->interpreter, $config['file_path'], 'index'),
                 maxLines: compileValueWhenExpression($this->interpreter, $config['max_lines']),
                 delimiter: array_key_exists('delimiter', $config) ? compileValueWhenExpression($this->interpreter, $config['delimiter']) : null,

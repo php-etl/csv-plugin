@@ -5,7 +5,7 @@ namespace Kiboko\Plugin\CSV\Builder;
 use Kiboko\Contract\Configurator\StepBuilderInterface;
 use PhpParser\Node;
 
-final class MultipleFileLoader implements StepBuilderInterface
+final class MultipleFilesLoader implements StepBuilderInterface
 {
     private ?Node\Expr $logger;
     private ?Node\Expr $rejection;
@@ -217,7 +217,7 @@ final class MultipleFileLoader implements StepBuilderInterface
                                     new Node\Stmt\Expression(
                                         expr: new Node\Expr\Assign(
                                             var: new Node\Expr\Variable('readLines'),
-                                            expr: new Node\Scalar\LNumber(1)
+                                            expr: new Node\Scalar\LNumber(0)
                                         )
                                     ),
                                     new Node\Stmt\Expression(
@@ -260,7 +260,7 @@ final class MultipleFileLoader implements StepBuilderInterface
                                                         new Node\Stmt\Expression(
                                                             new Node\Expr\Assign(
                                                                 new Node\Expr\Variable('readLines'),
-                                                                new Node\Scalar\LNumber(1),
+                                                                new Node\Scalar\LNumber(0),
                                                             ),
                                                         ),
                                                     ],
