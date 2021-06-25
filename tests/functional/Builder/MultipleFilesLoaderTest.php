@@ -45,7 +45,7 @@ final class MultipleFilesLoaderTest extends BuilderTestCase
             
             CSV);
 
-        $loader = new Builder\MultipleFileLoader(
+        $loader = new Builder\MultipleFilesLoader(
             filePath: compileExpression(new \functional\Kiboko\Plugin\CSV\ExpressionLanguage\ExpressionLanguage(), new Expression('format("vfs://SKU_%06d.csv", index)'), 'index'),
             maxLines: new Node\Scalar\LNumber(3)
         );
@@ -76,6 +76,10 @@ final class MultipleFilesLoaderTest extends BuilderTestCase
                     'firstname' => 'Billy',
                     'lastname' => 'Hess',
                 ],
+                [
+                    'firstname' => 'Henry',
+                    'lastname' => 'Sellers',
+                ],
             ],
             [
                 [
@@ -101,6 +105,10 @@ final class MultipleFilesLoaderTest extends BuilderTestCase
                 [
                     'firstname' => 'Billy',
                     'lastname' => 'Hess',
+                ],
+                [
+                    'firstname' => 'Henry',
+                    'lastname' => 'Sellers',
                 ],
             ],
             $loader,
