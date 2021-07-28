@@ -27,6 +27,9 @@ final class Configuration implements ConfigurationInterface
                 ->end()
                 ->append(node: $extractor->getConfigTreeBuilder()->getRootNode())
                 ->append(node: $loader->getConfigTreeBuilder()->getRootNode())
+                ->variableNode('logger')
+                    ->setDeprecated('php-etl/akeneo-plugin', '0.1')
+                ->end()
             ->end()
         ;
 
