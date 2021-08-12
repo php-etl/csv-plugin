@@ -3,7 +3,6 @@
 namespace functional\Kiboko\Plugin\CSV\Builder;
 
 use Kiboko\Plugin\CSV\Builder;
-use Kiboko\Plugin\Log;
 use PhpParser\Node;
 
 final class ExtractorTest extends BuilderTestCase
