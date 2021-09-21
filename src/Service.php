@@ -14,6 +14,7 @@ use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
         "php-etl/csv-flow:^0.2.0",
     ],
     steps: [
+        "extractor" => "extractor",
         "loader" => "loader",
     ],
 )]
