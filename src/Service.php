@@ -9,7 +9,7 @@ use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 #[Configurator\Pipeline(
-    name: "stream",
+    name: "csv",
     dependencies: [
         "php-etl/csv-flow:^0.2.0",
     ],
