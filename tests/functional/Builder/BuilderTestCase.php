@@ -5,6 +5,7 @@ namespace functional\Kiboko\Plugin\CSV\Builder;
 use functional\Kiboko\Plugin\CSV;
 use Kiboko\Component\PHPUnitExtension\BuilderAssertTrait;
 use Kiboko\Component\PHPUnitExtension\PipelineAssertTrait;
+use Kiboko\Contract\Pipeline\PipelineRunnerInterface;
 use PhpParser\Builder as DefaultBuilder;
 use PHPUnit\Framework\Constraint\LogicalNot;
 use PHPUnit\Framework\TestCase;
@@ -26,5 +27,10 @@ abstract class BuilderTestCase extends TestCase
     {
         $this->fs->unmount();
         $this->fs = null;
+    }
+
+    public function pipelineRunner(): PipelineRunnerInterface
+    {
+        return new CSV\PipelineRunner();
     }
 }
