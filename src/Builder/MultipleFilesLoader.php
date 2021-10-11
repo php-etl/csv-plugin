@@ -117,7 +117,10 @@ final class MultipleFilesLoader implements StepBuilderInterface
                     class: new Node\Name\FullyQualified('SplFileObject'),
                     args: [
                         new Node\Arg(
-                            value: $this->filePath
+                            value: new Node\Expr\BinaryOp\Concat(
+                                left: new Node\Scalar\MagicConst\Dir(),
+                                right: $this->filePath,
+                            ),
                         ),
                         new Node\Arg(
                             value: new Node\Scalar\String_('w')

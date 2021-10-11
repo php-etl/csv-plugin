@@ -101,7 +101,12 @@ final class Loader implements StepBuilderInterface
                 value: new Node\Expr\New_(
                     class: new Node\Name\FullyQualified('SplFileObject'),
                     args: [
-                        new Node\Arg($this->filePath),
+                        new Node\Arg(
+                            value: new Node\Expr\BinaryOp\Concat(
+                                left: new Node\Scalar\MagicConst\Dir(),
+                                right: $this->filePath,
+                            ),
+                        ),
                         new Node\Arg(new Node\Scalar\String_('w')),
                     ],
                 ),
