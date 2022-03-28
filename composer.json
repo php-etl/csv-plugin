@@ -1,7 +1,7 @@
 {
     "name": "php-etl/csv-plugin",
     "description": "Plugins for CSV Extractor and Loader",
-    "type": "satellite-plugin",
+    "type": "gyroscops-plugin",
     "license": "MIT",
     "authors": [
         {
@@ -41,8 +41,8 @@
         "branch-alias": {
             "dev-master": "0.4.x-dev"
         },
-        "satellite": {
-            "class": "Kiboko\\Plugin\\CSV\\Service"
+        "gyroscops": {
+            "plugins": ["Kiboko\\Plugin\\CSV\\Service"]
         }
     },
     "config": {
