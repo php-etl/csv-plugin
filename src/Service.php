@@ -60,21 +60,23 @@ final class Service implements Configurator\PipelinePluginInterface
 
     public function compile(array $config): Configurator\RepositoryInterface
     {
+        $interpreter = clone $this->interpreter;
+
         if (array_key_exists('expression_language', $config)
             && is_array($config['expression_language'])
             && count($config['expression_language'])
         ) {
             foreach ($config['expression_language'] as $provider) {
-                $this->interpreter->registerProvider(new $provider);
+                $interpreter->registerProvider(new $provider);
             }
         }
 
         if (array_key_exists('extractor', $config)) {
-            $extractorFactory = new Factory\Extractor($this->interpreter);
+            $extractorFactory = new Factory\Extractor($interpreter);
 
             return $extractorFactory->compile($config['extractor']);
         } elseif (array_key_exists('loader', $config)) {
-            $loaderFactory = new Factory\Loader($this->interpreter);
+            $loaderFactory = new Factory\Loader($interpreter);
 
             return $loaderFactory->compile($config['loader']);
         } else {
