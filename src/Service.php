@@ -13,8 +13,8 @@ use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
         "php-etl/csv-flow:^0.2.0",
     ],
     steps: [
-        "extractor" => "extractor",
-        "loader" => "loader",
+        new Configurator\Pipeline\StepExtractor(),
+        new Configurator\Pipeline\StepLoader(),
     ],
 )]
 final class Service implements Configurator\PipelinePluginInterface
