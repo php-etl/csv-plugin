@@ -39,7 +39,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.4.x-dev"
+            "dev-main": "0.4.x-dev"
         },
         "gyroscops": {
             "plugins": ["Kiboko\\Plugin\\CSV\\Service"]
