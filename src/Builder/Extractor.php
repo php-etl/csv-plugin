@@ -110,52 +110,37 @@ final class Extractor implements StepBuilderInterface
         ];
 
         if ($this->delimiter !== null) {
-            array_push(
-                $arguments,
-                new Node\Arg(
-                    value: $this->delimiter,
-                    name: new Node\Identifier('delimiter'),
-                ),
+            $arguments[] = new Node\Arg(
+                value: $this->delimiter,
+                name: new Node\Identifier('delimiter'),
             );
         }
 
         if ($this->enclosure !== null) {
-            array_push(
-                $arguments,
-                new Node\Arg(
-                    value: $this->enclosure,
-                    name: new Node\Identifier('enclosure'),
-                ),
+            $arguments[] = new Node\Arg(
+                value: $this->enclosure,
+                name: new Node\Identifier('enclosure'),
             );
         }
 
         if ($this->escape !== null) {
-            array_push(
-                $arguments,
-                new Node\Arg(
-                    value: $this->escape,
-                    name: new Node\Identifier('escape'),
-                ),
+            $arguments[] = new Node\Arg(
+                value: $this->escape,
+                name: new Node\Identifier('escape'),
             );
         }
 
         if ($this->columns !== null) {
-            array_push(
-                $arguments,
-                new Node\Arg(
-                    value: $this->columns,
-                    name: new Node\Identifier('columns'),
-                ),
+            $arguments[] = new Node\Arg(
+                value: $this->columns,
+                name: new Node\Identifier('columns'),
             );
         }
 
         if ($this->logger !== null) {
-            array_push(
-                $arguments,
-                new Node\Arg(
-                    value: $this->logger,
-                    name: new Node\Identifier('logger'),
-                ),
+            $arguments[] = new Node\Arg(
+                value: $this->logger,
+                name: new Node\Identifier('logger'),
             );
         }
 
