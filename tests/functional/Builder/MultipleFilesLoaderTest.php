@@ -9,7 +9,7 @@ use Symfony\Component\ExpressionLanguage\Expression;
 use Vfs\FileSystem;
 use function Kiboko\Component\SatelliteToolbox\Configuration\compileExpression;
 
-final class MultipleFilesLoaderTest extends BuilderTestCase
+abstract class MultipleFilesLoaderTest extends BuilderTestCase
 {
     use PipelineAssertTrait;
 

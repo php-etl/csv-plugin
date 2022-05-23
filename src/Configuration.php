@@ -15,6 +15,8 @@ final class Configuration implements PluginConfigurationInterface
         $loader = new Configuration\Loader();
 
         $builder = new TreeBuilder('csv');
+
+        /* @phpstan-ignore-next-line */
         $builder->getRootNode()
             ->validate()
                 ->ifTrue(function (array $value) {

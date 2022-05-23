@@ -10,8 +10,6 @@ use PhpParser\Node;
 final class Loader implements StepBuilderInterface
 {
     private ?Node\Expr $logger;
-    private ?Node\Expr $rejection;
-    private ?Node\Expr $state;
 
     public function __construct(
         private ?Node\Expr $filePath,
@@ -22,8 +20,6 @@ final class Loader implements StepBuilderInterface
         private bool $safeMode = true,
     ) {
         $this->logger = null;
-        $this->rejection = null;
-        $this->state = null;
     }
 
     public function withFilePath(Node\Expr $filePath): self
@@ -70,15 +66,11 @@ final class Loader implements StepBuilderInterface
 
     public function withRejection(Node\Expr $rejection): self
     {
-        $this->rejection = $rejection;
-
         return $this;
     }
 
     public function withState(Node\Expr $state): self
     {
-        $this->state = $state;
-
         return $this;
     }
 

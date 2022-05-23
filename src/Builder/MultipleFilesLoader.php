@@ -10,8 +10,6 @@ use PhpParser\Node;
 final class MultipleFilesLoader implements StepBuilderInterface
 {
     private ?Node\Expr $logger;
-    private ?Node\Expr $rejection;
-    private ?Node\Expr $state;
 
     public function __construct(
         private ?Node\Expr $filePath,
@@ -23,20 +21,11 @@ final class MultipleFilesLoader implements StepBuilderInterface
         private bool $safeMode = true,
     ) {
         $this->logger = null;
-        $this->rejection = null;
-        $this->state = null;
     }
 
     public function withFilePath(Node\Expr $filePath): self
     {
         $this->filePath = $filePath;
-
-        return $this;
-    }
-
-    public function withPattern(Node\Expr $pattern): self
-    {
-        $this->pattern = $pattern;
 
         return $this;
     }
@@ -85,15 +74,11 @@ final class MultipleFilesLoader implements StepBuilderInterface
 
     public function withRejection(Node\Expr $rejection): self
     {
-        $this->rejection = $rejection;
-
         return $this;
     }
 
     public function withState(Node\Expr $state): self
     {
-        $this->state = $state;
-
         return $this;
     }
 
