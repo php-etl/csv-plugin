@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Kiboko\Plugin\CSV\Builder;
 
@@ -121,41 +123,41 @@ final class MultipleFilesLoader implements StepBuilderInterface
                         ),
                         new Node\Arg(
                             value: new Node\Scalar\String_('w')
-                        )
+                        ),
                     ]
                 )
-            )
+            ),
         ];
 
-        if ($this->delimiter !== null) {
+        if (null !== $this->delimiter) {
             $arguments[] = new Node\Arg(
                 value: $this->delimiter,
                 name: new Node\Identifier('delimiter'),
             );
         }
 
-        if ($this->enclosure !== null) {
+        if (null !== $this->enclosure) {
             $arguments[] = new Node\Arg(
                 value: $this->enclosure,
                 name: new Node\Identifier('enclosure'),
             );
         }
 
-        if ($this->escape !== null) {
+        if (null !== $this->escape) {
             $arguments[] = new Node\Arg(
                 value: $this->escape,
                 name: new Node\Identifier('escape'),
             );
         }
 
-        if ($this->columns !== null) {
+        if (null !== $this->columns) {
             $arguments[] = new Node\Arg(
                 value: $this->columns,
                 name: new Node\Identifier('columns'),
             );
         }
 
-        if ($this->logger !== null) {
+        if (null !== $this->logger) {
             $arguments[] = new Node\Arg(
                 value: $this->logger,
                 name: new Node\Identifier('logger'),
@@ -167,7 +169,7 @@ final class MultipleFilesLoader implements StepBuilderInterface
                 name: null,
                 subNodes: [
                     'implements' => [
-                        new Node\Name\FullyQualified('Kiboko\Contract\Pipeline\LoaderInterface')
+                        new Node\Name\FullyQualified('Kiboko\Contract\Pipeline\LoaderInterface'),
                     ],
                     'stmts' => [
                         new Node\Stmt\ClassMethod(
@@ -194,7 +196,7 @@ final class MultipleFilesLoader implements StepBuilderInterface
                                                             var: new Node\Expr\Variable('index'),
                                                             expr: new Node\Scalar\LNumber(0)
                                                         )
-                                                    )
+                                                    ),
                                                 ]
                                             )
                                         )
@@ -289,7 +291,7 @@ final class MultipleFilesLoader implements StepBuilderInterface
                                     new Node\Param(
                                         var: new Node\Expr\Variable('index'),
                                         type: new Node\Identifier('int')
-                                    )
+                                    ),
                                 ],
                                 'stmts' => [
                                     new Node\Stmt\Expression(

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "00b32856f7d3384b74396287597cb0a8",
+    "content-hash": "1bf78653fcde26a85a454a997d71fa0a",
     "packages": [
         {
             "name": "nikic/php-parser",
@@ -64,16 +64,16 @@
         },
         {
             "name": "php-etl/configurator-contracts",
-            "version": "v0.4.0",
+            "version": "v0.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-etl/configurator-contracts.git",
-                "reference": "46ffa3bd58a7c60a3150b6ccdf505d12d039a261"
+                "reference": "c98c11de81f004c6c96351d108b36de574d8c60d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-etl/configurator-contracts/zipball/46ffa3bd58a7c60a3150b6ccdf505d12d039a261",
-                "reference": "46ffa3bd58a7c60a3150b6ccdf505d12d039a261",
+                "url": "https://api.github.com/repos/php-etl/configurator-contracts/zipball/c98c11de81f004c6c96351d108b36de574d8c60d",
+                "reference": "c98c11de81f004c6c96351d108b36de574d8c60d",
                 "shasum": ""
             },
             "require": {
@@ -110,9 +110,9 @@
             "description": "This library describes contracts for defining configuration formats and building optimized code from it",
             "support": {
                 "issues": "https://github.com/php-etl/configurator-contracts/issues",
-                "source": "https://github.com/php-etl/configurator-contracts/tree/v0.4.0"
+                "source": "https://github.com/php-etl/configurator-contracts/tree/v0.4.1"
             },
-            "time": "2021-09-26T19:30:48+00:00"
+            "time": "2022-03-28T21:03:54+00:00"
         },
         {
             "name": "php-etl/packaging-contracts",
@@ -166,16 +166,16 @@
         },
         {
             "name": "php-etl/satellite-toolbox",
-            "version": "dev-master",
+            "version": "dev-main",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-etl/satellite-toolbox.git",
-                "reference": "306204b5d57beb0c0435ad072f76d8b24ee86a76"
+                "reference": "0009fd2be16d07b860b45b46b4ab99329b597417"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-etl/satellite-toolbox/zipball/306204b5d57beb0c0435ad072f76d8b24ee86a76",
-                "reference": "306204b5d57beb0c0435ad072f76d8b24ee86a76",
+                "url": "https://api.github.com/repos/php-etl/satellite-toolbox/zipball/0009fd2be16d07b860b45b46b4ab99329b597417",
+                "reference": "0009fd2be16d07b860b45b46b4ab99329b597417",
                 "shasum": ""
             },
             "require": {
@@ -196,17 +196,17 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.2.x-dev"
+                    "dev-main": "0.2.x-dev"
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Kiboko\\Component\\SatelliteToolbox\\": "src/"
-                },
                 "files": [
                     "src/ast.php",
                     "src/configuration.php"
-                ]
+                ],
+                "psr-4": {
+                    "Kiboko\\Component\\SatelliteToolbox\\": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -225,9 +225,9 @@
             "description": "This library aims at building and running lambda PHP functions",
             "support": {
                 "issues": "https://github.com/php-etl/satellite-toolbox/issues",
-                "source": "https://github.com/php-etl/satellite-toolbox/tree/master"
+                "source": "https://github.com/php-etl/satellite-toolbox/tree/main"
             },
-            "time": "2021-09-21T21:51:45+00:00"
+            "time": "2022-05-18T15:53:16+00:00"
         },
         {
             "name": "psr/cache",
@@ -1599,7 +1599,7 @@
         },
         {
             "name": "php-etl/bucket",
-            "version": "dev-master",
+            "version": "v0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-etl/bucket.git",
@@ -1623,7 +1623,6 @@
                 "phpunit/php-invoker": "*",
                 "phpunit/phpunit": "^9.0"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1652,7 +1651,7 @@
             "description": "This library implements the Extract-Transform-Load pattern asynchronously in PHP with the help of iterators and generators",
             "support": {
                 "issues": "https://github.com/php-etl/bucket/issues",
-                "source": "https://github.com/php-etl/bucket/tree/master"
+                "source": "https://github.com/php-etl/bucket/tree/v0.2.0"
             },
             "time": "2021-09-29T07:03:50+00:00"
         },
@@ -1710,7 +1709,7 @@
         },
         {
             "name": "php-etl/csv-flow",
-            "version": "dev-master",
+            "version": "v0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-etl/csv-flow.git",
@@ -1739,7 +1738,6 @@
                 "phpunit/php-invoker": "*",
                 "phpunit/phpunit": "^9.0"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1768,22 +1766,22 @@
             "description": "CSV implementation for the ETL pipeline",
             "support": {
                 "issues": "https://github.com/php-etl/csv-flow/issues",
-                "source": "https://github.com/php-etl/csv-flow/tree/master"
+                "source": "https://github.com/php-etl/csv-flow/tree/v0.2.0"
             },
             "time": "2021-10-01T18:46:46+00:00"
         },
         {
             "name": "php-etl/phpunit-extension",
-            "version": "dev-master",
+            "version": "dev-main",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-etl/phpunit-extension.git",
-                "reference": "600c2c8f2d493570d944d6a1d5455d04ce5d57c7"
+                "reference": "88da32b280743278877794c9b6865b6b2ee252d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-etl/phpunit-extension/zipball/600c2c8f2d493570d944d6a1d5455d04ce5d57c7",
-                "reference": "600c2c8f2d493570d944d6a1d5455d04ce5d57c7",
+                "url": "https://api.github.com/repos/php-etl/phpunit-extension/zipball/88da32b280743278877794c9b6865b6b2ee252d9",
+                "reference": "88da32b280743278877794c9b6865b6b2ee252d9",
                 "shasum": ""
             },
             "require": {
@@ -1797,7 +1795,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.2.x-dev"
+                    "dev-main": "0.4.x-dev"
                 }
             },
             "autoload": {
@@ -1818,9 +1816,9 @@
             "description": "Extension for testing FastMap and ETL components with PHPUnit testing framework",
             "support": {
                 "issues": "https://github.com/php-etl/phpunit-extension/issues",
-                "source": "https://github.com/php-etl/phpunit-extension/tree/master"
+                "source": "https://github.com/php-etl/phpunit-extension/tree/main"
             },
-            "time": "2021-09-28T18:53:56+00:00"
+            "time": "2022-05-18T10:01:06+00:00"
         },
         {
             "name": "php-etl/pipeline-contracts",
@@ -3604,5 +3602,5 @@
         "ext-json": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.3.0"
 }

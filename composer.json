@@ -19,13 +19,13 @@
         "php-etl/configurator-contracts": "^0.4.0",
         "php-etl/packaging-contracts": "^0.1.0",
         "symfony/expression-language": "^5.2",
-        "php-etl/satellite-toolbox": "*"
+        "php-etl/satellite-toolbox": "^0.2.0"
     },
     "require-dev": {
         "adlawson/vfs": "dev-develop",
         "phpunit/phpunit": "^9.0",
         "php-etl/csv-flow": "^0.2.0",
-        "php-etl/phpunit-extension": "^0.2.0"
+        "php-etl/phpunit-extension": "^0.4.0"
     },
     "autoload": {
         "psr-4": {

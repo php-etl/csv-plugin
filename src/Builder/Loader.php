@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Kiboko\Plugin\CSV\Builder;
 
@@ -109,35 +111,35 @@ final class Loader implements StepBuilderInterface
             ),
         ];
 
-        if ($this->delimiter !== null) {
+        if (null !== $this->delimiter) {
             $arguments[] = new Node\Arg(
                 value: $this->delimiter,
                 name: new Node\Identifier('delimiter'),
             );
         }
 
-        if ($this->enclosure !== null) {
+        if (null !== $this->enclosure) {
             $arguments[] = new Node\Arg(
                 value: $this->enclosure,
                 name: new Node\Identifier('enclosure'),
             );
         }
 
-        if ($this->escape !== null) {
+        if (null !== $this->escape) {
             $arguments[] = new Node\Arg(
                 value: $this->escape,
                 name: new Node\Identifier('escape'),
             );
         }
 
-        if ($this->columns !== null) {
+        if (null !== $this->columns) {
             $arguments[] = new Node\Arg(
                 value: $this->columns,
                 name: new Node\Identifier('columns'),
             );
         }
 
-        if ($this->logger !== null) {
+        if (null !== $this->logger) {
             $arguments[] = new Node\Arg(
                 value: $this->logger,
                 name: new Node\Identifier('logger'),
