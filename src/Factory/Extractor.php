@@ -1,15 +1,17 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Kiboko\Plugin\CSV\Factory;
 
-use Kiboko\Plugin\CSV;
+use function Kiboko\Component\SatelliteToolbox\Configuration\compileValue;
+use function Kiboko\Component\SatelliteToolbox\Configuration\compileValueWhenExpression;
 use Kiboko\Contract\Configurator;
+use Kiboko\Plugin\CSV;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Exception as Symfony;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
-use function Kiboko\Component\SatelliteToolbox\Configuration\compileValue;
-use function Kiboko\Component\SatelliteToolbox\Configuration\compileValueWhenExpression;
 
 final class Extractor implements Configurator\FactoryInterface
 {
@@ -54,14 +56,14 @@ final class Extractor implements Configurator\FactoryInterface
     {
         $extractor = new CSV\Builder\Extractor(
             filePath: compileValueWhenExpression($this->interpreter, $config['file_path']),
-            delimiter: array_key_exists('delimiter', $config) ? compileValueWhenExpression($this->interpreter, $config['delimiter']) : null,
-            enclosure: array_key_exists('enclosure', $config) ? compileValueWhenExpression($this->interpreter, $config['enclosure']) : null,
-            escape: array_key_exists('escape', $config) ? compileValueWhenExpression($this->interpreter, $config['escape']) : null,
-            columns: array_key_exists('columns', $config) ? compileValue($this->interpreter, $config['columns']) : null
+            delimiter: \array_key_exists('delimiter', $config) ? compileValueWhenExpression($this->interpreter, $config['delimiter']) : null,
+            enclosure: \array_key_exists('enclosure', $config) ? compileValueWhenExpression($this->interpreter, $config['enclosure']) : null,
+            escape: \array_key_exists('escape', $config) ? compileValueWhenExpression($this->interpreter, $config['escape']) : null,
+            columns: \array_key_exists('columns', $config) ? compileValue($this->interpreter, $config['columns']) : null
         );
 
-        if (array_key_exists('safe_mode', $config)) {
-            if ($config['safe_mode'] === true) {
+        if (\array_key_exists('safe_mode', $config)) {
+            if (true === $config['safe_mode']) {
                 $extractor->withSafeMode();
             } else {
                 $extractor->withFingersCrossedMode();

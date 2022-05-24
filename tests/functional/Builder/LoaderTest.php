@@ -6,7 +6,7 @@ use Kiboko\Plugin\CSV\Builder;
 use Kiboko\Plugin\Log;
 use PhpParser\Node;
 
-final class LoaderTest extends BuilderTestCase
+abstract class LoaderTest extends BuilderTestCase
 {
     public function testWithoutOptions(): void
     {

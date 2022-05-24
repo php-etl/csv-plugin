@@ -1,11 +1,13 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Kiboko\Plugin\CSV\Configuration;
 
-use Symfony\Component\Config\Definition\Builder\TreeBuilder;
-use Symfony\Component\Config\Definition\ConfigurationInterface;
 use function Kiboko\Component\SatelliteToolbox\Configuration\asExpression;
 use function Kiboko\Component\SatelliteToolbox\Configuration\isExpression;
+use Symfony\Component\Config\Definition\Builder\TreeBuilder;
+use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 final class Loader implements ConfigurationInterface
 {
@@ -13,6 +15,7 @@ final class Loader implements ConfigurationInterface
     {
         $builder = new TreeBuilder('loader');
 
+        /* @phpstan-ignore-next-line */
         $builder->getRootNode()
             ->children()
                 ->scalarNode('file_path')
@@ -50,15 +53,16 @@ final class Loader implements ConfigurationInterface
                 ->booleanNode('safe_mode')->end()
                 ->variableNode('columns')
                     ->validate()
-                        ->ifTrue(fn ($value) => $value !== null && !is_array($value))
+                        ->ifTrue(fn ($value) => null !== $value && !\is_array($value))
                         ->thenInvalid('Value should be an array')
                     ->end()
                     ->validate()
-                        ->ifTrue(fn ($value) => $value === null)
+                        ->ifTrue(fn ($value) => null === $value)
                         ->thenInvalid('Value cannot be null')
                     ->end()
                 ->end()
-            ->end();
+            ->end()
+        ;
 
         return $builder;
     }

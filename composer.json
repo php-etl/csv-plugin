@@ -12,20 +12,21 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": "^8.0",
+        "php": "^8.1",
         "ext-json": "*",
         "nikic/php-parser": "^4.10",
         "symfony/config": "^5.2",
         "php-etl/configurator-contracts": "^0.4.0",
         "php-etl/packaging-contracts": "^0.1.0",
         "symfony/expression-language": "^5.2",
-        "php-etl/satellite-toolbox": "*"
+        "php-etl/satellite-toolbox": "^0.2.0"
     },
     "require-dev": {
         "adlawson/vfs": "dev-develop",
         "phpunit/phpunit": "^9.0",
         "php-etl/csv-flow": "^0.2.0",
-        "php-etl/phpunit-extension": "^0.2.0"
+        "php-etl/phpunit-extension": "^0.4.0",
+        "friendsofphp/php-cs-fixer": "^3.0"
     },
     "autoload": {
         "psr-4": {
