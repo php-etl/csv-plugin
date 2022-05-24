@@ -25,7 +25,8 @@
         "adlawson/vfs": "dev-develop",
         "phpunit/phpunit": "^9.0",
         "php-etl/csv-flow": "^0.2.0",
-        "php-etl/phpunit-extension": "^0.4.0"
+        "php-etl/phpunit-extension": "^0.4.0",
+        "friendsofphp/php-cs-fixer": "^3.0"
     },
     "autoload": {
         "psr-4": {
