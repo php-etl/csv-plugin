@@ -107,7 +107,7 @@ final class Loader implements StepBuilderInterface
                             subNodes: [
                                 'extends' => new Node\Name\FullyQualified('SplFileObject'),
                                 'stmts' => [
-                                    new Node\Stmt\Function_(
+                                    new Node\Stmt\ClassMethod(
                                         name: 'fputcsv',
                                         subNodes: [
                                             'params' => [
