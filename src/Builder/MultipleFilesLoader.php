@@ -110,7 +110,7 @@ final class MultipleFilesLoader implements StepBuilderInterface
         $arguments = [
             new Node\Arg(
                 value: new Node\Expr\New_(
-                    class: $this->withoutEnclosure ? new Node\Name\FullyQualified('GyroscopsGenerated\\SplFileObject') : new Node\Name\FullyQualified('SplFileObject') ,
+                    class: $this->withoutEnclosure ? new Node\Name\FullyQualified('GyroscopsGenerated\\SplFileObject') : new Node\Name\FullyQualified('SplFileObject'),
                     args: [
                         new Node\Arg(
                             value: $this->filePath

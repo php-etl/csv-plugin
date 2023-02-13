@@ -4,16 +4,15 @@ declare(strict_types=1);
 
 namespace Kiboko\Plugin\CSV\Factory;
 
-use Kiboko\Component\Packaging\Asset\InMemory;
-use Kiboko\Component\Packaging\File;
-use function Kiboko\Component\SatelliteToolbox\Configuration\compileValue;
-use function Kiboko\Component\SatelliteToolbox\Configuration\compileValueWhenExpression;
 use Kiboko\Contract\Configurator;
 use Kiboko\Plugin\CSV;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Exception as Symfony;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
+
+use function Kiboko\Component\SatelliteToolbox\Configuration\compileValue;
+use function Kiboko\Component\SatelliteToolbox\Configuration\compileValueWhenExpression;
 
 final class Loader implements Configurator\FactoryInterface
 {
@@ -83,7 +82,7 @@ final class Loader implements Configurator\FactoryInterface
             }
         }
 
-        if (array_key_exists('nonstandard', $config) && $config['nonstandard'] === true) {
+        if (\array_key_exists('nonstandard', $config) && true === $config['nonstandard']) {
             $loader->withNonStandard();
         }
 

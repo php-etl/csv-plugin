@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Kiboko\Plugin\CSV\Builder;
 
 use Kiboko\Contract\Configurator\StepBuilderInterface;
-use PhpParser\Builder\Method;
 use PhpParser\Node;
 
 final class Loader implements StepBuilderInterface
@@ -102,7 +101,7 @@ final class Loader implements StepBuilderInterface
         $arguments = [
             new Node\Arg(
                 value: new Node\Expr\New_(
-                    class: $this->withNonStandard === true ?
+                    class: true === $this->withNonStandard ?
                         new Node\Stmt\Class_(
                             name: 'SplFileObject',
                             subNodes: [
@@ -137,9 +136,11 @@ final class Loader implements StepBuilderInterface
                                                     type: 'string',
                                                 ),
                                             ],
-                                            'returnType' => new Node\Expr\BinaryOp\LogicalXor(
-                                                left: new Node\Expr\ConstFetch(new Node\Name('int')),
-                                                right: new Node\Expr\ConstFetch(new Node\Name('false')),
+                                            'returnType' => new Node\UnionType(
+                                                types: [
+                                                    new Node\Name('int'),
+                                                    new Node\Name('false'),
+                                                ],
                                             ),
                                             'stmts' => [
                                                 new Node\Stmt\Return_(
@@ -148,8 +149,8 @@ final class Loader implements StepBuilderInterface
                                                         name: 'fwrite',
                                                         args: [
                                                             new Node\Arg(
-                                                                value: new Node\Expr\AssignOp\Concat(
-                                                                    var: new Node\Expr\FuncCall(
+                                                                value: new Node\Expr\BinaryOp\Concat(
+                                                                    left: new Node\Expr\FuncCall(
                                                                         name: new Node\Name('implode'),
                                                                         args: [
                                                                             new Node\Arg(
@@ -160,7 +161,7 @@ final class Loader implements StepBuilderInterface
                                                                             ),
                                                                         ],
                                                                     ),
-                                                                    expr: new Node\Expr\Variable('eol')
+                                                                    right: new Node\Expr\Variable('eol')
                                                                 ),
                                                             ),
                                                         ],
