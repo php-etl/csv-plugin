@@ -110,6 +110,7 @@ final class Loader implements StepBuilderInterface
                                     new Node\Stmt\ClassMethod(
                                         name: 'fputcsv',
                                         subNodes: [
+                                            'type' => Node\Stmt\Class_::MODIFIER_PUBLIC,
                                             'params' => [
                                                 new Node\Param(
                                                     var: new Node\Expr\Variable('fields'),
