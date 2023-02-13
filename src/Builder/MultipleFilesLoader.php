@@ -252,7 +252,7 @@ final class MultipleFilesLoader implements StepBuilderInterface
                                             var: new Node\Expr\Variable('coroutine'),
                                             expr: new Node\Expr\MethodCall(
                                                 var: new Node\Expr\Variable('this'),
-                                                name: new Node\Name('coroutineFactory'),
+                                                name: 'coroutineFactory',
                                                 args: [
                                                     new Node\Arg(
                                                         value: new Node\Expr\Assign(

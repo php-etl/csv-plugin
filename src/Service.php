@@ -70,7 +70,7 @@ final class Service implements Configurator\PipelinePluginInterface
             && \count($config['expression_language'])
         ) {
             foreach ($config['expression_language'] as $provider) {
-                /** @var ExpressionFunctionProviderInterface $provider */
+                /* @var ExpressionFunctionProviderInterface $provider */
                 $interpreter->registerProvider(new $provider());
             }
         }
