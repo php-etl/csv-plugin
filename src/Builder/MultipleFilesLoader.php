@@ -10,6 +10,7 @@ use PhpParser\Node;
 final class MultipleFilesLoader implements StepBuilderInterface
 {
     private ?Node\Expr $logger;
+    private bool $withoutEnclosure;
 
     public function __construct(
         private ?Node\Expr $filePath,
@@ -21,6 +22,7 @@ final class MultipleFilesLoader implements StepBuilderInterface
         private bool $safeMode = true,
     ) {
         $this->logger = null;
+        $this->withoutEnclosure = false;
     }
 
     public function withFilePath(Node\Expr $filePath): self
@@ -89,6 +91,13 @@ final class MultipleFilesLoader implements StepBuilderInterface
         return $this;
     }
 
+    public function withoutEnclosure(): self
+    {
+        $this->safeMode = true;
+
+        return $this;
+    }
+
     public function withFingersCrossedMode(): self
     {
         $this->safeMode = false;
@@ -101,7 +110,7 @@ final class MultipleFilesLoader implements StepBuilderInterface
         $arguments = [
             new Node\Arg(
                 value: new Node\Expr\New_(
-                    class: new Node\Name\FullyQualified('SplFileObject'),
+                    class: $this->withoutEnclosure ? new Node\Name\FullyQualified('GyroscopsGenerated\\SplFileObject') : new Node\Name\FullyQualified('SplFileObject') ,
                     args: [
                         new Node\Arg(
                             value: $this->filePath

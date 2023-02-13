@@ -10,6 +10,7 @@ use PhpParser\Node;
 final class Loader implements StepBuilderInterface
 {
     private ?Node\Expr $logger;
+    private bool $withoutEnclosure;
 
     public function __construct(
         private ?Node\Expr $filePath,
@@ -20,6 +21,7 @@ final class Loader implements StepBuilderInterface
         private bool $safeMode = true,
     ) {
         $this->logger = null;
+        $this->withoutEnclosure = false;
     }
 
     public function withFilePath(Node\Expr $filePath): self
@@ -88,12 +90,19 @@ final class Loader implements StepBuilderInterface
         return $this;
     }
 
+    public function withoutEnclosure(): self
+    {
+        $this->withoutEnclosure = true;
+
+        return $this;
+    }
+
     public function getNode(): Node
     {
         $arguments = [
             new Node\Arg(
                 value: new Node\Expr\New_(
-                    class: new Node\Name\FullyQualified('SplFileObject'),
+                    class: $this->withoutEnclosure ? new Node\Name\FullyQualified('GyroscopsGenerated\\SplFileObject') : new Node\Name\FullyQualified('SplFileObject') ,
                     args: [
                         new Node\Arg($this->filePath),
                         new Node\Arg(new Node\Scalar\String_('w')),

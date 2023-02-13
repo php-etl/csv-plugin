@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Kiboko\Plugin\CSV\Factory;
 
+use Kiboko\Component\Packaging\Asset\InMemory;
+use Kiboko\Component\Packaging\File;
 use function Kiboko\Component\SatelliteToolbox\Configuration\compileValue;
 use function Kiboko\Component\SatelliteToolbox\Configuration\compileValueWhenExpression;
 use Kiboko\Contract\Configurator;
@@ -81,6 +83,28 @@ final class Loader implements Configurator\FactoryInterface
             }
         }
 
-        return new Repository\Loader($loader);
+        $repositoryLoader = new Repository\Loader($loader);
+
+        if (array_key_exists('without_enclosure', $config) && $config['without_enclosure'] === true) {
+            $loader->withoutEnclosure();
+
+            $repositoryLoader->addFiles(
+                new File('SplFileObject.php', new InMemory(<<<PHP
+                <?php 
+                
+                namespace GyroscopsGenerated;
+                class SplFileObject extends \SplFileObject
+                {
+                    public function fputcsv(array \$fields, string \$separator = ',', string \$enclosure = '"', string \$escape = "\\\", string \$eol = PHP_EOL): int|false
+                    {
+                        return \$this->fwrite(implode(\$separator, \$fields) . \$eol);
+                    }
+                }
+                PHP
+                )),
+            );
+        }
+
+        return $repositoryLoader;
     }
 }

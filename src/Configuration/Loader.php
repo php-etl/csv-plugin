@@ -61,6 +61,7 @@ final class Loader implements ConfigurationInterface
                         ->thenInvalid('Value cannot be null')
                     ->end()
                 ->end()
+                ->booleanNode('without_enclosure')->end()
             ->end()
         ;
 
