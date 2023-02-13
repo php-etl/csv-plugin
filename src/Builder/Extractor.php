@@ -12,7 +12,7 @@ final class Extractor implements StepBuilderInterface
     private ?Node\Expr $logger;
 
     public function __construct(
-        private ?Node\Expr $filePath,
+        private Node\Expr $filePath,
         private ?Node\Expr $delimiter = null,
         private ?Node\Expr $enclosure = null,
         private ?Node\Expr $escape = null,

@@ -7,6 +7,7 @@ namespace Kiboko\Plugin\CSV;
 use Kiboko\Contract\Configurator;
 use Symfony\Component\Config\Definition\Exception as Symfony;
 use Symfony\Component\Config\Definition\Processor;
+use Symfony\Component\ExpressionLanguage\ExpressionFunctionProviderInterface;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 #[Configurator\Pipeline(
@@ -69,6 +70,7 @@ final class Service implements Configurator\PipelinePluginInterface
             && \count($config['expression_language'])
         ) {
             foreach ($config['expression_language'] as $provider) {
+                /** @var ExpressionFunctionProviderInterface $provider */
                 $interpreter->registerProvider(new $provider());
             }
         }
