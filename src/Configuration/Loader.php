@@ -8,6 +8,7 @@ use function Kiboko\Component\SatelliteToolbox\Configuration\asExpression;
 use function Kiboko\Component\SatelliteToolbox\Configuration\isExpression;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
+use function Kiboko\Component\SatelliteToolbox\Configuration\mutuallyExclusiveFields;
 
 final class Loader implements ConfigurationInterface
 {
@@ -17,6 +18,9 @@ final class Loader implements ConfigurationInterface
 
         /* @phpstan-ignore-next-line */
         $builder->getRootNode()
+            ->beforeNormalization()
+                ->always(mutuallyExclusiveFields('nonstandard', 'delimiter', 'enclosure'))
+            ->end()
             ->children()
                 ->scalarNode('file_path')
                     ->isRequired()
@@ -61,7 +65,9 @@ final class Loader implements ConfigurationInterface
                         ->thenInvalid('Value cannot be null')
                     ->end()
                 ->end()
-                ->booleanNode('without_enclosure')->end()
+                ->booleanNode('nonstandard')
+                    ->defaultFalse()
+                ->end()
             ->end()
         ;
 

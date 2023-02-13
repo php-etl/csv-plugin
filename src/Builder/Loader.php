@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Kiboko\Plugin\CSV\Builder;
 
 use Kiboko\Contract\Configurator\StepBuilderInterface;
+use PhpParser\Builder\Method;
 use PhpParser\Node;
 
 final class Loader implements StepBuilderInterface
 {
     private ?Node\Expr $logger;
-    private bool $withoutEnclosure;
 
     public function __construct(
         private ?Node\Expr $filePath,
@@ -19,9 +19,9 @@ final class Loader implements StepBuilderInterface
         private ?Node\Expr $escape = null,
         private ?Node\Expr $columns = null,
         private bool $safeMode = true,
+        private bool $withNonStandard = false,
     ) {
         $this->logger = null;
-        $this->withoutEnclosure = false;
     }
 
     public function withFilePath(Node\Expr $filePath): self
@@ -90,9 +90,9 @@ final class Loader implements StepBuilderInterface
         return $this;
     }
 
-    public function withoutEnclosure(): self
+    public function withNonStandard(): self
     {
-        $this->withoutEnclosure = true;
+        $this->withNonStandard = true;
 
         return $this;
     }
@@ -102,7 +102,76 @@ final class Loader implements StepBuilderInterface
         $arguments = [
             new Node\Arg(
                 value: new Node\Expr\New_(
-                    class: $this->withoutEnclosure ? new Node\Name\FullyQualified('GyroscopsGenerated\\SplFileObject') : new Node\Name\FullyQualified('SplFileObject') ,
+                    class: $this->withNonStandard === true ?
+                        new Node\Stmt\Class_(
+                            name: 'SplFileObject',
+                            subNodes: [
+                                'extends' => new Node\Name\FullyQualified('SplFileObject'),
+                                'stmts' => [
+                                    new Node\Stmt\Function_(
+                                        name: 'fputcsv',
+                                        subNodes: [
+                                            'params' => [
+                                                new Node\Param(
+                                                    var: new Node\Expr\Variable('fields'),
+                                                    type: 'array',
+                                                ),
+                                                new Node\Param(
+                                                    var: new Node\Expr\Variable('separator'),
+                                                    default: new Node\Scalar\String_(','),
+                                                    type: 'string',
+                                                ),
+                                                new Node\Param(
+                                                    var: new Node\Expr\Variable('enclosure'),
+                                                    default: new Node\Scalar\String_('"'),
+                                                    type: 'string',
+                                                ),
+                                                new Node\Param(
+                                                    var: new Node\Expr\Variable('escape'),
+                                                    default: new Node\Scalar\String_('\\'),
+                                                    type: 'string',
+                                                ),
+                                                new Node\Param(
+                                                    var: new Node\Expr\Variable('eol'),
+                                                    default: new Node\Expr\ConstFetch(new Node\Name('PHP_EOL')),
+                                                    type: 'string',
+                                                ),
+                                            ],
+                                            'returnType' => new Node\Expr\BinaryOp\LogicalXor(
+                                                left: new Node\Expr\ConstFetch(new Node\Name('int')),
+                                                right: new Node\Expr\ConstFetch(new Node\Name('false')),
+                                            ),
+                                            'stmts' => [
+                                                new Node\Stmt\Return_(
+                                                    expr: new Node\Expr\MethodCall(
+                                                        var: new Node\Expr\Variable('this'),
+                                                        name: 'fwrite',
+                                                        args: [
+                                                            new Node\Arg(
+                                                                value: new Node\Expr\AssignOp\Concat(
+                                                                    var: new Node\Expr\FuncCall(
+                                                                        name: new Node\Name('implode'),
+                                                                        args: [
+                                                                            new Node\Arg(
+                                                                                value: new Node\Expr\Variable('separator')
+                                                                            ),
+                                                                            new Node\Arg(
+                                                                                value: new Node\Expr\Variable('fields')
+                                                                            ),
+                                                                        ],
+                                                                    ),
+                                                                    expr: new Node\Expr\Variable('eol')
+                                                                ),
+                                                            ),
+                                                        ],
+                                                    ),
+                                                ),
+                                            ],
+                                        ],
+                                    ),
+                                ],
+                            ],
+                        ) : new Node\Name\FullyQualified('SplFileObject'),
                     args: [
                         new Node\Arg($this->filePath),
                         new Node\Arg(new Node\Scalar\String_('w')),

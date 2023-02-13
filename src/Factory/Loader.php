@@ -83,28 +83,10 @@ final class Loader implements Configurator\FactoryInterface
             }
         }
 
-        $repositoryLoader = new Repository\Loader($loader);
-
-        if (array_key_exists('without_enclosure', $config) && $config['without_enclosure'] === true) {
-            $loader->withoutEnclosure();
-
-            $repositoryLoader->addFiles(
-                new File('SplFileObject.php', new InMemory(<<<PHP
-                <?php 
-                
-                namespace GyroscopsGenerated;
-                class SplFileObject extends \SplFileObject
-                {
-                    public function fputcsv(array \$fields, string \$separator = ',', string \$enclosure = '"', string \$escape = "\\\", string \$eol = PHP_EOL): int|false
-                    {
-                        return \$this->fwrite(implode(\$separator, \$fields) . \$eol);
-                    }
-                }
-                PHP
-                )),
-            );
+        if (array_key_exists('nonstandard', $config) && $config['nonstandard'] === true) {
+            $loader->withNonStandard();
         }
 
-        return $repositoryLoader;
+        return new Repository\Loader($loader);
     }
 }
