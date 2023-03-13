@@ -20,7 +20,8 @@ final class Loader implements ConfigurationInterface
         /* @phpstan-ignore-next-line */
         $builder->getRootNode()
             ->beforeNormalization()
-            ->always(mutuallyExclusiveFields('nonstandard', 'enclosure', 'escape'))
+            ->always(mutuallyExclusiveFields('nonstandard', 'enclosure'))
+            ->always(mutuallyExclusiveFields('nonstandard', 'escape'))
             ->end()
             ->children()
                 ->scalarNode('file_path')
