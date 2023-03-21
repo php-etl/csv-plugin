@@ -14,7 +14,7 @@ use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use function Kiboko\Component\SatelliteToolbox\Configuration\compileValue;
 use function Kiboko\Component\SatelliteToolbox\Configuration\compileValueWhenExpression;
 
-final class Extractor implements Configurator\FactoryInterface
+final readonly class Extractor implements Configurator\FactoryInterface
 {
     private Processor $processor;
     private ConfigurationInterface $configuration;

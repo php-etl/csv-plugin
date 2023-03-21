@@ -9,18 +9,10 @@ use PhpParser\Node;
 
 final class Loader implements StepBuilderInterface
 {
-    private ?Node\Expr $logger;
+    private ?Node\Expr $logger = null;
 
-    public function __construct(
-        private Node\Expr $filePath,
-        private ?Node\Expr $delimiter = null,
-        private ?Node\Expr $enclosure = null,
-        private ?Node\Expr $escape = null,
-        private ?Node\Expr $columns = null,
-        private bool $safeMode = true,
-        private bool $withNonStandard = false,
-    ) {
-        $this->logger = null;
+    public function __construct(private Node\Expr $filePath, private ?Node\Expr $delimiter = null, private ?Node\Expr $enclosure = null, private ?Node\Expr $escape = null, private ?Node\Expr $columns = null, private bool $safeMode = true, private bool $withNonStandard = false)
+    {
     }
 
     public function withFilePath(Node\Expr $filePath): self
@@ -221,8 +213,8 @@ final class Loader implements StepBuilderInterface
         return new Node\Expr\New_(
             class: new Node\Name\FullyQualified(
                 $this->safeMode
-                    ? 'Kiboko\\Component\\Flow\\Csv\\Safe\\Loader'
-                    : 'Kiboko\\Component\\Flow\\Csv\\FingersCrossed\\Loader'
+                    ? \Kiboko\Component\Flow\Csv\Safe\Loader::class
+                    : \Kiboko\Component\Flow\Csv\FingersCrossed\Loader::class
             ),
             args: $arguments,
         );

@@ -12,21 +12,24 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": "^8.1",
+        "php": "^8.2",
         "ext-json": "*",
         "nikic/php-parser": "^4.10",
         "symfony/config": "^5.2",
-        "php-etl/configurator-contracts": "^0.5.0",
-        "php-etl/packaging-contracts": "^0.1.0",
-        "symfony/expression-language": "^5.2",
-        "php-etl/satellite-toolbox": "^0.3.0"
+        "php-etl/configurator-contracts": "^0.6@dev",
+        "php-etl/packaging-contracts": "^0.2@dev",
+        "symfony/expression-language": "^5.2 || ^6.0",
+        "php-etl/satellite-toolbox": "^0.4@dev"
     },
     "require-dev": {
         "adlawson/vfs": "dev-develop",
-        "phpunit/phpunit": "^9.0",
-        "php-etl/csv-flow": "^0.2.0",
-        "php-etl/phpunit-extension": "^0.4.0",
-        "friendsofphp/php-cs-fixer": "^3.0"
+        "phpunit/phpunit": "^9.5 || ^10.0",
+        "php-etl/csv-flow": "^0.3@dev",
+        "php-etl/phpunit-extension": "^0.5@dev",
+        "friendsofphp/php-cs-fixer": "^3.0",
+        "phpstan/phpstan": "^1.10",
+        "infection/infection": "^0.26.18",
+        "rector/rector": "^0.15"
     },
     "autoload": {
         "psr-4": {
@@ -40,13 +43,18 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "0.5.x-dev"
+            "dev-main": "0.6.x-dev",
+            "dev-feature/qualityflow-improvments": "0.6.x-dev"
         },
         "gyroscops": {
             "plugins": ["Kiboko\\Plugin\\CSV\\Service"]
         }
     },
     "config": {
-        "bin-dir": "bin"
+        "bin-dir": "bin",
+        "allow-plugins": {
+            "infection/extension-installer": true,
+            "php-http/discovery": true
+        }
     }
 }

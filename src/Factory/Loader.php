@@ -14,7 +14,7 @@ use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use function Kiboko\Component\SatelliteToolbox\Configuration\compileValue;
 use function Kiboko\Component\SatelliteToolbox\Configuration\compileValueWhenExpression;
 
-final class Loader implements Configurator\FactoryInterface
+final readonly class Loader implements Configurator\FactoryInterface
 {
     private Processor $processor;
     private ConfigurationInterface $configuration;

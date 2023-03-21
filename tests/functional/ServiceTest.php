@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 final class ServiceTest extends TestCase
 {
-    public function configProvider()
+    public static function configProvider()
     {
         yield [
             'expected' => [
@@ -17,7 +17,7 @@ final class ServiceTest extends TestCase
                     'file_path' => 'input.csv',
                 ]
             ],
-            'expected_class' => 'Kiboko\\Plugin\\CSV\\Factory\\Repository\\Extractor',
+            'expected_class' => \Kiboko\Plugin\CSV\Factory\Repository\Extractor::class,
             'actual' => [
                 'csv' => [
                     'expression_language' => [],
@@ -35,7 +35,7 @@ final class ServiceTest extends TestCase
                     'file_path' => 'output.csv',
                 ]
             ],
-            'expected_class' => 'Kiboko\\Plugin\\CSV\\Factory\\Repository\\Loader',
+            'expected_class' => \Kiboko\Plugin\CSV\Factory\Repository\Loader::class,
             'actual' => [
                 'csv' => [
                     'expression_language' => [],
@@ -47,9 +47,7 @@ final class ServiceTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider configProvider
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('configProvider')]
     public function testWithConfigurationAndProcessor(array $expected, string $expectedClass, array $actual): void
     {
         $service = new CSV\Service();
