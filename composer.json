@@ -28,7 +28,8 @@
         "phpstan/phpstan": "^1.10",
         "infection/infection": "^0.26.18",
         "rector/rector": "^0.15",
-        "php-etl/csv-flow": "^0.3.0"
+        "php-etl/csv-flow": "^0.3.0",
+        "mikey179/vfsstream": "^1.6"
     },
     "autoload": {
         "psr-4": {

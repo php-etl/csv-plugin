@@ -3,30 +3,26 @@
 namespace functional\Kiboko\Plugin\CSV\Builder;
 
 use functional\Kiboko\Plugin\CSV;
-use Kiboko\Component\PHPUnitExtension\BuilderAssertTrait;
-use Kiboko\Component\PHPUnitExtension\PipelineAssertTrait;
+use Kiboko\Component\PHPUnitExtension\Assert\PipelineBuilderAssertTrait;
 use Kiboko\Contract\Pipeline\PipelineRunnerInterface;
-use PhpParser\Builder as DefaultBuilder;
-use PHPUnit\Framework\Constraint\LogicalNot;
+use org\bovigo\vfs\vfsStream;
+use org\bovigo\vfs\vfsStreamDirectory;
+use org\bovigo\vfs\vfsStreamWrapper;
 use PHPUnit\Framework\TestCase;
-use Vfs\FileSystem;
 
 abstract class BuilderTestCase extends TestCase
 {
-    use BuilderAssertTrait;
+    use PipelineBuilderAssertTrait;
 
-    private ?FileSystem $fs = null;
-
+    private ?vfsStreamDirectory $fs = null;
     protected function setUp(): void
     {
-        $this->fs = FileSystem::factory('vfs://');
-        $this->fs->mount();
+        $this->fs = vfsStream::setup();
     }
-
     protected function tearDown(): void
     {
-        $this->fs->unmount();
         $this->fs = null;
+        vfsStreamWrapper::unregister();
     }
 
     public function pipelineRunner(): PipelineRunnerInterface
