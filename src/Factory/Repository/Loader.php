@@ -11,7 +11,7 @@ final class Loader implements Configurator\StepRepositoryInterface
 {
     use RepositoryTrait;
 
-    public function __construct(private CSV\Builder\Loader|CSV\Builder\MultipleFilesLoader $builder)
+    public function __construct(private readonly CSV\Builder\Loader|CSV\Builder\MultipleFilesLoader $builder)
     {
         $this->files = [];
         $this->packages = [];

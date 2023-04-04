@@ -9,17 +9,10 @@ use PhpParser\Node;
 
 final class Extractor implements StepBuilderInterface
 {
-    private ?Node\Expr $logger;
+    private ?Node\Expr $logger = null;
 
-    public function __construct(
-        private Node\Expr $filePath,
-        private ?Node\Expr $delimiter = null,
-        private ?Node\Expr $enclosure = null,
-        private ?Node\Expr $escape = null,
-        private ?Node\Expr $columns = null,
-        private bool $safeMode = true,
-    ) {
-        $this->logger = null;
+    public function __construct(private Node\Expr $filePath, private ?Node\Expr $delimiter = null, private ?Node\Expr $enclosure = null, private ?Node\Expr $escape = null, private ?Node\Expr $columns = null, private bool $safeMode = true)
+    {
     }
 
     public function withFilePath(Node\Expr $filePath): self
@@ -141,8 +134,8 @@ final class Extractor implements StepBuilderInterface
         return new Node\Expr\New_(
             class: new Node\Name\FullyQualified(
                 $this->safeMode
-                    ? 'Kiboko\\Component\\Flow\\Csv\\Safe\\Extractor'
-                    : 'Kiboko\\Component\\Flow\\Csv\\FingersCrossed\\Extractor'
+                    ? \Kiboko\Component\Flow\Csv\Safe\Extractor::class
+                    : \Kiboko\Component\Flow\Csv\FingersCrossed\Extractor::class
             ),
             args: $arguments,
         );
