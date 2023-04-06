@@ -15,7 +15,7 @@
         "php": "^8.2",
         "ext-json": "*",
         "nikic/php-parser": "^4.10",
-        "symfony/config": "6.0",
+        "symfony/config": "^6.0",
         "php-etl/configurator-contracts": "^0.7.0",
         "symfony/expression-language": "^6.0",
         "php-etl/packaging-contracts": "^0.3.0",
