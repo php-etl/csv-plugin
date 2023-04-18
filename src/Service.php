@@ -13,7 +13,7 @@ use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 #[Configurator\Pipeline(
     name: 'csv',
     dependencies: [
-        'php-etl/csv-flow:"*"',
+        'php-etl/csv-flow:*',
     ],
     steps: [
         new Configurator\Pipeline\StepExtractor(),
