@@ -85,12 +85,30 @@ final class Extractor implements StepBuilderInterface
     {
         $arguments = [
             new Node\Arg(
-                value: new Node\Expr\New_(
-                    class: new Node\Name\FullyQualified('SplFileObject'),
-                    args: [
-                        new Node\Arg($this->filePath),
-                        new Node\Arg(new Node\Scalar\String_('r')),
-                    ],
+                value: new Node\Expr\Ternary(
+                    cond: new Node\Expr\FuncCall(
+                        name: new Node\Name('file_exists'),
+                        args: [
+                            new Node\Arg(
+                                value: new Node\Expr\Assign(
+                                    var: new Node\Expr\Variable('file'),
+                                    expr: $this->filePath,
+                                )
+                            ),
+                        ],
+                    ),
+                    if: new Node\Expr\New_(
+                        class: new Node\Name\FullyQualified('SplFileObject'),
+                        args: [
+                            new Node\Arg(
+                                value: new Node\Expr\Variable('file'),
+                            ),
+                            new Node\Arg(new Node\Scalar\String_('r')),
+                        ],
+                    ),
+                    else: new Node\Expr\New_(
+                        class: new Node\Name\FullyQualified('SplTempFileObject'),
+                    ),
                 ),
                 name: new Node\Identifier('file'),
             ),
