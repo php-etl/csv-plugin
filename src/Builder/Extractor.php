@@ -11,9 +11,7 @@ final class Extractor implements StepBuilderInterface
 {
     private ?Node\Expr $logger = null;
 
-    public function __construct(private Node\Expr $filePath, private ?Node\Expr $delimiter = null, private ?Node\Expr $enclosure = null, private ?Node\Expr $escape = null, private ?Node\Expr $columns = null, private bool $safeMode = true)
-    {
-    }
+    public function __construct(private Node\Expr $filePath, private ?Node\Expr $delimiter = null, private ?Node\Expr $enclosure = null, private ?Node\Expr $escape = null, private ?Node\Expr $columns = null, private bool $safeMode = true) {}
 
     public function withFilePath(Node\Expr $filePath): self
     {
@@ -85,12 +83,30 @@ final class Extractor implements StepBuilderInterface
     {
         $arguments = [
             new Node\Arg(
-                value: new Node\Expr\New_(
-                    class: new Node\Name\FullyQualified('SplFileObject'),
-                    args: [
-                        new Node\Arg($this->filePath),
-                        new Node\Arg(new Node\Scalar\String_('r')),
-                    ],
+                value: new Node\Expr\Ternary(
+                    cond: new Node\Expr\FuncCall(
+                        name: new Node\Name('file_exists'),
+                        args: [
+                            new Node\Arg(
+                                value: new Node\Expr\Assign(
+                                    var: new Node\Expr\Variable('file'),
+                                    expr: $this->filePath,
+                                )
+                            ),
+                        ],
+                    ),
+                    if: new Node\Expr\New_(
+                        class: new Node\Name\FullyQualified('SplFileObject'),
+                        args: [
+                            new Node\Arg(
+                                value: new Node\Expr\Variable('file'),
+                            ),
+                            new Node\Arg(new Node\Scalar\String_('r')),
+                        ],
+                    ),
+                    else: new Node\Expr\New_(
+                        class: new Node\Name\FullyQualified('SplTempFileObject'),
+                    ),
                 ),
                 name: new Node\Identifier('file'),
             ),
