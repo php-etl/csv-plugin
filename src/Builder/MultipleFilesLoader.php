@@ -11,9 +11,7 @@ final class MultipleFilesLoader implements StepBuilderInterface
 {
     private ?Node\Expr $logger = null;
 
-    public function __construct(private Node\Expr $filePath, private Node\Expr $maxLines, private ?Node\Expr $delimiter = null, private ?Node\Expr $enclosure = null, private ?Node\Expr $escape = null, private ?Node\Expr $columns = null, private bool $safeMode = true, private bool $withNonStandard = false)
-    {
-    }
+    public function __construct(private Node\Expr $filePath, private Node\Expr $maxLines, private ?Node\Expr $delimiter = null, private ?Node\Expr $enclosure = null, private ?Node\Expr $escape = null, private ?Node\Expr $columns = null, private bool $safeMode = true, private bool $withNonStandard = false) {}
 
     public function withFilePath(Node\Expr $filePath): self
     {
