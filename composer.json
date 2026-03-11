@@ -12,9 +12,9 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": "^8.2",
+        "php": "^8.4",
         "ext-json": "*",
-        "nikic/php-parser": "^4.10",
+        "nikic/php-parser": "^5.6",
         "symfony/config": "^6.0",
         "php-etl/configurator-contracts": "0.8.*",
         "symfony/expression-language": "^6.0",
@@ -25,9 +25,9 @@
         "phpunit/phpunit": "^10.0",
         "php-etl/phpunit-extension": "*",
         "friendsofphp/php-cs-fixer": "^3.0",
-        "phpstan/phpstan": "^1.10",
+        "phpstan/phpstan": "^2.2",
         "infection/infection": "^0.26.18",
-        "rector/rector": "^0.15",
+        "rector/rector": "^2.0",
         "php-etl/csv-flow": "*",
         "mikey179/vfsstream": "^1.6"
     },
