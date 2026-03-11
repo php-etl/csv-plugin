@@ -25,9 +25,9 @@
         "phpunit/phpunit": "^10.0",
         "php-etl/phpunit-extension": "*",
         "friendsofphp/php-cs-fixer": "^3.0",
-        "phpstan/phpstan": "^2.2",
-        "infection/infection": "^0.26.18",
-        "rector/rector": "^2.0",
+        "phpstan/phpstan": "^2.1",
+        "infection/infection": "^0.28",
+        "rector/rector": "^2.3",
         "php-etl/csv-flow": "*",
         "mikey179/vfsstream": "^1.6"
     },
